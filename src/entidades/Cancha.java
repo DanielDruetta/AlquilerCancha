@@ -73,7 +73,7 @@ public void setDireccion(String direccion) {
 @Override
 public String toString() {
 	return "Cancha [numero=" + numero + ", descripcion=" + descripcion + ", tipo=" + tipo + ", luz=" + luz
-			+ ", establecimiento=" + establecimiento + ", direccion=" + direccion + "]";
+			+ ", establecimiento=" + establecimiento + "]";
 }
 
 

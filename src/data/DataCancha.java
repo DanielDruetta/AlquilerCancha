@@ -196,7 +196,7 @@ public int tipoSegunNroCancha(int numero, String establecimiento) {
 		return tipo;
 	}
 
-public Cancha search(String establecimiento,int numero) {
+public Cancha search(Cancha can) {
 	
 	Cancha c=null;
 	PreparedStatement stmt=null;
@@ -206,18 +206,20 @@ public Cancha search(String establecimiento,int numero) {
 				"SELECT establecimiento,numero,descripcion,tipo,luz from cancha where establecimiento=? and numero=?"
 				);
 		
-		stmt.setString(1, establecimiento);
-		stmt.setInt(2, numero);
+		stmt.setString(1, can.getEstablecimiento());
+		stmt.setInt(2, can.getNumero());
 	
 		rs=stmt.executeQuery();
 		if(rs!=null && rs.next()) {
 						
+			System.out.println("asd");
 			c=new Cancha();
 			c.setEstablecimiento(rs.getString("establecimiento"));
 			c.setNumero(rs.getInt("numero"));
-			c.setDescripcion(rs.getString("descipcion"));
+			c.setDescripcion(rs.getString("descripcion"));
 			c.setTipo(rs.getInt("tipo"));
 			c.setLuz(rs.getString("luz"));
+			System.out.println(c.toString());
 
 			
 		
@@ -235,11 +237,6 @@ public Cancha search(String establecimiento,int numero) {
 	}
 	
 	return c;
-}
-
-public Cancha search(Cancha can) {
-	// TODO Auto-generated method stub
-	return null;
 }
 
 public void delete(Cancha c) {

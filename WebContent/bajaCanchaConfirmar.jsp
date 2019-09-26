@@ -52,8 +52,8 @@
 		    
 		    <div class="form-group">
 			    <label for="inputLuz" class="control-label col-md-2">Luz:</label>
-			    <div class="col-md-2">
-			    	<input id="inputLuz" name="luz" class="form-control" type="checkbox" value="S" value=<%=can.isLuz()%> disabled>
+			    <div class="col-md-10">
+			    	<input id="inputLuz" name="luz" class="form-control" type="text" value=<%=can.isLuz()%> disabled>
 			    </div>
 		    </div>
 		    
