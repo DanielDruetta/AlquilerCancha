@@ -195,4 +195,85 @@ public int tipoSegunNroCancha(int numero, String establecimiento) {
 		
 		return tipo;
 	}
+
+public Cancha search(String establecimiento,int numero) {
+	
+	Cancha c=null;
+	PreparedStatement stmt=null;
+	ResultSet rs=null;
+	try {
+		stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+				"SELECT establecimiento,numero,descripcion,tipo,luz from cancha where establecimiento=? and numero=?"
+				);
+		
+		stmt.setString(1, establecimiento);
+		stmt.setInt(2, numero);
+	
+		rs=stmt.executeQuery();
+		if(rs!=null && rs.next()) {
+						
+			c=new Cancha();
+			c.setEstablecimiento(rs.getString("establecimiento"));
+			c.setNumero(rs.getInt("numero"));
+			c.setDescripcion(rs.getString("descipcion"));
+			c.setTipo(rs.getInt("tipo"));
+			c.setLuz(rs.getString("luz"));
+
+			
+		
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			if(rs!=null) {rs.close();}
+			if(stmt!=null) {stmt.close();}
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	return c;
+}
+
+public Cancha search(Cancha can) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public void delete(Cancha c) {
+	PreparedStatement stmt= null;
+	ResultSet keyResultSet=null;
+	try {
+		stmt=FactoryConexion.getInstancia().getConn().
+				prepareStatement(
+						"delete from cancha where establecimiento=? and numero=?",
+						PreparedStatement.RETURN_GENERATED_KEYS
+						);
+		
+		stmt.setString(1, c.getEstablecimiento());
+		stmt.setInt(2, c.getNumero());
+		stmt.executeUpdate();
+		
+		keyResultSet=stmt.getGeneratedKeys();
+        if(keyResultSet!=null && keyResultSet.next()){
+            
+        }
+
+		
+	}  catch (SQLException e) {
+        e.printStackTrace();
+	} finally {
+        try {
+            if(keyResultSet!=null)keyResultSet.close();
+            if(stmt!=null)stmt.close();
+            FactoryConexion.getInstancia().releaseConn();
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+	}
+}
+
+
 }

@@ -22,6 +22,14 @@ public Cancha(int numero, String descripcion, int tipo, String luz, String estab
 	this.establecimiento = establecimiento;
 }
 
+
+
+public Cancha(String establecimiento,int numero) {
+	super();
+	this.numero = numero;
+	this.establecimiento = establecimiento;
+}
+
 public String getDireccion() {
 	return direccion;
 }
