@@ -65,6 +65,7 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 			     System.out.println("Cancha vieja"+canviejo.toString());
 			        
 				 dc.modificarCancha(cannuevo,canviejo);
+				 request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
 				 
 		doGet(request, response);
 	}

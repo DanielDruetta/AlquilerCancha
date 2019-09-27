@@ -63,6 +63,7 @@ public class AltaCancha extends HttpServlet {
 			     
 			        Cancha can = new Cancha(numero,descripcion,tipo,luz,establecimiento);
 		        	dc.add(can);
+		        	request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
 			       
 			}
 	

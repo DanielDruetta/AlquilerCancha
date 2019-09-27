@@ -48,6 +48,7 @@ public class BajaCanchaConfirmado extends HttpServlet {
 				 DataCancha dc = new DataCancha();
 				 System.out.println(can.toString());
 				 dc.delete(can);
+				 request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
 		doGet(request, response);
 	}
 

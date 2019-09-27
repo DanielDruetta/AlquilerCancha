@@ -54,6 +54,7 @@ public class Alta extends HttpServlet {
 			        String dni=request.getParameter("dni");
 			        Cliente cli = new Cliente((dc.ultimoid()+1),dni,nombre,apellido,celular,email,usuario,contraseña);
 			        dc.add(cli);
+			        request.getRequestDispatcher("ventanaCliente.html").forward(request, response);
 			}
 	
        

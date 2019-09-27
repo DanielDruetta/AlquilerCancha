@@ -64,6 +64,7 @@ public class ModificacionCliente extends HttpServlet {
 			System.out.println(cliviejo.toString());
 	        
 			dc.modificarCliente(clinuevo,cliviejo);
+			request.getRequestDispatcher("ventanaCliente.html").forward(request, response);
 	
 	        doGet(request, response);
     }
