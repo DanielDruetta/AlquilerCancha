@@ -272,5 +272,45 @@ public void delete(Cancha c) {
 	}
 }
 
+public Cancha modificarCancha(Cancha nuev,Cancha viej) {
+
+	PreparedStatement stmt= null;
+	ResultSet keyResultSet=null;
+    try {
+    	System.out.println("Data cancha 1");
+        stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+                "update cancha set establecimiento=?,numero=?,descripcion=?,tipo=?,luz=? where establecimiento=? and numero=?",
+				PreparedStatement.RETURN_GENERATED_KEYS
+                );
+        stmt.setString(1, nuev.getEstablecimiento());
+        stmt.setInt(2, nuev.getNumero());
+        stmt.setString(3, nuev.getDescripcion());
+        stmt.setInt(4, nuev.getTipo());
+        stmt.setString(5, nuev.isLuz());
+        stmt.setString(6, viej.getEstablecimiento());
+        stmt.setInt(7, viej.getNumero());
+
+        stmt.executeUpdate();
+        System.out.println("Data cancha 2");
+
+	}  catch (SQLException e) {
+        e.printStackTrace();
+	} finally {
+        try {
+            if(keyResultSet!=null)keyResultSet.close();
+            if(stmt!=null)stmt.close();
+            FactoryConexion.getInstancia().releaseConn();
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+	}
+
+    return nuev;
+}
+
+
+
+
+
 
 }
