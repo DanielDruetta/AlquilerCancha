@@ -6,9 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
 import entidades.Cancha;
+import entidades.Establecimiento;
 
 /**
  * Servlet implementation class BajaCliente
@@ -38,6 +40,7 @@ public class BajaCancha extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String act = request.getParameter("act");
 		 if (act == null) {
 			    System.out.println("No se presiono nada");
@@ -45,7 +48,10 @@ public class BajaCancha extends HttpServlet {
 				 System.out.println("Se presiono eliminar");
 					DataCancha dc = new DataCancha();
 					
-			        String establecimiento=request.getParameter("establecimiento");
+					System.out.println("asd");
+					Establecimiento e= (Establecimiento)session.getAttribute("establec");
+			        String establecimiento= e.getNombre();
+			        System.out.println(establecimiento);
 			        String num=request.getParameter("numero");
 			        int numero=Integer.parseInt(num);
 			        
