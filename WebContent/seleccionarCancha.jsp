@@ -21,6 +21,7 @@
     
    <% 	
  		ArrayList<Ocupada> disponibles=(ArrayList<Ocupada>)request.getAttribute("listaDisponibles");
+        Establecimiento es=(Establecimiento) session.getAttribute("establecimiento");
    		   		
     %>
     

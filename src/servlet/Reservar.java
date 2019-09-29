@@ -134,7 +134,7 @@ public class Reservar extends HttpServlet {
 				request.setAttribute("listaDisponibles",disponibles); 
 				
 							
-				request.setAttribute("establecimiento", es);
+				request.getSession().setAttribute("establecimiento", es);
 				
 				request.getRequestDispatcher("seleccionarCancha.jsp").forward(request, response);
 				

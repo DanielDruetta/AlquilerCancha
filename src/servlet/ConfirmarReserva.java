@@ -63,12 +63,14 @@ public class ConfirmarReserva extends HttpServlet {
 			System.out.println(dr.ultimoid());
 			
 			System.out.println(cli.getDni());
+			System.out.println(es.getNombre());
 			
-			
-			Reserva r= new Reserva((dr.ultimoid()+1),fecha,hora_inicio,"Bombonera",numero_cancha,cli.getDni());
+			Reserva r= new Reserva((dr.ultimoid()+1),fecha,hora_inicio,es.getNombre(),numero_cancha,cli.getDni());
 			
 			dr.add(r);
 			
+			request.getSession().setAttribute("reserva", r);
+			request.getRequestDispatcher("ConfirmacionDeLaReserva.jsp").forward(request, response);
 			
 		// doGet(request, response);
 	}
