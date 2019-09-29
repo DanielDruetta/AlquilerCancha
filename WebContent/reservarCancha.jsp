@@ -63,12 +63,20 @@
     </div>
     
     <div class="form-group">
-    	<label for="inputTipo" class="control-label col-md-2">Tipo:</label>
-    	<div class="col-md-7">
-    		<input for="inputTipo" name="inputTipo" class="form-control" placeholder="5/7/9/11" required="" autofocus="" type="text">
-    	</div>
-    </div>
+			    <label for="inputTipo" class="control-label col-md-2">Tipo:</label>
+			    <div class="col-md-7">
+			    	<select class="col-md-12" id="inputTipo" name="inputTipo">
+						
+						<option class=form-control value=5>5</option>
+						<option class=form-control value=7>7</option>
+						<option class=form-control value=9>9</option>
+						<option class=form-control value=11>11</option>
+					
+					</select>
+			    </div>
+		 </div>
     
+       
 		
     	<div class="form-group">
            <div class="col-md-2">

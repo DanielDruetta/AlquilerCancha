@@ -45,7 +45,7 @@
 <div class="container">
 		<br/>
 		 <h3>Canchas disponibles</h3>
-  <form class="form-reservar" action="reservar" method="post">
+  <form class="form-confirmarReserva" action="ConfirmarReserva" method="post">
    <div class="row">
 		  <div class="col-12 col-sm-12 col-lg-12">
 		   <div class="table-responsive">

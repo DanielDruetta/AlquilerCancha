@@ -2,9 +2,13 @@ package servlet;
 
 import java.io.IOException;
 
+
 import java.sql.Date;
+
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -25,7 +29,7 @@ import entidades.Ocupada;
 @WebServlet({"/Reservar", "/reservar"})
 public class Reservar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DateFormat dateFormat;
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,48 +52,31 @@ public class Reservar extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-		//Parameter index out of range (2 > number of parameters, which is 1).
+		
 		String act = request.getParameter("act");
-		String seleccion = request.getParameter("seleccion");
-		System.out.println(seleccion);
-		if (seleccion == null) {
-		    System.out.println("No se presiono nada");
-		} else if (seleccion.equals("Seleccionar")) {
-			String nrocancha=null;
-			int cont=0;
-			String s=request.getParameter("seleccion");
-			
-			while (nrocancha.charAt(0)!='r') {
-			nrocancha= s.substring(cont);
-			cont++;
-			System.out.println("gg");
-			}
-			System.out.println(nrocancha);
-			System.out.println("ggg");
-		}
-		String establecimiento= request.getParameter("inputEstablecimiento");
-		String fecha=request.getParameter("inputFecha");
-		String tipoS=request.getParameter("inputTipo");
-		
-		
-		int tipo=Integer.parseInt(tipoS);
-		DataCancha dc = new DataCancha();
-		DataEstablecimiento de= new DataEstablecimiento();
-		Establecimiento es=de.buscarEst(establecimiento);
-		
-		System.out.println("Hora inicio");
-		System.out.println(es.getHora_inicio());
-		System.out.println("Cantidad de canchas");
-		System.out.println(de.cantidadCanchas(establecimiento));
-		System.out.println(tipo);
-					
-		System.out.println(fecha);
 		
 		if (act == null) {
 		    System.out.println("No se presiono nada");
+		
 		} else if (act.equals("Aceptar")) {
 			
-				System.out.println("Se presiono buscar por establecimiento");
+			String establecimiento= request.getParameter("inputEstablecimiento");
+			String fecha=request.getParameter("inputFecha");
+			System.out.println(fecha);
+			String tipoS=request.getParameter("inputTipo");
+			
+			
+			Date date = Date.valueOf(fecha);
+			
+			System.out.println(date);
+		        
+		        request.getSession().setAttribute("fecha", date);
+		
+			int tipo=Integer.parseInt(tipoS);
+			DataCancha dc = new DataCancha();
+			DataEstablecimiento de= new DataEstablecimiento();
+			Establecimiento es=de.buscarEst(establecimiento);
+			
 				
 				ArrayList<Ocupada> ocupadas = new ArrayList<Ocupada>();
 				
