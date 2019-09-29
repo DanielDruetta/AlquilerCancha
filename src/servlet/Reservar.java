@@ -16,10 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
 import data.DataEstablecimiento;
 import entidades.Cancha;
+import entidades.Cliente;
 import entidades.Establecimiento;
 import entidades.Ocupada;
 
@@ -51,7 +53,7 @@ public class Reservar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		HttpSession session = request.getSession();
 		
 		String act = request.getParameter("act");
 		
@@ -84,7 +86,10 @@ public class Reservar extends HttpServlet {
 				
 				for (Ocupada disp: ocupadas) {
 					System.out.println(disp.toString());
+					
 				}
+				Cliente cli=(Cliente) session.getAttribute("usuario");
+				System.out.println(cli.getDni());
 				
 				ArrayList<Ocupada> disponibles = new ArrayList<Ocupada>();
 				
@@ -128,11 +133,8 @@ public class Reservar extends HttpServlet {
 			
 				request.setAttribute("listaDisponibles",disponibles); 
 				
-				for (Ocupada disp: disponibles) {
-					System.out.println(disp.toString());
-				}
-				
-				request.setAttribute("establecimiento", de.buscarEst(establecimiento));
+							
+				request.setAttribute("establecimiento", es);
 				
 				request.getRequestDispatcher("seleccionarCancha.jsp").forward(request, response);
 				

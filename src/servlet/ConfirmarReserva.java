@@ -61,15 +61,16 @@ public class ConfirmarReserva extends HttpServlet {
 			
 			DataReserva dr= new DataReserva();
 			System.out.println(dr.ultimoid());
-			System.out.println(es.getNombre());
+			
 			System.out.println(cli.getDni());
 			
-			Reserva r= new Reserva((dr.ultimoid()+1),fecha,hora_inicio,es.getNombre(),numero_cancha,cli.getDni());
+			
+			Reserva r= new Reserva((dr.ultimoid()+1),fecha,hora_inicio,"Bombonera",numero_cancha,cli.getDni());
 			
 			dr.add(r);
 			
 			
-		doGet(request, response);
+		// doGet(request, response);
 	}
 
 }
