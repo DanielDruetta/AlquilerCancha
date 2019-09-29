@@ -66,7 +66,7 @@ public class AltaEstablecimiento extends HttpServlet {
 			        Establecimiento es = new Establecimiento(nombre,direccion,horainicio,horafin,usuario,contraseña);
 			        System.out.println(es.toString());
 			        de.add(es);
-			        System.out.println("ggbrozqui");
+			        request.getRequestDispatcher("ventanaAdmin.html").forward(request, response);
 			        
 			}
 	

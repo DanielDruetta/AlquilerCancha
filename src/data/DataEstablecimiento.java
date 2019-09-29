@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
+import entidades.Cancha;
 import entidades.Establecimiento;
 
 public class DataEstablecimiento {
@@ -194,6 +195,38 @@ public int cantidadCanchas(String establecimiento) {
 	}
 	
 	return cantidad;
+}
+
+public void delete(Establecimiento es) {
+	PreparedStatement stmt= null;
+	ResultSet keyResultSet=null;
+	try {
+		stmt=FactoryConexion.getInstancia().getConn().
+				prepareStatement(
+						"delete from establecimiento where nombre=?",
+						PreparedStatement.RETURN_GENERATED_KEYS
+						);
+		
+		stmt.setString(1, es.getNombre());
+		stmt.executeUpdate();
+		
+		keyResultSet=stmt.getGeneratedKeys();
+        if(keyResultSet!=null && keyResultSet.next()){
+            
+        }
+
+		
+	}  catch (SQLException e) {
+        e.printStackTrace();
+	} finally {
+        try {
+            if(keyResultSet!=null)keyResultSet.close();
+            if(stmt!=null)stmt.close();
+            FactoryConexion.getInstancia().releaseConn();
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+	}
 }
 
 }

@@ -61,18 +61,6 @@
 				</select>
 			    </div>
 			    
-			       <label for="inputMinutoInicio" class="control-label col-md-2">Minuto inicio:</label>
-			    <div class="col-md-10">
-			   
-			    <select id="inputMinutoInicio" name="inputMinutoInicio">
-				<% for (int hi=0; hi<=59 ;hi++) {%>
-
-				<option class=form-control value="<%=Integer.toString(hi)%>"><%=Integer.toString(hi)%></option>
-
-				<%} %>
-				</select>
-			    </div>
-			    
 		    </div>
 		    
 		    
@@ -89,17 +77,6 @@
 				</select>
 			    </div>
 			    
-			    <label for="inputMinutoFin" class="control-label col-md-2">Minuto fin:</label>
-			    <div class="col-md-10">
-			   
-			    <select id="inputMinutoFin" name="inputMinutoFin">
-				<% for (int hf=0; hf<=59 ;hf++) {%>
-
-				<option class=form-control value="<%=Integer.toString(hf)%>"><%=Integer.toString(hf)%></option>
-
-				<%} %>
-				</select>
-			    </div>
 			    
 		    </div>
 		    

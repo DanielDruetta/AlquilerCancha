@@ -32,6 +32,12 @@ public Establecimiento(String nombre, String direccion, int hora_inicio, int hor
 
 
 
+public Establecimiento(String nombre) {
+	super();
+	this.nombre = nombre;
+}
+
+
 public String getUsuario() {
 	return usuario;
 }
