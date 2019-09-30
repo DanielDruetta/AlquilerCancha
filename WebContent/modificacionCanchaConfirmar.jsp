@@ -80,19 +80,12 @@
 		    <div class="form-group">
 			    <label for="inputEstablecimiento" class="control-label col-md-4">Establecimiento:</label>
 			    <div class="col-md-12">
-			    	<select class="col-md-12" id="inputEstablecimiento" name="inputEstablecimiento">
-						<% for (Establecimiento c:es) {%>
-
-						<option class=form-control value="<%=c.getNombre()%>"><%=c.getNombre()%></option>
-
-					<%} %>
-					</select>
+			    	<input id="inputEstablecimiento" name="establecimiento" class="form-control" type="text" value=<%=can.getEstablecimiento()%> disabled>				    	
 			    </div>
 		    </div>
 		    
 		    
 		    <div class="form-group">
-		    	<br/>
 			    <label for="inputNumero" class="control-label col-md-4">Numero de cancha:</label>
 			    <div class="col-md-12">
 			    <input id="inputNumero" name="numero" class="form-control" type="number">

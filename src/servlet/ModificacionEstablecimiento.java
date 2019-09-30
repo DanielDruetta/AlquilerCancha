@@ -8,23 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import data.DataCancha;
-import data.DataCliente;
-import entidades.Cancha;
-import entidades.Cliente;
+import data.DataEstablecimiento;
 import entidades.Establecimiento;
 
 /**
- * Servlet implementation class AltaCancha
+ * Servlet implementation class BajaCliente
  */
-@WebServlet("/AltaCancha")
-public class AltaCancha extends HttpServlet {
+
+@WebServlet("/ModificacionEstablecimiento")
+public class ModificacionEstablecimiento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaCancha() {
+    public ModificacionEstablecimiento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,32 +44,23 @@ public class AltaCancha extends HttpServlet {
 		 if (act == null) {
 			    System.out.println("No se presiono nada");
 			} else if (act.equals("Aceptar")) {
-				 System.out.println("Se presiono aceptar");
-					DataCancha dc = new DataCancha();
-					Establecimiento e= (Establecimiento)session.getAttribute("establec");
-					String establecimiento= e.getNombre();
-			        String luz=request.getParameter("luz");
-			        String descripcion=request.getParameter("descripcion");
-			        String num=request.getParameter("numero");
-			        String tip=request.getParameter("tipo");
-			       
+				 	System.out.println("Servlet modificacion establecimiento");
+					DataEstablecimiento de = new DataEstablecimiento();
+					
+					String establecimiento=request.getParameter("inputEstablecimiento");			        
 			        System.out.println(establecimiento);
-			      
-			        int numero=Integer.parseInt(num);
-			        int tipo=Integer.parseInt(tip);
-			       
-			       
-			        if (luz == null) 
-			        	luz= "N";
-			     
-			        Cancha can = new Cancha(numero,descripcion,tipo,luz,establecimiento);
-		        	dc.add(can);
-		        	request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
-			       
-			}
-	
-      
-		doGet(request, response);
-	}
 
-}
+			        Establecimiento e= de.buscarEst(establecimiento);
+
+			        request.getSession().setAttribute("establec", e);
+			        request.getRequestDispatcher("modificacionEstablecimientoConfirmar.jsp").forward(request, response);
+					 
+						}
+					
+		 	
+  
+		 doGet(request, response);
+	
+	
+	}
+}	

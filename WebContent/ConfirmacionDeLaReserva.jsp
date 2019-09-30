@@ -7,7 +7,7 @@
 <%@page import="data.DataEstablecimiento"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="java.sql.Time"%>
-;
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,50 +25,55 @@
 
     %>
 <body>
-
-<div class="form-group">
-    	<label for="inputFecha" class="control-label col-md-2">Numero de reserva</label>
-    	<div class="col-md-7">
-    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getNumero_reserva()%>" disabled>
-    	</div>
+	<div class="container">
+		<div class="form-group col-md-12">
+			    <br/>
+			    <h3>Datos de la reserva</h3>
+		    </div>
+		<div class="form-group">
+		    	<label for="inputFecha" class="control-label col-md-4">Numero de reserva</label>
+		    	<div class="col-md-7">
+		    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getNumero_reserva()%>" disabled>
+		    	</div>
+		    </div>
+		
+		<div class="form-group">
+		    	<label for="inputFecha" class="control-label col-md-4">Establecimiento</label>
+		    	<div class="col-md-7">
+		    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getEstablecimiento()%>" disabled>
+		    	</div>
+		    </div>
+		    
+		    <div class="form-group">
+		    	<label for="inputFecha" class="control-label col-md-4">Fecha del partido</label>
+		    	<div class="col-md-7">
+		    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getFecha()%>" disabled>
+		    	</div>
+		    </div>
+		    
+		<div class="form-group">
+		    	<label for="inputFecha" class="control-label col-md-4">Hora inicio del partido</label>
+		    	<div class="col-md-7">
+		    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getHora_inicio()%>" disabled>
+		    	</div>
+		    </div>
+		    
+		    <div class="form-group">
+		    	<label for="inputFecha" class="control-label col-md-4">Hora fin del partido</label>
+		    	<div class="col-md-7">
+		    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getHora_inicio()+1%>" disabled>
+		    	</div>
+		    </div>
+		
+		<div class="form-group">
+		    	<label for="inputFecha" class="control-label col-md-4">Numero de cancha</label>
+		    	<div class="col-md-7">
+		    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getNumero_cancha()%>" disabled>
+		    	</div>
+		    </div>    
+		<div class="form-group">    
+			<a class="btn btn-primary" href="menuCliente.html" role="button">Volver al menu</a>
+		</div>  
     </div>
-
-<div class="form-group">
-    	<label for="inputFecha" class="control-label col-md-2">Establecimiento</label>
-    	<div class="col-md-7">
-    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getEstablecimiento()%>" disabled>
-    	</div>
-    </div>
-    
-    <div class="form-group">
-    	<label for="inputFecha" class="control-label col-md-2">Fecha del partido</label>
-    	<div class="col-md-7">
-    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getFecha()%>" disabled>
-    	</div>
-    </div>
-    
-<div class="form-group">
-    	<label for="inputFecha" class="control-label col-md-2">Hora inicio del partido</label>
-    	<div class="col-md-7">
-    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getHora_inicio()%>" disabled>
-    	</div>
-    </div>
-    
-    <div class="form-group">
-    	<label for="inputFecha" class="control-label col-md-2">Hora fin del partido</label>
-    	<div class="col-md-7">
-    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getHora_inicio()+1%>" disabled>
-    	</div>
-    </div>
-
-<div class="form-group">
-    	<label for="inputFecha" class="control-label col-md-2">Numero de cancha</label>
-    	<div class="col-md-7">
-    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getNumero_cancha()%>" disabled>
-    	</div>
-    </div>    
-    
-<a class="btn btn-primary" href="menuCliente.html" role="button">Volver al menu</a>
-    
 </body>
 </html>

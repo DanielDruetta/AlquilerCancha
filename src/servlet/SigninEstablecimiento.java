@@ -65,7 +65,7 @@ public class SigninEstablecimiento extends HttpServlet {
 		        	{    request.getSession().setAttribute("establec", e); // esto es correcto
 		        	
 		        	
-				    request.getRequestDispatcher("menuDueño.html").forward(request, response);
+				    request.getRequestDispatcher("menuDueño.jsp").forward(request, response);
 		       
 				   }
 		} else if (act.equals("Registrarse")) {

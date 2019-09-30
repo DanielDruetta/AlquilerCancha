@@ -133,7 +133,7 @@ public Establecimiento buscarEst(String establecimiento) {
 	ResultSet rs=null;
 	try {
 		stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-				"select nombre,direccion,hora_inicio,hora_fin from establecimiento where nombre=?"
+				"select nombre,direccion,hora_inicio,hora_fin,usuario from establecimiento where nombre=?"
 				);
 		stmt.setString(1, establecimiento);
 	
@@ -146,6 +146,7 @@ public Establecimiento buscarEst(String establecimiento) {
 			
 			c.setHora_inicio(rs.getInt("hora_inicio"));
 			c.setHora_fin(rs.getInt("hora_fin"));
+			c.setUsuario(rs.getString("usuario"));
 			
 			
 		}
@@ -228,5 +229,42 @@ public void delete(Establecimiento es) {
         }
 	}
 }
+
+public Establecimiento modificarEstablecimiento(Establecimiento nuev,Establecimiento viej) {
+
+	PreparedStatement stmt= null;
+	ResultSet keyResultSet=null;
+    try {
+    	System.out.println("Data establecimineto 1");
+        stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+                "update establecimiento set nombre=?,direccion=?,hora_inicio=?,hora_fin=?,usuario=?,contraseña=? where nombre=?",
+				PreparedStatement.RETURN_GENERATED_KEYS
+                );
+        stmt.setString(1, nuev.getNombre());
+        stmt.setString(2, nuev.getDireccion());
+        stmt.setInt(3, nuev.getHora_inicio());
+        stmt.setInt(4, nuev.getHora_fin());
+        stmt.setString(5, nuev.getUsuario());
+        stmt.setString(6, nuev.getContraseña());
+        stmt.setString(7, viej.getNombre());
+
+        stmt.executeUpdate();
+        System.out.println("Data cancha 2");
+
+	}  catch (SQLException e) {
+        e.printStackTrace();
+	} finally {
+        try {
+            if(keyResultSet!=null)keyResultSet.close();
+            if(stmt!=null)stmt.close();
+            FactoryConexion.getInstancia().releaseConn();
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+	}
+
+    return nuev;
+}
+
 
 }

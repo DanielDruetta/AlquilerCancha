@@ -21,35 +21,35 @@
 		    </div>
 		    
 		     <div class="form-group">
-			    <label for="inputNombre" class="control-label col-md-2">Nombre del establecimiento:</label>
+			    <label for="inputNombre" class="control-label col-md-4">Nombre del establecimiento:</label>
 			    <div class="col-md-10">
 			    <input id="inputNombre" name="nombre" class="form-control" type="text">
 			    </div>
 		    </div>
 		    
 		     <div class="form-group">
-			    <label for="inputDireccion" class="control-label col-md-2">Direccion del establecimiento:</label>
+			    <label for="inputDireccion" class="control-label col-md-4">Direccion del establecimiento:</label>
 			    <div class="col-md-10">
 			    <input id="inputDireccion" name="direccion" class="form-control" type="text">
 			    </div>
 		    </div>
 		    
 		    <div class="form-group">
-			    <label for="inputUsuario" class="control-label col-md-2">Usuario:</label>
+			    <label for="inputUsuario" class="control-label col-md-4">Usuario:</label>
 			    <div class="col-md-10">
 			    <input id="inputUsuario" name="usuario" class="form-control" type="text">
 			    </div>
 		    </div>
 		    
 		    <div class="form-group">
-			    <label for="inputContraseña" class="control-label col-md-2">Contraseña:</label>
+			    <label for="inputContraseña" class="control-label col-md-4">Contraseña:</label>
 			    <div class="col-md-10">
 			    <input id="inputContraseña" name="contraseña" class="form-control" type="text">
 			    </div>
 		    </div>
 		    
 		    <div class="form-group">
-			    <label for="inputHoraInicio" class="control-label col-md-2">Hora inicio:</label>
+			    <label for="inputHoraInicio" class="control-label col-md-4">Hora inicio:</label>
 			    <div class="col-md-10">
 			   
 			    <select id="inputHoraInicio" name="inputHoraInicio">

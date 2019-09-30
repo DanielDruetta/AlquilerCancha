@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
 import data.DataCliente;
+import data.DataEstablecimiento;
 import entidades.Cancha;
 import entidades.Cliente;
 import entidades.Establecimiento;
@@ -17,14 +18,14 @@ import entidades.Establecimiento;
 /**
  * Servlet implementation class BajaClienteConfirmado
  */
-@WebServlet("/ModificacionCanchaConfirmado")
-public class ModificacionCanchaConfirmado extends HttpServlet {
+@WebServlet("/ModificacionEstablecimientoConfirmado")
+public class ModificacionEstablecimientoConfirmado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificacionCanchaConfirmado() {
+    public ModificacionEstablecimientoConfirmado() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,32 +43,35 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String actio = request.getParameter("action");
+		String actio = request.getParameter("act");
 		if (actio == null) {
 			    System.out.println("No se presiono nada");
 			} else if (actio.equals("Modificar")) {
-				 System.out.println("Servlet modificacion cancha confirmado");
-				 
-				 Cancha c= (Cancha)session.getAttribute("cancha");
-			     String establecimiento= c.getEstablecimiento();
-				 String num=request.getParameter("numero");
-			     String descripcion=request.getParameter("descripcion");
-			     String tip=request.getParameter("tipo");
-			     String luz=request.getParameter("luz");
-			     int numero=Integer.parseInt(num);
-			     int tipo=Integer.parseInt(tip);
-			     
-			     
-			     DataCancha dc=new DataCancha();
-			 	
-			     Cancha cannuevo = new Cancha(numero,descripcion,tipo,luz,establecimiento);
-			     System.out.println("Cancha nueva"+cannuevo.toString());
+				 System.out.println("Servlet modificacion establecimiento confirmado");
+				 DataEstablecimiento de = new DataEstablecimiento();
 					
-			     Cancha canviejo= (Cancha)session.getAttribute("cancha");
-			     System.out.println("Cancha vieja"+canviejo.toString());
+				 String nombre=request.getParameter("nombre");
+			     String direccion=request.getParameter("direccion");
+			     String usuario=request.getParameter("usuario");
+			     String contraseña=request.getParameter("contraseña");
 			        
-				 dc.modificarCancha(cannuevo,canviejo);
-				 request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
+			     String hora_inicio=request.getParameter("inputHoraInicio");
+			     String hora_fin=request.getParameter("inputHoraFin");
+			        
+			     int horainicio = Integer.parseInt(hora_inicio);
+			     int horafin = Integer.parseInt(hora_fin);
+					
+			     System.out.println(horainicio);
+			     System.out.println(horafin);
+			     
+			     Establecimiento estnuevo = new Establecimiento(nombre,direccion,horainicio,horafin,usuario,contraseña);
+			     System.out.println("Cancha nueva "+estnuevo.toString());
+					
+			     Establecimiento estviejo= (Establecimiento)session.getAttribute("establec");
+			     System.out.println("Cancha vieja"+estviejo.toString());
+			        
+				 de.modificarEstablecimiento(estnuevo,estviejo);
+				 request.getRequestDispatcher("ventanaAdmin.html").forward(request, response);
 				 
 		doGet(request, response);
 	}
