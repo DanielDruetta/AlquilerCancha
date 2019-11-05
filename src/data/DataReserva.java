@@ -72,7 +72,7 @@ public class DataReserva {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where r.fecha=CAST(NOW() as date) and es.nombre=?"
+					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where r.fecha=CAST(NOW() as date) and es.nombre=? order by r.hora_inicio"
 					);
 			
 			stmt.setString(1, establecimiento);
@@ -113,7 +113,7 @@ public class DataReserva {
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where month(r.fecha)=month(NOW()) and year(r.fecha)=year(NOW()) and es.nombre=?"
+					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni,r.fecha FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where month(r.fecha)=month(NOW()) and year(r.fecha)=year(NOW()) and es.nombre=? order by r.fecha,r.hora_inicio"
 					);
 			
 			stmt.setString(1, establecimiento);
@@ -127,6 +127,7 @@ public class DataReserva {
 					o.setHora_inicio(rs.getInt("hora_inicio"));
 					o.setNumero_cancha(rs.getInt("numero_cancha"));
 					o.setDni(rs.getString("r.dni"));
+					o.setFecha(rs.getDate("r.fecha"));
 					reservas.add(o);
 				
 				}

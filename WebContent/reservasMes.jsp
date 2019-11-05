@@ -58,6 +58,7 @@
 		        
 		        <th>Numero de reserva</th>
 		        <th>Numero de cancha</th>
+		        <th>Fecha</th>
 		        <th>Hora inicio</th>
 		        <th>Hora fin</th>
 		        <th>DNI del cliente</th>
@@ -72,6 +73,7 @@
 		      <tr>
 		        <td><%=disp.getNumero_reserva()%></td>
 		        <td><%=disp.getNumero_cancha()%></td>
+		        <td><%=disp.getFecha()%></td>
 		        <td><%=disp.getHora_inicio()%></td>
 		        <td><%=disp.getHora_inicio()+1%></td>
 		 	    <td><%=disp.getDni()%></td>
