@@ -204,7 +204,43 @@ public class DataCliente {
         return nuev;
     }
 
-
+	public Cliente buscarDNI(String dni) {
+		
+		Cliente c=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select nombre,apellido,celular,email,dni,usuario from cliente where dni=?"
+					);
+			stmt.setString(1, dni);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				c=new Cliente();
+				c.setNombre(rs.getString("nombre"));
+				c.setApellido(rs.getString("apellido"));
+				c.setEmail(rs.getString("email"));
+				c.setDni(rs.getString("dni"));
+				c.setCelular(rs.getString("celular"));
+				c.setUsuario(rs.getString("usuario"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return c;
+	}
+	
+	
 }
 	
 	

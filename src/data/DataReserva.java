@@ -2,6 +2,7 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import entidades.*;
 
@@ -64,5 +65,86 @@ public class DataReserva {
 		}
     }
 	
-	
+ public ArrayList<Reserva> reservasDia(String establecimiento) {
+		
+		ArrayList<Reserva> reservas= new ArrayList<>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where r.fecha=CAST(NOW() as date) and es.nombre=?"
+					);
+			
+			stmt.setString(1, establecimiento);
+			rs=stmt.executeQuery();
+			
+			if(rs!=null) {
+				while(rs.next()) {
+					
+					Reserva o=new Reserva();
+					o.setNumero_reserva(rs.getInt("numero_reserva"));
+					o.setHora_inicio(rs.getInt("hora_inicio"));
+					o.setNumero_cancha(rs.getInt("numero_cancha"));
+					o.setDni(rs.getString("r.dni"));
+					reservas.add(o);
+				
+				}
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return reservas;
+	}
+ 
+ public ArrayList<Reserva> reservasMes(String establecimiento) {
+		
+		ArrayList<Reserva> reservas= new ArrayList<>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where month(r.fecha)=month(NOW()) and year(r.fecha)=year(NOW()) and es.nombre=?"
+					);
+			
+			stmt.setString(1, establecimiento);
+			rs=stmt.executeQuery();
+			
+			if(rs!=null) {
+				while(rs.next()) {
+					
+					Reserva o=new Reserva();
+					o.setNumero_reserva(rs.getInt("numero_reserva"));
+					o.setHora_inicio(rs.getInt("hora_inicio"));
+					o.setNumero_cancha(rs.getInt("numero_cancha"));
+					o.setDni(rs.getString("r.dni"));
+					reservas.add(o);
+				
+				}
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return reservas;
+	}
+ 
 }

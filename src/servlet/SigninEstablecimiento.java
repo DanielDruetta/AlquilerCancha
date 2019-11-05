@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import data.DataEstablecimiento;
+import data.DataReserva;
 import entidades.Establecimiento;
+import entidades.Reserva;
 
 /**
  * Servlet implementation class signin
@@ -55,6 +57,7 @@ public class SigninEstablecimiento extends HttpServlet {
 		        DataEstablecimiento de= new DataEstablecimiento();
 		        Establecimiento e= de.getByUser(est);
 		        request.getSession().setAttribute("establec", e);
+		        
 		        
 		        if (e == null) {
 		        	

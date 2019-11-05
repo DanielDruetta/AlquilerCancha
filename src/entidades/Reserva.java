@@ -11,6 +11,13 @@ int numero_cancha;
 String dni;
 
 
+
+
+public Reserva() {
+	super();
+}
+
+
 public Reserva(int numero_reserva, Date fecha, int hora_inicio, String establecimiento, int numero_cancha, String dni) {
 	super();
 	this.numero_reserva = numero_reserva;
