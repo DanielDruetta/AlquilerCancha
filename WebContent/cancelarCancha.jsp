@@ -4,7 +4,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Cliente"%>
 <%@page import="entidades.Establecimiento"%>
-<%@page import="data.DataEstablecimiento"%>
+<%@page import="entidades.Reserva"%>
+<%@page import="data.DataReserva"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -14,9 +15,12 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     	  
     
-   <% 	DataEstablecimiento de = new DataEstablecimiento();
-        request.getSession().setAttribute("listaEstablecimientos", de.getAll()); //esto es correcto
- 		ArrayList<Establecimiento> es=(ArrayList<Establecimiento>)session.getAttribute("listaEstablecimientos");
+   <% 	
+   Cliente c=(Cliente) session.getAttribute("usuario");
+   DataReserva dr = new DataReserva();
+   ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+   reservas= dr.reservasCliente(c.getDni());	  
+
     %>
     
     </head>
@@ -37,55 +41,46 @@
 </nav>
   
 <div class="container">
-	<br/>
-	<h3>Buscar un turno</h3>
-    <form class="form-reservar" action="reservar" method="post">
-   		<div class="form-group">
-			    <label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
-			    <div class="col-md-7">
-			    	<select class="col-md-12" id="inputEstablecimiento" name="inputEstablecimiento">
-						<% for (Establecimiento c:es) {%>
-
-						<option class=form-control value="<%=c.getNombre()%>"><%=c.getNombre()%></option>
-
-					<%} %>
-					</select>
-			    </div>
-		 </div>
-
-
-
-	<div class="form-group">
-    	<label for="inputFecha" class="control-label col-md-2">Fecha</label>
-    	<div class="col-md-7">
-    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="date">
-    	</div>
-    </div>
-    
-    <div class="form-group">
-			    <label for="inputTipo" class="control-label col-md-2">Tipo:</label>
-			    <div class="col-md-7">
-			    	<select class="col-md-12" id="inputTipo" name="inputTipo">
-						
-						<option class=form-control value=5>5</option>
-						<option class=form-control value=7>7</option>
-						<option class=form-control value=9>9</option>
-						<option class=form-control value=11>11</option>
-					
-					</select>
-			    </div>
-		 </div>
-    
-       
-		
-    	<div class="form-group">
-           <div class="col-md-2">
-                 <input type="submit" class="btn btn-primary" id="act" name="act" value="Aceptar">   
-            </div>
-     </div>
+		<br/>
+		 <h3>Reservas vigentes</h3>
+  <form class="form-cancelarReserva" action="CancelarReserva" method="post">
+   <div class="row">
+		  <div class="col-12 col-sm-12 col-lg-12">
+		   <div class="table-responsive">
+		    <table class="table">
+		     <thead>
+		      <tr>
+		       
+		        <th>Fecha del partido</th>
+		        <th>Hora del partido</th>
+		        <th>Establecimiento</th>
+		        <th>Numero de cancha</th>
+		        <th> </th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    <% for (Reserva disp : reservas) {%>
+		      <tr>
+		        <td><%=disp.getFecha()%></td>
+		        <td><%=disp.getHora_inicio()%></td>
+		        <td><%=disp.getEstablecimiento()%></td>
+		 	    <td><%=disp.getNumero_cancha()%></td>
+		 	  
+		 	    <td>
+		 	   <button type="submit" class="btn btn-primary" name="seleccion" value=<%=String.valueOf(disp.getNumero_reserva())%>>Cancelar reserva</button>
+		 	    </td>
+		    
+		      </tr>
+		     
+		      <%} %>
+		    </tbody>
+		  </table>
+		  </div>
+	    </div><!-- end col-12 -->
+	  </div><!-- end row -->
 
       
-      </form>
+   </form>
  </div>
 </body>
 </html>
