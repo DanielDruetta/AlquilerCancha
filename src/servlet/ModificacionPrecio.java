@@ -16,14 +16,14 @@ import entidades.Precio;
 /**
  * Servlet implementation class AltaPrecio
  */
-@WebServlet("/AltaPrecio")
-public class AltaPrecio extends HttpServlet {
+@WebServlet("/ModificacionPrecio")
+public class ModificacionPrecio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaPrecio() {
+    public ModificacionPrecio() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,7 +55,7 @@ public class AltaPrecio extends HttpServlet {
 		Precio precio=new Precio(e.getNombre(),numerocancha,nuevoprecio);
 		DataPrecio dr= new DataPrecio();
 		dr.add(precio);
-		
+		request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
 		doGet(request, response);
 	}
 

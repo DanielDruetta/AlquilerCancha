@@ -24,7 +24,7 @@
   
   <body>
      <div class="container">
-	    <form class="form-altacancha" action="AltaPrecio" method="post">
+	    <form class="form-modificacionprecio" action="ModificacionPrecio" method="post">
 		    <div class="form-group col-md-12">
 			    <br/>
 			    <h3>Alta precio</h3>
