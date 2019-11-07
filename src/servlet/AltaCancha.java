@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
 import data.DataCliente;
+import data.DataEstablecimiento;
+import data.DataPrecio;
 import entidades.Cancha;
 import entidades.Cliente;
 import entidades.Establecimiento;
+import entidades.Precio;
 
 /**
  * Servlet implementation class AltaCancha
@@ -48,24 +53,34 @@ public class AltaCancha extends HttpServlet {
 			} else if (act.equals("Aceptar")) {
 				 System.out.println("Se presiono aceptar");
 					DataCancha dc = new DataCancha();
+					DataEstablecimiento de= new DataEstablecimiento();
 					Establecimiento e= (Establecimiento)session.getAttribute("establec");
 					String establecimiento= e.getNombre();
 			        String luz=request.getParameter("luz");
 			        String descripcion=request.getParameter("descripcion");
-			        String num=request.getParameter("numero");
+			        String preci=request.getParameter("precio");
 			        String tip=request.getParameter("tipo");
 			       
 			        System.out.println(establecimiento);
 			      
-			        int numero=Integer.parseInt(num);
+			        
+			        ArrayList<Integer> canchas = new ArrayList<Integer>();
+			 		canchas= de.canchas(e.getNombre());	
+			     
 			        int tipo=Integer.parseInt(tip);
-			       
+			        double preciocancha = Double.parseDouble(preci);
+			    
 			       
 			        if (luz == null) 
 			        	luz= "N";
 			     
-			        Cancha can = new Cancha(numero,descripcion,tipo,luz,establecimiento);
+			        Cancha can = new Cancha(canchas.size()+1,descripcion,tipo,luz,establecimiento);
 		        	dc.add(can);
+		        	
+		        	Precio precio=new Precio(e.getNombre(),canchas.size()+1,preciocancha);
+		    		DataPrecio dr= new DataPrecio();
+		    		dr.add(precio);
+		    		
 		        	request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
 			       
 			}

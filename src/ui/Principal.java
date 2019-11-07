@@ -11,20 +11,16 @@ import data.*;
 public class Principal {
 
 	public static void main(String[] args) throws ClassNotFoundException{
-		DataCancha de = new DataCancha();
-		ArrayList<Cancha> establecimientos = de.getAll();
-		String luz;
-		luz= "N";
-		int i=5;
-		System.out.println(Integer.toString(i));
-		System.out.println(luz);
-		System.out.println(!(luz.equals("N")));
-		for(Cancha es:establecimientos)
-		{
-			System.out.println(es.toString());
-		}
-
-
+		 
+		ArrayList<Integer> lista = new ArrayList<>();
+	         
+	        //Metodo add. añade elementos a nuestra lista
+	        lista.add(1);
+	        lista.add(2);
+	        lista.add(3);
+      
+	        System.out.println("SIZE");
+	        System.out.println(lista.size());
 		
 	}
 

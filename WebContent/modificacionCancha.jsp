@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Establecimiento"%>
+<%@page import="data.DataEstablecimiento"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,6 +14,10 @@
     
     <% 
     	Establecimiento e= (Establecimiento)session.getAttribute("establec");
+   
+		DataEstablecimiento de=new DataEstablecimiento();
+		ArrayList<Integer> canchas = new ArrayList<Integer>();
+		canchas= de.canchas(e.getNombre());	
     %>
     
     </head>
@@ -30,12 +37,20 @@
 			    </div>
 		    </div>
 
-		    <div class="form-group">
-			    <label for="inputNumero" class="control-label col-md-4">Numero de cancha:</label>
-			    <div class="col-md-10">
-			    <input id="inputNumero" name="numero" class="form-control" type="number">
+		 
+		     <div class="form-group">
+			    <label for="inputNumero" class="control-label col-md-2">Numero de cancha:</label>
+			    <div class="col-md-7">
+			    	<select class="col-md-12" id="inputNumero" name="numero">
+						<% for (Integer nro:canchas) {%>
+
+						<option class=form-control value="<%=nro%>"><%=nro%></option>
+
+					<%} %>
+					</select>
 			    </div>
-		    </div>
+		 </div>
+		    
 		    
 	        <div class="form-group">
 	            <div class="col-md-2">

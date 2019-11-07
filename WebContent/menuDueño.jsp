@@ -49,7 +49,7 @@
 	      <div class="col-md-4">
 	      	<br> 
 	        <h2>Precio</h2>
-	        <p><a class="btn btn-primary" href="altaPrecio.html" role="button">Alta precio</a></p>
+	        <p><a class="btn btn-primary" href="altaPrecio.jsp" role="button">Alta precio</a></p>
 	        <p><a class="btn btn-primary" href="bajaPrecio.html" role="button">Baja precio</a></p>
 	        <p><a class="btn btn-primary" href="#" role="button">Modificacion precio</a></p>
 	      </div>

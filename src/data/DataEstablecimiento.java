@@ -9,6 +9,7 @@ import com.mysql.jdbc.Statement;
 
 import entidades.Cancha;
 import entidades.Establecimiento;
+import entidades.Reserva;
 
 public class DataEstablecimiento {
 
@@ -264,6 +265,41 @@ public Establecimiento modificarEstablecimiento(Establecimiento nuev,Establecimi
 	}
 
     return nuev;
+}
+
+
+public ArrayList<Integer> canchas(String establecimiento) {
+	
+	ArrayList<Integer> canchas= new ArrayList<>();
+	PreparedStatement stmt=null;
+	ResultSet rs=null;
+	try {
+		stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+				"SELECT numero FROM cancha c inner join establecimiento es on es.nombre = c.establecimiento where es.nombre=?"
+				);
+		
+		stmt.setString(1, establecimiento);
+		rs=stmt.executeQuery();
+		
+		if(rs!=null) {
+			while(rs.next()) {
+				canchas.add(rs.getInt("numero"));
+			}
+		
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			if(rs!=null) {rs.close();}
+			if(stmt!=null) {stmt.close();}
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	return canchas;
 }
 
 

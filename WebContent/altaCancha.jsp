@@ -14,6 +14,8 @@
  		DataEstablecimiento de = new DataEstablecimiento();
  		request.getSession().setAttribute("listaEstablecimientos", de.getAll());
  		ArrayList<Establecimiento> es=(ArrayList<Establecimiento>)session.getAttribute("listaEstablecimientos");
+ 		ArrayList<Integer> canchas = new ArrayList<Integer>();
+ 		canchas= de.canchas(e.getNombre());	
  
     %>
 <title>Futbol 5</title>
@@ -42,7 +44,8 @@
 		    <div class="form-group">
 			    <label for="inputNumero" class="control-label col-md-2">Numero de cancha:</label>
 			    <div class="col-md-10">
-			    	<input id="inputNumero" name="numero" class="form-control" type="number">
+			    	<input id="inputNumero" name="numero" class="form-control" type="number" value=<%=canchas.size()+1%> disabled>	
+			    
 			    </div>
 		    </div>
 		    
@@ -57,6 +60,13 @@
 			    <label for="inputTipo" class="control-label col-md-2">Tipo:</label>
 			    <div class="col-md-10">
 			    <input id="inputTipo" name="tipo" class="form-control" type="text" placeholder="" >
+			    </div>
+		    </div>
+		    
+		     <div class="form-group">
+			    <label for="inputPrecio" class="control-label col-md-2">Precio:</label>
+			    <div class="col-md-10">
+			    <input id="inputPrecio" name="precio" class="form-control" type="number" placeholder="" >
 			    </div>
 		    </div>
 		    
