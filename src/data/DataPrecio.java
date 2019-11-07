@@ -15,7 +15,7 @@ public class DataPrecio {
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().
 					prepareStatement(
-							"insert into precio(establecimiento, numero_cancha, precio) values(?,?,?)",
+							"insert into precio(establecimiento, numero_cancha,fecha_desde, precio) values(?,?,current_date(),?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getEstablecimiento());

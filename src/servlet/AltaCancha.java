@@ -77,9 +77,11 @@ public class AltaCancha extends HttpServlet {
 			        Cancha can = new Cancha(canchas.size()+1,descripcion,tipo,luz,establecimiento);
 		        	dc.add(can);
 		        	
+		        	
 		        	Precio precio=new Precio(e.getNombre(),canchas.size()+1,preciocancha);
 		    		DataPrecio dr= new DataPrecio();
 		    		dr.add(precio);
+		    		
 		    		
 		        	request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
 			       
