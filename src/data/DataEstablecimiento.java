@@ -302,5 +302,39 @@ public ArrayList<Integer> canchas(String establecimiento) {
 	return canchas;
 }
 
+public ArrayList<Integer> tipos(String establecimiento) {
+	
+	ArrayList<Integer> tipos= new ArrayList<>();
+	PreparedStatement stmt=null;
+	ResultSet rs=null;
+	try {
+		stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+				"SELECT DISTINCT tipo FROM cancha c inner join establecimiento es on es.nombre = c.establecimiento where es.nombre=? order by tipo"
+				);
+		
+		stmt.setString(1, establecimiento);
+		rs=stmt.executeQuery();
+		
+		if(rs!=null) {
+			while(rs.next()) {
+				tipos.add(rs.getInt("tipo"));
+			}
+		
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			if(rs!=null) {rs.close();}
+			if(stmt!=null) {stmt.close();}
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	return tipos;
+}
+
 
 }
