@@ -84,10 +84,7 @@ public class Reservar extends HttpServlet {
 				
 				ocupadas= dc.buscarFechaEstablecimiento(establecimiento, fecha, tipo);//Esta funcion lo que hace es, devuelve una lista de ocupadas (numero y hora) de ese tipo, para esa fecha y ese establecimiento
 				
-				for (Ocupada disp: ocupadas) {
-					System.out.println(disp.toString());
-					
-				}
+				
 				Cliente cli=(Cliente) session.getAttribute("usuario");
 				System.out.println(cli.getDni());
 				

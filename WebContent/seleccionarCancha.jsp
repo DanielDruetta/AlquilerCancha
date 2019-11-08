@@ -4,8 +4,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Ocupada"%>
 <%@page import="entidades.Establecimiento"%>
+<%@page import="entidades.Precio"%>
 <%@page import="data.DataEstablecimiento"%>
-<%@page import="data.DataEstablecimiento"%>
+<%@page import="data.DataPrecio"%>
 <%@page import="java.sql.Time"%>
 ;
 <!DOCTYPE html>
@@ -22,7 +23,8 @@
    <% 	
  		ArrayList<Ocupada> disponibles=(ArrayList<Ocupada>)request.getAttribute("listaDisponibles");
         Establecimiento es=(Establecimiento) session.getAttribute("establecimiento");
-   		   		
+        DataPrecio dp=new DataPrecio();
+        	
     %>
     
     </head>
@@ -57,6 +59,7 @@
 		        <th>Hora</th>
 		        <th>Estado</th>
 		        <th>Descripcion</th>
+		        <th>Precio</th>
 		        <th> </th>
 		      </tr>
 		    </thead>
@@ -67,6 +70,8 @@
 		        <td><%=disp.getHora_inicio()%></td>
 		        <td><%=disp.getEstado()%></td>
 		 	    <td><%=disp.getDescripcion()%></td>
+			    <td><%=dp.obtenerPrecio(es.getNombre(), disp.getNumero()).getPrecio()%></td>
+		 	    
 		 	 <% if (disp.getEstado().equals("Disponible")) {%>  
 		 	    <td>
 		 	     	<button type="submit" class="btn btn-primary" name="seleccion" value=<%=String.valueOf(disp.getNumero())+"r"+String.valueOf(disp.getHora_inicio())%>>Seleccionar</button>

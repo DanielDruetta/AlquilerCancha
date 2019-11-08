@@ -5,6 +5,7 @@
 <%@page import="entidades.Ocupada"%>
 <%@page import="entidades.Establecimiento"%>
 <%@page import="data.DataEstablecimiento"%>
+<%@page import="data.DataPrecio"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="java.sql.Time"%>
 
@@ -22,6 +23,8 @@
    <% 	
         Establecimiento es=(Establecimiento) session.getAttribute("establecimiento");
   		Reserva r=(Reserva) session.getAttribute("reserva");
+  		
+        DataPrecio dp=new DataPrecio();
 
     %>
 <body>
@@ -70,7 +73,15 @@
 		    	<div class="col-md-7">
 		    		<input id="inputFecha" name="inputFecha" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=r.getNumero_cancha()%>" disabled>
 		    	</div>
-		    </div>    
+		    </div>  
+		    
+		    <div class="form-group">
+		    	<label for="inputPrecio" class="control-label col-md-4">Precio de la reserva</label>
+		    	<div class="col-md-7">
+		    		<input id="inputPrecio" name="inputPrecio" class="form-control" placeholder="" required="" autofocus="" type="text" value="<%=dp.obtenerPrecio(es.getNombre(), r.getNumero_cancha()).getPrecio() %>" disabled>
+		    	</div>
+		    </div>  
+		     
 		<div class="form-group">    
 			<a class="btn btn-primary" href="menuCliente.html" role="button">Volver al menu</a>
 		</div>  

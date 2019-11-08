@@ -11,6 +11,7 @@ public class Principal {
 	DataPrecio dp=new DataPrecio();
 	Precio p = new Precio();
 	p= dp.obtenerPrecio("Bombonera", 2);
+	System.out.println(dp.obtenerPrecio("Bombonera",2).getPrecio());
 	System.out.println(p.getEstablecimiento());
 	System.out.println(p.getNumero_cancha());
 	System.out.println(p.getFecha_desde());
