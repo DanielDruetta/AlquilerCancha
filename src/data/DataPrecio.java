@@ -39,22 +39,25 @@ public class DataPrecio {
 	
 	
 	
-public int obtenerPrecio(String establecimiento, int numero) {
-		
-		int precio=0;
+public Precio obtenerPrecio(String establecimiento, int numero) {
+		Precio pr = null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
-					"DROP TEMPORARY TABLE IF EXISTS precios; CREATE TEMPORARY TABLE precios SELECT establecimiento, numero_cancha, MAX(fecha_desde) as Fechita FROM precio group by establecimiento, numero_cancha; SELECT p.establecimiento, p.numero_cancha, p.fecha_desde, p.precio FROM precio p  INNER JOIN precios pre ON p.establecimiento = pre.establecimiento and p.numero_cancha = pre.numero_cancha and p.fecha_desde = pre.Fechita where p.establecimiento=? and p.numero_cancha=? group by p.establecimiento, p.numero_cancha, p.fecha_desde;"
+					"call futbol.devolver_precio(?, ?);"
 					);
 			stmt.setString(1, establecimiento);
 			stmt.setInt(2, numero);
 			rs=stmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
+				pr=new Precio();
+				pr.setEstablecimiento(rs.getString("p.establecimiento"));
+				pr.setNumero_cancha(rs.getInt("p.numero_cancha"));
+				pr.setFecha_desde(rs.getDate("p.fecha_desde"));
+				pr.setPrecio(rs.getDouble("p.precio"));
 				
-				precio= rs.getInt("precio");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -68,7 +71,7 @@ public int obtenerPrecio(String establecimiento, int numero) {
 			}
 		}
 		
-		return precio;
+		return pr;
 		
 	}
 	

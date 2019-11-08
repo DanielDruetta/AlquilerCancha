@@ -1,21 +1,20 @@
 package ui;
 
-import entidades.*;
+import data.DataPrecio;
+import entidades.Precio;
 
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import data.*;
 
 public class Principal {
 
-	public static void main(String[] args) throws ClassNotFoundException{
+	public static void main(String[] args) {
 		 
 	DataPrecio dp=new DataPrecio();
-	int precio;
-	precio= dp.obtenerPrecio("Bombonera", 2);
-	System.out.println(precio);
+	Precio p = new Precio();
+	p= dp.obtenerPrecio("Bombonera", 2);
+	System.out.println(p.getEstablecimiento());
+	System.out.println(p.getNumero_cancha());
+	System.out.println(p.getFecha_desde());
+	System.out.println(p.getPrecio());
 		
 	}
 
