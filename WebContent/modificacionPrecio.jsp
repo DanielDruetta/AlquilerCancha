@@ -16,6 +16,7 @@
  		canchas= de.canchas(e.getNombre());	
  		DataPrecio dp=new DataPrecio();
  		
+ 		
     %>
 <title>Futbol 5</title>
     	<link rel="icon" href="https://http2.mlstatic.com/pelota-futbol-adidas-epp-2-b-D_NQ_NP_662338-MLA29510542741_022019-F.jpg">
