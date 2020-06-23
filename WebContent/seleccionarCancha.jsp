@@ -65,18 +65,27 @@
 		    </thead>
 		    <tbody>
 		    <% for (Ocupada disp : disponibles) {%>
+		      <% if (disp.getEstado().equals("Disponible")) {%>  
 		      <tr>
-		        <td><%=disp.getNumero()%></td>
-		        <td><%=disp.getHora_inicio()%></td>
-		        <td><%=disp.getEstado()%></td>
-		 	    <td><%=disp.getDescripcion()%></td>
-			    <td><%=dp.obtenerPrecio(es.getNombre(), disp.getNumero()).getPrecio()%></td>
-		 	    
-		 	 <% if (disp.getEstado().equals("Disponible")) {%>  
-		 	    <td>
-		 	     	<button type="submit" class="btn btn-primary" name="seleccion" value=<%=String.valueOf(disp.getNumero())+"r"+String.valueOf(disp.getHora_inicio())%>>Seleccionar</button>
+		        <td bgcolor="#b2ffff"><%=disp.getNumero()%></td>
+		        <td bgcolor="#b2ffff"><%=disp.getHora_inicio()%></td>
+		        <td bgcolor="#b2ffff"><%=disp.getEstado()%></td>
+		 	    <td bgcolor="#b2ffff"><%=disp.getDescripcion()%></td>
+			    <td bgcolor="#b2ffff"><%=dp.obtenerPrecio(es.getNombre(), disp.getNumero()).getPrecio()%></td>
+		 	    <td bgcolor="#b2ffff">
+		 	     	<button  type="submit" class="btn btn-primary" name="seleccion" value=<%=String.valueOf(disp.getNumero())+"r"+String.valueOf(disp.getHora_inicio())%>>Seleccionar</button>
 		 	    </td>
 		      <%} %>
+		       <% if (disp.getEstado().equals("Ocupada")) {%>  
+		      <tr>
+		        <td bgcolor="#ffb2ba"><%=disp.getNumero()%></td>
+		        <td bgcolor="#ffb2ba"><%=disp.getHora_inicio()%></td>
+		        <td bgcolor="#ffb2ba"><%=disp.getEstado()%></td>
+		 	    <td bgcolor="#ffb2ba"><%=disp.getDescripcion()%></td>
+			   	<td bgcolor="#ffb2ba"><%=dp.obtenerPrecio(es.getNombre(), disp.getNumero()).getPrecio()%></td>
+		     	<td bgcolor="#ffb2ba">Se encuentra Ocupada</td>
+		      <%} %>
+		      
 		      </tr>
 		     
 		      <%} %>
