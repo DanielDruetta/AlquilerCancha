@@ -23,6 +23,7 @@
 
 
 <body>
+	<br>
 
 	<footer class="footer" style="background-color: #F8F9FA">
 		<hr>
@@ -72,6 +73,7 @@
 		</div>
 		<hr>
 		</hr>
+
 	</footer>
 
 

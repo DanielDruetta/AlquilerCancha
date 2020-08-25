@@ -12,21 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Futbol 5</title>
-<link rel="icon"
-	href="https://http2.mlstatic.com/pelota-futbol-adidas-epp-2-b-D_NQ_NP_662338-MLA29510542741_022019-F.jpg">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-
-
-
-
+<jsp:include page="header.jsp" />
 <%
 	Establecimiento es = (Establecimiento) session.getAttribute("establecimiento");
 	Reserva r = (Reserva) session.getAttribute("reserva");
@@ -37,12 +23,10 @@
 <body>
 	<div class="container">
 		<div class="form-group col-md-12">
-			<br />
 			<h3>Datos de la reserva</h3>
 		</div>
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Numero
-				de reserva</label>
+			<label for="inputFecha" class="control-label col-md-4">Numero de reserva</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -60,8 +44,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Fecha
-				del partido</label>
+			<label for="inputFecha" class="control-label col-md-4">Fecha del partido</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -70,8 +53,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Hora
-				inicio del partido</label>
+			<label for="inputFecha" class="control-label col-md-4">Hora inicio del partido</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -80,8 +62,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Hora
-				fin del partido</label>
+			<label for="inputFecha" class="control-label col-md-4">Hora fin del partido</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -90,8 +71,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Numero
-				de cancha</label>
+			<label for="inputFecha" class="control-label col-md-4">Numero de cancha</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -100,8 +80,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputPrecio" class="control-label col-md-4">Precio
-				de la reserva</label>
+			<label for="inputPrecio" class="control-label col-md-4">Precio de la reserva</label>
 			<div class="col-md-7">
 				<input id="inputPrecio" name="inputPrecio" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -109,11 +88,7 @@
 					disabled>
 			</div>
 		</div>
-
-		<div class="form-group">
-			<a class="btn btn-primary" href="menuCliente.html" role="button">Volver
-				al menu</a>
-		</div>
 	</div>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

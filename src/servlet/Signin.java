@@ -73,7 +73,7 @@ public class Signin extends HttpServlet {
 			} else {
 				request.getSession().setAttribute("usuario", c); // esto es correcto
 
-				request.getRequestDispatcher("menuCliente.html").forward(request, response);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 
 			}
 		} else if (act.equals("Registrarse")) {
