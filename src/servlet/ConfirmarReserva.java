@@ -21,57 +21,57 @@ import entidades.Reserva;
 @WebServlet("/ConfirmarReserva")
 public class ConfirmarReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ConfirmarReserva() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ConfirmarReserva() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
 		String seleccion = request.getParameter("seleccion");
 		System.out.println(seleccion);
-		
-			
-			
-			String[] datos = seleccion.split("r");
-			int numero_cancha= Integer.parseInt(datos[0]);
-			int hora_inicio= Integer.parseInt(datos[1]);
-			
-			Establecimiento es=(Establecimiento) session.getAttribute("establecimiento");
-			Cliente cli=(Cliente) session.getAttribute("usuario");
-			Date fecha=(Date) session.getAttribute("fecha");
-			
-			
-			
-			DataReserva dr= new DataReserva();
-			System.out.println(dr.ultimoid());
-			
-			System.out.println(cli.getDni());
-			System.out.println(es.getNombre());
-			
-			Reserva r= new Reserva((dr.ultimoid()+1),fecha,hora_inicio,es.getNombre(),numero_cancha,cli.getDni());
-			
-			dr.add(r);
-			
-			request.getSession().setAttribute("reserva", r);
-			request.getRequestDispatcher("ConfirmacionDeLaReserva.jsp").forward(request, response);
-			
+
+		String[] datos = seleccion.split("r");
+		int numero_cancha = Integer.parseInt(datos[0]);
+		int hora_inicio = Integer.parseInt(datos[1]);
+
+		Establecimiento es = (Establecimiento) session.getAttribute("establecimiento");
+		Cliente cli = (Cliente) session.getAttribute("usuario");
+		Date fecha = (Date) session.getAttribute("fecha");
+
+		DataReserva dr = new DataReserva();
+		System.out.println(dr.ultimoid());
+
+		System.out.println(cli.getDni());
+		System.out.println(es.getNombre());
+
+		Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha, cli.getDni());
+
+		dr.add(r);
+
+		request.getSession().setAttribute("reserva", r);
+		request.getRequestDispatcher("ConfirmacionDeLaReserva.jsp").forward(request, response);
+
 		// doGet(request, response);
 	}
 

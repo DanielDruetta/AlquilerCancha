@@ -18,49 +18,50 @@ import entidades.Establecimiento;
 @WebServlet("/ModificacionEstablecimiento")
 public class ModificacionEstablecimiento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ModificacionEstablecimiento() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ModificacionEstablecimiento() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String act = request.getParameter("act");
-		 if (act == null) {
-			    System.out.println("No se presiono nada");
-			} else if (act.equals("Aceptar")) {
-				 	System.out.println("Servlet modificacion establecimiento");
-					DataEstablecimiento de = new DataEstablecimiento();
-					
-					String establecimiento=request.getParameter("inputEstablecimiento");			        
-			        System.out.println(establecimiento);
+		if (act == null) {
+			System.out.println("No se presiono nada");
+		} else if (act.equals("Aceptar")) {
+			System.out.println("Servlet modificacion establecimiento");
+			DataEstablecimiento de = new DataEstablecimiento();
 
-			        Establecimiento e= de.buscarEst(establecimiento);
+			String establecimiento = request.getParameter("inputEstablecimiento");
+			System.out.println(establecimiento);
 
-			        request.getSession().setAttribute("establec", e);
-			        request.getRequestDispatcher("modificacionEstablecimientoConfirmar.jsp").forward(request, response);
-					 
-						}
-					
-		 	
-  
-		 doGet(request, response);
-	
-	
+			Establecimiento e = de.buscarEst(establecimiento);
+
+			request.getSession().setAttribute("establec", e);
+			request.getRequestDispatcher("modificacionEstablecimientoConfirmar.jsp").forward(request, response);
+
+		}
+
+		doGet(request, response);
+
 	}
-}	
+}
