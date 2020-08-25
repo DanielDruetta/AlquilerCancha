@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import data.DataEstablecimiento;
 import data.DataReserva;
+import data.DataPrecio;
 import entidades.Establecimiento;
+import entidades.Ocupada;
 import entidades.Reserva;
+import entidades.Precio;
 
 /**
  * Servlet implementation class signin
@@ -44,6 +48,7 @@ public class SigninEstablecimiento extends HttpServlet {
         String contraseña=request.getParameter("contrasena");
         System.out.println(usuario+"|"+contraseña);
         String act = request.getParameter("act");
+        DataPrecio dp = new DataPrecio();
         
         if (act == null) {
 		    System.out.println("No se presiono nada");
@@ -58,6 +63,15 @@ public class SigninEstablecimiento extends HttpServlet {
 		        Establecimiento e= de.getByUser(est);
 		        request.getSession().setAttribute("establec", e);
 		        
+		   /*     ArrayList<Precio> preciosCancha = new ArrayList<Precio>();
+		        
+		        for (int i=1; i<=de.cantidadCanchas(e.getNombre());i++)
+		       
+		        {
+		        	 Precio prec = new Precio(e.getNombre(),i,dp.obtenerPrecio(e.getNombre(), i));
+		        }*/
+		        
+		        	
 		        
 		        if (e == null) {
 		        	
