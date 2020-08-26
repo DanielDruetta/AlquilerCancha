@@ -7,9 +7,9 @@
 <body>
 
 	<%
-		session.invalidate();
-		response.sendRedirect("index.jsp");
-
+		request.getSession().setAttribute("establec", null);
+		request.getSession().setAttribute("usuario", null);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	%>
 
 	<jsp:include page="footer.jsp" />

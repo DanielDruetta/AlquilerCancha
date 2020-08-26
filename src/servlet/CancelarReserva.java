@@ -10,35 +10,21 @@ import javax.servlet.http.HttpSession;
 
 import data.DataReserva;
 
-/**
- * Servlet implementation class CancelarReserva
- */
 @WebServlet("/CancelarReserva")
 public class CancelarReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public CancelarReserva() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -50,6 +36,8 @@ public class CancelarReserva extends HttpServlet {
 		dr.eliminarReserva(seleccion);
 
 		doGet(request, response);
+		
+		request.getRequestDispatcher("cancelarCancha.jsp").forward(request, response);
 	}
 
 }
