@@ -4,8 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import entidades.Cancha;
-import entidades.Cliente;
 import entidades.Precio;
 
 public class DataPrecio {

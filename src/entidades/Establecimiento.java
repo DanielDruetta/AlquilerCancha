@@ -1,9 +1,5 @@
 package entidades;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalTime;
-
 public class Establecimiento {
 String nombre;
 String direccion;

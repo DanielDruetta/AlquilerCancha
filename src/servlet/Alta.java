@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.DataCancha;
 import data.DataCliente;
 import entidades.Cliente;
 
@@ -17,12 +16,10 @@ public class Alta extends HttpServlet {
 
 	public Alta() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -44,7 +41,7 @@ public class Alta extends HttpServlet {
 			String dni = request.getParameter("dni");
 			Cliente cli = new Cliente((dc.ultimoid() + 1), dni, nombre, apellido, celular, email, usuario, contraseña);
 			dc.add(cli);
-			request.getRequestDispatcher("ventanaCliente.html").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 
 	}

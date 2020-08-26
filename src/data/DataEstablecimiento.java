@@ -6,10 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
-
-import entidades.Cancha;
 import entidades.Establecimiento;
-import entidades.Reserva;
+
 
 public class DataEstablecimiento {
 
