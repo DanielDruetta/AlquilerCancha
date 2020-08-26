@@ -9,6 +9,7 @@
 	<%
 		request.getSession().setAttribute("establec", null);
 		request.getSession().setAttribute("usuario", null);
+		request.getSession().setAttribute("administrador", null);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	%>
 
