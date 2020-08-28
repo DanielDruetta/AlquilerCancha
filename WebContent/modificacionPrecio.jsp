@@ -13,6 +13,9 @@
 
 <%
 	Establecimiento e = (Establecimiento) session.getAttribute("establec");
+	if (e == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	DataEstablecimiento de = new DataEstablecimiento();
 	ArrayList<Integer> canchas = new ArrayList<Integer>();
 	canchas = de.canchas(e.getNombre());

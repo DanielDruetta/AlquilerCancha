@@ -11,10 +11,12 @@
 
 <%
 	Establecimiento e = (Establecimiento) session.getAttribute("establec");
-
+	if (e == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	DataEstablecimiento de = new DataEstablecimiento();
-	request.getSession().setAttribute("listaEstablecimientos", de.getAll());
-	ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribute("listaEstablecimientos");
+	//request.getSession().setAttribute("listaEstablecimientos", de.getAll());
+	//ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribute("listaEstablecimientos");
 	ArrayList<Integer> canchas = new ArrayList<Integer>();
 	canchas = de.canchas(e.getNombre());
 %>
