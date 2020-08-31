@@ -1,17 +1,13 @@
 package data;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
 import entidades.Cancha;
-import entidades.Cliente;
-import entidades.Establecimiento;
 import entidades.Ocupada;
 
 public class DataCancha {

@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,35 +11,18 @@ import javax.servlet.http.HttpSession;
 import data.DataCliente;
 import entidades.Cliente;
 
-/**
- * Servlet implementation class ModificacionCliente
- */
 @WebServlet({ "/ModificacionCliente", "/mcliente" })
 public class ModificacionCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public ModificacionCliente() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -67,7 +49,9 @@ public class ModificacionCliente extends HttpServlet {
 			System.out.println(cliviejo.toString());
 
 			dc.modificarCliente(clinuevo, cliviejo);
-			request.getRequestDispatcher("ventanaCliente.html").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			
+			request.getSession().setAttribute("usuario", clinuevo);
 
 			doGet(request, response);
 		}

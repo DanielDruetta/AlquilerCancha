@@ -4,12 +4,7 @@ import java.io.IOException;
 
 import java.sql.Date;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
 import data.DataEstablecimiento;
-import entidades.Cancha;
 import entidades.Cliente;
 import entidades.Establecimiento;
 import entidades.Ocupada;
@@ -30,12 +24,10 @@ public class Reservar extends HttpServlet {
 
 	public Reservar() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -127,7 +119,6 @@ public class Reservar extends HttpServlet {
 		} else if (act.equals("cancelar")) {
 			System.out.println("Se presiono cancelar");
 		} else {
-			// someone has altered the HTML and sent a different value!
 		}
 		doGet(request, response);
 	}

@@ -33,7 +33,7 @@ public class DataCliente {
 		ResultSet rs = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,dni,email,celular,usuario from cliente where usuario=? and contraseña=?");
+					"select id,nombre,apellido,dni,email,celular,usuario,contraseña from cliente where usuario=? and contraseña=?");
 			stmt.setString(1, per.getUsuario());
 			stmt.setString(2, per.getPassword());
 			rs = stmt.executeQuery();
@@ -45,7 +45,7 @@ public class DataCliente {
 				c.setDni(rs.getString("dni"));
 				c.setCelular(rs.getString("celular"));
 				c.setUsuario(rs.getString("usuario"));
-
+				c.setPassword(rs.getString("contraseña"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

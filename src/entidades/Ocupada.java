@@ -1,7 +1,5 @@
 package entidades;
 
-import java.sql.Time;
-
 public class Ocupada {
 int numero;
 int hora_inicio;

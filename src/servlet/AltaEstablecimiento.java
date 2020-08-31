@@ -6,41 +6,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Time;
 import data.DataEstablecimiento;
 import entidades.Establecimiento;
 
-/**
- * Servlet implementation class AltaEstablecimiento
- */
 @WebServlet("/AltaEstablecimiento")
 public class AltaEstablecimiento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public AltaEstablecimiento() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-
-	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -70,7 +52,7 @@ public class AltaEstablecimiento extends HttpServlet {
 			Establecimiento es = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña);
 			System.out.println(es.toString());
 			de.add(es);
-			request.getRequestDispatcher("ventanaAdmin.html").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 
 		}
 
