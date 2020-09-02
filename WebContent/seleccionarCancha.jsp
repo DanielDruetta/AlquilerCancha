@@ -16,8 +16,10 @@
 
 <%
 	ArrayList<Ocupada> disponibles = (ArrayList<Ocupada>) request.getAttribute("listaDisponibles");
-	Establecimiento es = (Establecimiento) session.getAttribute("establecimiento");
-	DataPrecio dp = new DataPrecio();
+
+Establecimiento es = (Establecimiento) session.getAttribute("establecimiento");
+
+DataPrecio dp = new DataPrecio();
 %>
 
 </head>
@@ -44,24 +46,25 @@
 							<tbody>
 								<%
 									for (Ocupada disp : disponibles) {
-								%>
-								<%
 									if (disp.getEstado().equals("Disponible")) {
-								%>
+										Precio precio = new Precio();
+										precio = dp.obtenerPrecio(es.getNombre(), disp.getNumero());
+										int precioint = (int) Math.round(precio.getPrecio());
+										System.out.println(precioint);
+										%>
 								<tr>
 									<td><%=disp.getNumero()%></td>
 									<td><%=disp.getHora_inicio()%></td>
 									<td><%=disp.getEstado()%></td>
 									<td><%=disp.getDescripcion()%></td>
-									<td><%=dp.obtenerPrecio(es.getNombre(), disp.getNumero()).getPrecio()%></td>
+									<td><%=precioint%></td>
 									<td>
 										<button type="submit" class="btn btn-primary" name="seleccion"
 											value=<%=String.valueOf(disp.getNumero()) + "r" + String.valueOf(disp.getHora_inicio())%>>Seleccionar</button>
 									</td>
 									<%
 										}
-									%>
-									<%
+					
 										if (disp.getEstado().equals("Ocupada")) {
 									%>
 								

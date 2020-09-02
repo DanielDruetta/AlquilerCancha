@@ -84,11 +84,6 @@ public class Reservar extends HttpServlet {
 				}
 			}
 
-			for (Ocupada disp : disponibles) {
-				System.out.println(disp.toString());
-				System.out.println(dc.estaEnMantenimiento(1, establecimiento, date));
-			}
-
 			for (Ocupada dispo : disponibles) {
 				for (Ocupada oc : ocupadas) {
 					if (oc.getHora_inicio() == dispo.getHora_inicio() && oc.getNumero() == dispo.getNumero()) {
