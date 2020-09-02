@@ -71,12 +71,9 @@ public class Reservar extends HttpServlet {
 			ArrayList<Ocupada> disponibles = new ArrayList<Ocupada>();
 
 			for (int j = es.getHora_inicio(); j <= es.getHora_fin(); j++) {
-
 				for (int l = 1; l <= de.cantidadCanchas(establecimiento); l++) {
-					// Aca esta el problema. Porque en realidad hay que copiar en disponibles,
-					// solamente las canchas que sean de ese tipo. Si por ejemplo, la cancha numero
-					// 2 y la 4 son de tipo 11, como hacer?
-					if (tipo == dc.tipoSegunNroCancha(l, establecimiento)) {
+					if (tipo == dc.tipoSegunNroCancha(l, establecimiento)
+							&& (dc.estaEnMantenimiento(l, establecimiento, date) == 0)) {
 						Ocupada disp = new Ocupada();
 						disp.setEstado("Disponible");
 						disp.setHora_inicio(j);
@@ -89,6 +86,7 @@ public class Reservar extends HttpServlet {
 
 			for (Ocupada disp : disponibles) {
 				System.out.println(disp.toString());
+				System.out.println(dc.estaEnMantenimiento(1, establecimiento, date));
 			}
 
 			for (Ocupada dispo : disponibles) {

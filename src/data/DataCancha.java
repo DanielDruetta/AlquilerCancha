@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -314,6 +315,42 @@ public class DataCancha {
 		}
 
 		return nuev;
+	}
+
+	public int estaEnMantenimiento(int numero, String establecimiento, Date fecha) {
+		int devolucion = 0;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT EXISTS(select * FROM mantenimiento WHERE establecimiento=? and numero_cancha=? and ? BETWEEN fecha_desde AND fecha_hasta) as valor");
+			stmt.setString(1, establecimiento);
+			stmt.setInt(2, numero);
+			stmt.setDate(3, fecha);
+
+			rs = stmt.executeQuery();
+			if (rs != null && rs.next()) {
+				devolucion = rs.getInt("valor");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return devolucion;
 	}
 
 }
