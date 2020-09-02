@@ -79,7 +79,7 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Mantenimientos </a>
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
-						<a class="dropdown-item" href="">Alta Mantenimiento</a> 
+						<a class="dropdown-item" href="altaMantenimiento.jsp">Alta Mantenimiento</a> 
 						<a class="dropdown-item" href="">Eliminar Mantenimiento</a> 
 						<a class="dropdown-item" href="">Modificar Mantenimiento</a>
 					</div>
