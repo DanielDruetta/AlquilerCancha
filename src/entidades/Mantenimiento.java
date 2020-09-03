@@ -12,6 +12,11 @@ public class Mantenimiento {
 	String descripcion;
 	String observaciones;
 	
+	
+	
+	public Mantenimiento() {
+		super();
+	}
 	public Mantenimiento(String establecimiento, int numeroCancha, Date fechaInicio, Date fechaFin, String descripcion,
 			String observaciones) {
 		super();

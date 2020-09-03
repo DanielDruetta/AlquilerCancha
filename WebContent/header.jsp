@@ -81,7 +81,7 @@
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
 						<a class="dropdown-item" href="altaMantenimiento.jsp">Alta Mantenimiento</a> 
 						<a class="dropdown-item" href="">Eliminar Mantenimiento</a> 
-						<a class="dropdown-item" href="">Modificar Mantenimiento</a>
+						<a class="dropdown-item" href="listadoMantenimientos.jsp">Lista de Mantenimientos</a>
 					</div>
 				</li>
 
