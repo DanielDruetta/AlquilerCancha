@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Mantenimiento;
-import entidades.Reserva;
 
 public class DataMantenimiento {
 
@@ -84,6 +83,39 @@ public class DataMantenimiento {
 		}
 
 		return mantenimientos;
+	}
+
+	public void delete(Mantenimiento man) {
+		PreparedStatement stmt = null;
+		ResultSet keyResultSet = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"delete from mantenimiento where establecimiento=? and numero_cancha=? and fecha_desde=?",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+
+			stmt.setString(1, man.getEstablecimiento());
+			stmt.setInt(2, man.getNumeroCancha());
+			stmt.setDate(3, man.getFechaInicio());
+			stmt.executeUpdate();
+
+			keyResultSet = stmt.getGeneratedKeys();
+			if (keyResultSet != null && keyResultSet.next()) {
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (keyResultSet != null)
+					keyResultSet.close();
+				if (stmt != null)
+					stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

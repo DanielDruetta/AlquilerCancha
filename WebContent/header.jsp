@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Establecimiento"%>
 <%@page import="entidades.Cliente"%>
@@ -80,7 +80,6 @@
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Mantenimientos </a>
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
 						<a class="dropdown-item" href="altaMantenimiento.jsp">Alta Mantenimiento</a> 
-						<a class="dropdown-item" href="">Eliminar Mantenimiento</a> 
 						<a class="dropdown-item" href="listadoMantenimientos.jsp">Lista de Mantenimientos</a>
 					</div>
 				</li>

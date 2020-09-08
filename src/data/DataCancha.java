@@ -254,7 +254,7 @@ public class DataCancha {
 		ResultSet keyResultSet = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"delete from cancha where establecimiento=? and numero=?", PreparedStatement.RETURN_GENERATED_KEYS);
+					"delete from mantenimiento where establecimiento=? and numero_cancha=? and fecha_desde=?", PreparedStatement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1, c.getEstablecimiento());
 			stmt.setInt(2, c.getNumero());

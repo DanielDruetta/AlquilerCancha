@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Statement;
 import entidades.Establecimiento;
 
-
 public class DataEstablecimiento {
 
 	public ArrayList<Establecimiento> getAll() {

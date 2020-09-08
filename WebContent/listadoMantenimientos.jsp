@@ -23,7 +23,7 @@ mantenimientos = dm.mantenimientos(es.getNombre());
 <body>
 	<div class="container">
 		<h3>Listado de mantenimientos</h3>
-		<form class="" action="" method="post">
+		<form class="form-BajaMantenimiento" action="bajamantenimiento" method="post">
 			<table class="table">
 				<thead>
 					<tr>
@@ -32,6 +32,7 @@ mantenimientos = dm.mantenimientos(es.getNombre());
 						<th>Fecha hasta</th>
 						<th>Descripcion</th>
 						<th>Observaciones</th>
+						<th></th>
 					</tr>
 				</thead>
 
@@ -46,6 +47,7 @@ mantenimientos = dm.mantenimientos(es.getNombre());
 						<td><%=man.getFechaFin()%></td>
 						<td><%=man.getDescripcion()%></td>
 						<td><%=man.getObservaciones()%></td>
+						<td><button type="submit" class="btn btn-outline-danger" style="color: red;" name="seleccion" value="<%=String.valueOf(man.getNumeroCancha()) + "r" + String.valueOf(man.getFechaInicio())%>">Eliminar</button></td>
 					</tr>
 
 					<%
