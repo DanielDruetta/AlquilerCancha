@@ -21,12 +21,10 @@ public class ConfirmarReserva extends HttpServlet {
 
 	public ConfirmarReserva() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -51,11 +49,20 @@ public class ConfirmarReserva extends HttpServlet {
 		System.out.println(cli.getDni());
 		System.out.println(es.getNombre());
 
+		Correo correo = new Correo();
+
+		try {
+			correo.enviar_mail_confirmacion("danidruetta97@gmail.com", 4);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha, cli.getDni());
 
 		dr.add(r);
-
+		
 		request.getSession().setAttribute("reserva", r);
+
 		request.getRequestDispatcher("confirmacionDeLaReserva.jsp").forward(request, response);
 
 		// doGet(request, response);
