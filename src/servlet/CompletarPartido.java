@@ -6,6 +6,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import data.DataClienteReserva;
+import data.DataReserva;
+import entidades.Cliente;
+import entidades.ClienteReserva;
+import entidades.Reserva;
 
 /**
  * Servlet implementation class CompletarPartido
@@ -34,8 +41,28 @@ public class CompletarPartido extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		HttpSession session = request.getSession();
+
+		String numeroreserva = request.getParameter("nroreserva");
+		
+		int reserva = Integer.parseInt(numeroreserva);
+		
+		if (numeroreserva != null) {
+			
+			DataReserva dr = new DataReserva();
+			
+			Reserva r = dr.search(reserva);
+			
+			request.getSession().setAttribute("reserva", r);
+			
+			request.getRequestDispatcher("ingresarCantJugadores.jsp").forward(request, response);
+		}
+		
+		
+	
+		
+		
 	}
 
 }

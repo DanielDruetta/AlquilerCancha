@@ -104,12 +104,15 @@ public void setLugares_disponibles(int lugares_disponibles) {
 }
 
 
-
 @Override
 public String toString() {
 	return "Reserva [numero_reserva=" + numero_reserva + ", fecha=" + fecha + ", hora_inicio=" + hora_inicio
-			+ ", establecimiento=" + establecimiento + ", numero_cancha=" + numero_cancha + ", dni=" + dni + "]";
+			+ ", establecimiento=" + establecimiento + ", numero_cancha=" + numero_cancha + ", dni=" + dni
+			+ ", lugares_disponibles=" + lugares_disponibles + "]";
 }
+
+
+
 
 
 

@@ -276,5 +276,46 @@ public class DataReserva {
 		return reservas;
 	}
 	
+	
+	public Reserva search(int numero_reserva) {
+
+		Reserva r = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select numero_reserva,establecimiento,fecha,hora_inicio,numero_cancha,dni,lugares_disponibles from reserva where numero_reserva=?");
+			stmt.setInt(1, numero_reserva);
+			rs = stmt.executeQuery();
+			if (rs != null && rs.next()) {
+				r = new Reserva();
+				r.setNumero_reserva(rs.getInt("numero_reserva"));
+				r.setEstablecimiento(rs.getString("establecimiento"));
+				r.setFecha(rs.getDate("fecha"));
+				r.setHora_inicio(rs.getInt("hora_inicio"));
+				r.setNumero_cancha(rs.getInt("numero_cancha"));
+				r.setDni(rs.getString("dni"));
+				r.setLugares_disponibles(rs.getInt("lugares_disponibles"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return r;
+	}
+
 
 }
