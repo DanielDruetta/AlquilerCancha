@@ -52,7 +52,7 @@ public class ConfirmarReserva extends HttpServlet {
 		Correo correo = new Correo();
 
 		try {
-			correo.enviar_mail_confirmacion("danidruetta97@gmail.com", 4);
+			correo.enviar_mail_confirmacion(cli.getEmail(), 4);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
