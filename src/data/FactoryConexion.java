@@ -10,8 +10,8 @@ public class FactoryConexion {
 	private String host = "localhost";
 	private String port = "3306";
 	private String user = "root";
-	//private String password = "admin";
-	private String password = "password";
+	private String password = "admin";
+	//private String password = "password";
 	private String db = "futbol";
 	private int conectados = 0;
 	private Connection conn = null;

@@ -42,11 +42,11 @@ mantenimientos = dm.mantenimientos(es.getNombre());
 							
 					%>
 					<tr>
-						<td><%=man.getNumeroCancha()%></td>
-						<td><%=man.getFechaInicio()%> </td>
-						<td><%=man.getFechaFin()%></td>
-						<td><%=man.getDescripcion()%></td>
-						<td><%=man.getObservaciones()%></td>
+						<td style="padding-top:20px"><%=man.getNumeroCancha()%></td>
+						<td style="padding-top:20px"><%=man.getFechaInicio()%> </td>
+						<td style="padding-top:20px"><%=man.getFechaFin()%></td>
+						<td style="padding-top:20px"><%=man.getDescripcion()%></td>
+						<td style="padding-top:20px"><%=man.getObservaciones()%></td>
 						<td><button type="submit" class="btn btn-outline-danger" style="color: red;" name="seleccion" value="<%=String.valueOf(man.getNumeroCancha()) + "r" + String.valueOf(man.getFechaInicio())%>">Eliminar</button></td>
 					</tr>
 

@@ -230,5 +230,51 @@ public class DataReserva {
 			}
 		}
 	}
+	
+	public ArrayList<Reserva> reservasAcompletar() {
+
+		ArrayList<Reserva> reservas = new ArrayList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT numero_reserva,fecha,hora_inicio, numero_cancha, establecimiento, lugares_disponibles FROM reserva WHERE fecha>=CAST(NOW() as date) and lugares_disponibles!=0 order by fecha,hora_inicio");
+
+			rs = stmt.executeQuery();
+
+			if (rs != null) {
+				while (rs.next()) {
+
+					Reserva o = new Reserva();
+					o.setNumero_reserva(rs.getInt("numero_reserva"));
+					o.setHora_inicio(rs.getInt("hora_inicio"));
+					o.setNumero_cancha(rs.getInt("numero_cancha"));
+					o.setEstablecimiento(rs.getString("establecimiento"));
+					o.setFecha(rs.getDate("fecha"));
+					o.setLugares_disponibles(rs.getInt("lugares_disponibles"));
+					reservas.add(o);
+
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return reservas;
+	}
+	
 
 }

@@ -9,6 +9,7 @@ int hora_inicio;
 String establecimiento;
 int numero_cancha;
 String dni;
+int lugares_disponibles;
 
 
 
@@ -27,6 +28,10 @@ public Reserva(int numero_reserva, Date fecha, int hora_inicio, String estableci
 	this.numero_cancha = numero_cancha;
 	this.dni = dni;
 }
+
+
+
+
 
 
 public int getNumero_reserva() {
@@ -87,6 +92,17 @@ public String getDni() {
 public void setDni(String dni) {
 	this.dni = dni;
 }
+
+
+public int getLugares_disponibles() {
+	return lugares_disponibles;
+}
+
+
+public void setLugares_disponibles(int lugares_disponibles) {
+	this.lugares_disponibles = lugares_disponibles;
+}
+
 
 
 @Override

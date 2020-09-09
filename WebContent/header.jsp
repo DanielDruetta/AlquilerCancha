@@ -82,6 +82,13 @@
 						<a class="dropdown-item" href="listadoMantenimientos.jsp">Lista de Mantenimientos</a>
 					</div>
 				</li>
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Buscar Partidos </a>
+					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
+						<a class="dropdown-item" href="listadoPartidos.jsp">Lista de partidos disponibles</a> 
+					</div>
+				</li>
 
 
 			</ul>
