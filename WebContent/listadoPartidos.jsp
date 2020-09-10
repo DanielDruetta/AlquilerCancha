@@ -10,8 +10,8 @@
 
 <%
 	DataReserva dr = new DataReserva();
-ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-reservas = dr.reservasAcompletar();
+	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	reservas = dr.reservasAcompletar();
 %>
 </head>
 
@@ -42,8 +42,8 @@ reservas = dr.reservasAcompletar();
 						<td style="padding-top: 20px"><%=res.getFecha()%></td>
 						<td style="padding-top: 20px"><%=res.getHora_inicio()%></td>
 						<td style="padding-top: 20px"><%=res.getLugares_disponibles()%></td>
-						<td style="padding-top: 20px"><button type="submit" class="btn btn-light"
-								name="nroreserva"
+						<td style="padding-top: 20px"><button type="submit"
+								class="btn btn-light" name="nroreserva"
 								value="<%=String.valueOf(res.getNumero_reserva())%>">Seleccionar</button></td>
 					</tr>
 
@@ -51,7 +51,7 @@ reservas = dr.reservasAcompletar();
 						}
 					%>
 
-	
+
 				</tbody>
 			</table>
 		</form>

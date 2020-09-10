@@ -32,15 +32,50 @@
 				<li class="nav-item active"><a class="nav-link" href="../AlquilerCancha/index.jsp">Home<span class="sr-only">(current)</span></a></li>
 				
 				<li class="nav-item"><a class="nav-link" href="listadoCanchas.jsp">Listado Canchas</a></li>
-				
+
+				<%
+					if (c != null) {
+				%>
 				<li class="nav-item"><a class="nav-link" href="reservarCancha.jsp">Reservar Cancha</a></li>
-				
+
 				<li class="nav-item"><a class="nav-link" href="../AlquilerCancha/cancelarCancha.jsp">Cancelar Reserva</a></li>
+				<% }%>
 				
+				<%
+					if (e != null) {
+				%>
 				<li class="nav-item"><a class="nav-link" href="reservasDia.jsp">Reservas Día</a></li>
 				
 				<li class="nav-item"><a class="nav-link" href="reservasMes.jsp">Reservas Mes</a></li>
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Canchas </a>
+					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
+						<a class="dropdown-item" href="altaCancha.jsp">Alta Cancha</a> 
+						<a class="dropdown-item" href="bajaCancha.jsp">Eliminar Cancha</a> 
+						<a class="dropdown-item" href="modificacionCancha.jsp">Modificar Cancha</a>
+					</div>
+				</li>
+				
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Precio </a>
+					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
+						<a class="dropdown-item" href="modificacionPrecio.jsp">Modificar Precio</a> 
+					</div>
+				</li>
 
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Mantenimientos </a>
+					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
+						<a class="dropdown-item" href="altaMantenimiento.jsp">Alta Mantenimiento</a> <a class="dropdown-item"
+							href="listadoMantenimientos.jsp">Lista de Mantenimientos</a>
+					</div></li>
+
+				<% }%>
+				
+				<%
+					if (a != null) {
+				%>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="clienteDropdown" role="button" data-toggle="dropdown" aria-expanded="false"> Clientes </a>
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
@@ -51,15 +86,6 @@
 				</li>
 
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Canchas </a>
-					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
-						<a class="dropdown-item" href="altaCancha.jsp">Alta Cancha</a> 
-						<a class="dropdown-item" href="bajaCancha.jsp">Eliminar Cancha</a> 
-						<a class="dropdown-item" href="modificacionCancha.jsp">Modificar Cancha</a>
-					</div>
-				</li>
-				
-				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Establecimientos </a>
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
 						<a class="dropdown-item" href="altaEstablecimiento.jsp">Alta Establecimiento</a> 
@@ -68,20 +94,7 @@
 					</div>
 				</li>
 				
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Precio </a>
-					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
-						<a class="dropdown-item" href="modificacionPrecio.jsp">Modificar Precio</a> 
-					</div>
-				</li>
-				
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Mantenimientos </a>
-					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
-						<a class="dropdown-item" href="altaMantenimiento.jsp">Alta Mantenimiento</a> 
-						<a class="dropdown-item" href="listadoMantenimientos.jsp">Lista de Mantenimientos</a>
-					</div>
-				</li>
+				<% }%>
 				
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Buscar Partidos </a>
@@ -90,18 +103,17 @@
 					</div>
 				</li>
 
-
 			</ul>
 
 			<ul class="navbar-nav mr-right">
 			<%
-				if (c != null) {
+				if (c != null){
 			%>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%=c.getNombre()%> </a>
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
 						<a class="dropdown-item" href="modificacionCliente.jsp">Modificar datos personales</a>
-					</div></li>
-				
+					</div>
+				</li>
 				<li>
 					<a href="cerrarSesion.jsp" class="nav-link"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-closed-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 1a1 1 0 0 0-1 1v13H1.5a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2a1 1 0 0 0-1-1H4zm2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" /> 
 						</svg> Logout
@@ -109,8 +121,11 @@
 				</li>
 				
 			<% } else if  (e != null){ %>
-
-				<li><a href="#" class="nav-link"><%=e.getNombre()%></a></li>
+			
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%=e.getNombre()%></a>
+					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
+						<a class="dropdown-item" href="modificacionEstablecimientoConfirmar.jsp">Modificar datos del establecimiento</a>
+					</div></li>
 
 				<li><a href="cerrarSesion.jsp" class="nav-link"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-closed-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M4 1a1 1 0 0 0-1 1v13H1.5a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2a1 1 0 0 0-1-1H4zm2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" /> 
 						</svg> Logout </a></li>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Cancha"%>
 <%@page import="entidades.Establecimiento"%>
 <%@page import="data.DataEstablecimiento"%>
@@ -123,10 +122,11 @@
 
 					<div class="form-group">
 						<div class="col-md-6">
-							<input type="submit" class="btn btn-primary" name="action" value="Modificar">
-							<input type="submit" class="btn btn-secondary" name="action" value="Cancelar">
+							<input type="submit" class="btn btn-primary" name="action"
+								value="Modificar"> <input type="submit"
+								class="btn btn-secondary" name="action" value="Cancelar">
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
