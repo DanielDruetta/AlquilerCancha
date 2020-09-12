@@ -17,7 +17,6 @@
 
 
 <body>
-
 	<div align="center">
 		<img
 			style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 700px;"
@@ -29,10 +28,6 @@
 			src="https://resources.premierleague.com/premierleague/photo/2016/09/22/c9c78d39-60fb-47c6-9e20-837efb242ac5/Stamford_Bridge.jpg">
 	</div>
 
-
 	<jsp:include page="footer.jsp" />
-
-
-
 </body>
 </html>
