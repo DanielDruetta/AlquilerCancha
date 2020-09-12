@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
+import data.DataPrecio;
 import entidades.Cancha;
+import entidades.Precio;
 
 @WebServlet("/ModificacionCanchaConfirmado")
 public class ModificacionCanchaConfirmado extends HttpServlet {
@@ -17,21 +19,18 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 
 	public ModificacionCanchaConfirmado() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String actio = request.getParameter("action");
 		if (actio == null) {
-			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (actio.equals("Modificar")) {
 			System.out.println("Servlet modificacion cancha confirmado");
 
@@ -41,10 +40,16 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 			String descripcion = request.getParameter("descripcion");
 			String tip = request.getParameter("tipo");
 			String luz = request.getParameter("luz");
+			String nuevopreci = request.getParameter("inputPrecio");
 			int numero = Integer.parseInt(num);
 			int tipo = Integer.parseInt(tip);
+			double nuevoprecio = Double.parseDouble(nuevopreci);
+
+			if (luz == null)
+				luz = "N";
 
 			DataCancha dc = new DataCancha();
+			DataPrecio dp = new DataPrecio();
 
 			Cancha cannuevo = new Cancha(numero, descripcion, tipo, luz, establecimiento);
 			System.out.println("Cancha nueva" + cannuevo.toString());
@@ -53,8 +58,11 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 			System.out.println("Cancha vieja" + canviejo.toString());
 
 			dc.modificarCancha(cannuevo, canviejo);
+			
+			Precio precio = new Precio(establecimiento, numero, nuevoprecio);
+			dp.add(precio);
+			
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-
 			doGet(request, response);
 		}
 

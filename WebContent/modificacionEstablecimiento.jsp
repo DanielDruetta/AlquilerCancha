@@ -19,8 +19,7 @@
 <body>
 
 	<div class="container">
-		<form class="form-ModificacionEstablecimiento"
-			action="ModificacionEstablecimiento" method="post">
+		<form class="form-ModificacionEstablecimiento" action="ModificacionEstablecimiento" method="post">
 			<div class="form-group col-md-12">
 				<h3>Modificar Establecimiento</h3>
 			</div>
@@ -28,13 +27,12 @@
 			<div class="form-group">
 				<label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
 				<div class="col-md-10">
-					<select class="col-md-12" id="inputEstablecimiento"
-						name="inputEstablecimiento">
+					<select class="col-md-12" id="inputEstablecimiento" name="inputEstablecimiento">
 						<%
-							for (Establecimiento c : es) {
+							for (Establecimiento e : es) {
 						%>
 
-						<option class=form-control value="<%=c.getNombre()%>"><%=c.getNombre()%></option>
+						<option class=form-control value="<%=e.getNombre()%>"><%=e.getNombre()%></option>
 
 						<%
 							}

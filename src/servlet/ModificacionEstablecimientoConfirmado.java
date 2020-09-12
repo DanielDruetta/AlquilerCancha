@@ -51,12 +51,13 @@ public class ModificacionEstablecimientoConfirmado extends HttpServlet {
 			System.out.println(horafin);
 
 			Establecimiento estnuevo = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña);
-			System.out.println("Cancha nueva " + estnuevo.toString());
+			System.out.println("Establecimiento nuevo " + estnuevo.toString());
 
 			Establecimiento estviejo = (Establecimiento) session.getAttribute("establec");
-			System.out.println("Cancha vieja" + estviejo.toString());
+			System.out.println("Establecimiento viejo " + estviejo.toString());
 
 			de.modificarEstablecimiento(estnuevo, estviejo);
+			request.getSession().setAttribute("establec", estnuevo);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 
 			doGet(request, response);

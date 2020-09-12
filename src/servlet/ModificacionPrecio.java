@@ -42,8 +42,8 @@ public class ModificacionPrecio extends HttpServlet {
 		Establecimiento e = (Establecimiento) session.getAttribute("establec");
 
 		Precio precio = new Precio(e.getNombre(), numerocancha, nuevoprecio);
-		DataPrecio dr = new DataPrecio();
-		dr.add(precio);
+		DataPrecio dp = new DataPrecio();
+		dp.add(precio);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		doGet(request, response);
 	}

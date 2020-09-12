@@ -9,47 +9,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
+import data.DataPrecio;
 import entidades.Cancha;
 import entidades.Establecimiento;
-
-/**
- * Servlet implementation class BajaCliente
- */
+import entidades.Precio;
 
 @WebServlet("/ModificacionCancha")
 public class ModificacionCancha extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public ModificacionCancha() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String act = request.getParameter("act");
 		if (act == null) {
 			System.out.println("No se presiono nada");
 		} else if (act.equals("Modificar cancha")) {
-			System.out.println("Servlet modificacion cancha");
+			//System.out.println("Servlet modificacion cancha");
 			DataCancha dc = new DataCancha();
 
 			Establecimiento e = (Establecimiento) session.getAttribute("establec");
@@ -60,7 +44,11 @@ public class ModificacionCancha extends HttpServlet {
 			Cancha can = new Cancha(establecimiento, numero);
 			Cancha c = dc.search(can);
 
+			DataPrecio dp = new DataPrecio();
+			Precio p = dp.obtenerPrecio(establecimiento, numero);
+
 			request.getSession().setAttribute("cancha", c);
+			request.getSession().setAttribute("precio", p);
 			request.getRequestDispatcher("modificacionCanchaConfirmar.jsp").forward(request, response);
 
 		}
