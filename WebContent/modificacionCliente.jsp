@@ -7,6 +7,9 @@
 <jsp:include page="header.jsp" />
 <%
 	Cliente c = (Cliente) session.getAttribute("usuario");
+	if (c == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 %>
 </head>
 

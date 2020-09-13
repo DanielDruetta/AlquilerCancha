@@ -15,6 +15,9 @@
 
 <%
 	Establecimiento e = (Establecimiento) session.getAttribute("establec");
+	if (e == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	DataReserva dr = new DataReserva();
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	reservas = dr.reservasMes(e.getNombre());

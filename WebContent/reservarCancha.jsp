@@ -21,8 +21,10 @@
 <body>
 
 	<div class="container">
-		<h3>Buscar un turno</h3>
 		<form class="form-reservar" action="reservar" method="post">
+			<div class="form-group col-md-12">
+				<h3>Buscar un turno</h3>
+			</div>
 			<div class="form-group">
 				<label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
 				<div class="col-md-7">

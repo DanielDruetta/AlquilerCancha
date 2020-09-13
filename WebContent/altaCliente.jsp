@@ -7,7 +7,7 @@
 	<div class="container">
 		<form class="form-alta" action="alta" method="post">
 			<div class="form-group col-md-12">
-				<h3>Alta cliente</h3>
+				<h3>Registrarse</h3>
 			</div>
 
 			<div class="form-group">

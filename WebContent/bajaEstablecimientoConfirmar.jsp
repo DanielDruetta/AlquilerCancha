@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Establecimiento"%>
+<%@page import="entidades.Administrador"%>
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="header.jsp" />
 <%
+	Administrador a = (Administrador) session.getAttribute("administrador");
+	if (a == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	Establecimiento est = (Establecimiento) session.getAttribute("establecim");
 %>
 
