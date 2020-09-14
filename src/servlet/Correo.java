@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import javax.mail.BodyPart;
@@ -16,9 +18,12 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import entidades.Establecimiento;
+import entidades.Reserva;
+
 public class Correo {
 
-	public void enviar_mail_confirmacion(String destinatario, int nro_pedido) throws IOException {
+	public void enviar_mail_confirmacion(String destinatario, Reserva reserva, Establecimiento es) throws IOException {
 
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -51,12 +56,16 @@ public class Correo {
 
 			message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(emailDestination));
 
-			message.setSubject("Confirmación del pedido");
+			message.setSubject("Reserva registrada. Establecimiento: " + reserva.getEstablecimiento());
+			
+			DateFormat df = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy");
+			String fecha = df.format(reserva.getFecha());
+            
 
 			BodyPart messageBodyPart = new MimeBodyPart();
-			messageBodyPart.setText(
-					"Gracias por su compra. Recuerde que debe pasar a retirar y abonar el pedido en tres dás hábiles por el local. Su número de pedido es "
-							+ nro_pedido);
+			messageBodyPart.setText("Reserva registrada. \n\nEstablecimiento: " + reserva.getEstablecimiento()
+					+ "\nDirección: " + es.getDireccion() + "\nNumero de cancha: " + reserva.getNumero_cancha()
+					+ "\nFecha del partido: " + fecha+ "\nHora del partido: " + reserva.getHora_inicio() + "\n\nNo faltes!!");
 
 			Multipart multipart = new MimeMultipart();
 
