@@ -10,17 +10,16 @@
 
 <%
 	Reserva r = (Reserva) session.getAttribute("reserva");
-
-DataReserva dr = new DataReserva();
-ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-reservas = dr.reservasAcompletar();
+	DataReserva dr = new DataReserva();
+	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	reservas = dr.reservasAcompletar();
 %>
 </head>
 
 <body>
 	<div class="container">
 		<h3>Ingresar cantidad de jugadores</h3>
-		<form class="form-CompletarPartido" action="CantidadJugadores"
+		<form class="form-CantidadJugadores" action="CantidadJugadores"
 			method="post">
 
 			<div class="form-group">
