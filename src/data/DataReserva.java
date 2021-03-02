@@ -316,6 +316,31 @@ public class DataReserva {
 
 		return r;
 	}
+	
+	public void modificar_cantidad_jugadores(Reserva r) {
+		PreparedStatement stmt = null;
+		ResultSet keyResultSet = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"update reserva set lugares_disponibles=? where numero_reserva=?",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, r.getLugares_disponibles());
+			stmt.setInt(2, r.getNumero_reserva());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (keyResultSet != null)
+					keyResultSet.close();
+				if (stmt != null)
+					stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
-
+	}
+	
 }

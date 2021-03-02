@@ -69,11 +69,59 @@
 			<div class="form-group">
 				<div class="col-md-2">
 					<input type="submit" class="btn btn-primary" name="act"
-						value="Registrarse">
+						value="Registrarse" onclick="verificacion()">
 				</div>
 			</div>
 		</form>
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
+<script>
+
+var inputdni = document.getElementById('inputDni');
+var celular = document.getElementById('inputCelular');
+var nombre = document.getElementById('inputNombre');
+var apellido = document.getElementById('inputApellido');
+
+function onkeyPress(event){
+    if ((inputdni.value.length > 8) || (celular.value.length > 10)) {
+  	  	inputdni.value = inputdni.value.slice(0, 8);
+  	  	celular.value = celular.value.slice(0, 10);
+    }
+    inputdni.value = inputdni.value.replace(/[^0-9]+/gi, '').replace(/ $/, '');
+    nombre.value = nombre.value.replace(/[^a-z]+/gi, '').replace(/ $/, '');
+    apellido.value = apellido.value.replace(/[^a-z]+/gi, '').replace(/ $/, '');
+}
+
+inputdni.addEventListener('keypress',onkeyPress);
+inputdni.addEventListener('keydown',onkeyPress);
+inputdni.addEventListener('keyup',onkeyPress);
+celular.addEventListener('keypress',onkeyPress);
+celular.addEventListener('keydown',onkeyPress);
+celular.addEventListener('keyup',onkeyPress);
+nombre.addEventListener('keypress',onkeyPress);
+nombre.addEventListener('keydown',onkeyPress);
+nombre.addEventListener('keyup',onkeyPress);
+apellido.addEventListener('keypress',onkeyPress);
+apellido.addEventListener('keydown',onkeyPress);
+apellido.addEventListener('keyup',onkeyPress);
+
+function verificacion(){
+	var inputdni = document.getElementById('inputDni');
+	var celular = document.getElementById('inputCelular');
+	var nombre = document.getElementById('inputNombre');
+	var usuario = document.getElementById('inputUsuario');
+	var password = document.getElementById('inputPassword');
+	var email = document.getElementById('inputEmail');
+	var apellido = document.getElementById('inputApellido');
+
+	if ((inputdni.value == "") || (celular.value == "")|| (nombre.value == "")|| (usuario.value == "") || (password.value == "")|| (email.value == "")|| (apellido.value == "")){
+		alert("Existen campos vacios");
+		return false;
+	}
+
+}	
+
+</script>
 </html>
+

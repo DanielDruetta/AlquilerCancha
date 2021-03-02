@@ -39,9 +39,14 @@ public class Alta extends HttpServlet {
 			String email = request.getParameter("email");
 			String celular = request.getParameter("celular");
 			String dni = request.getParameter("dni");
-			Cliente cli = new Cliente((dc.ultimoid() + 1), dni, nombre, apellido, celular, email, usuario, contraseña);
-			dc.add(cli);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			if ((usuario == "") || (contraseña == "") || (nombre == "") || (apellido == "") || (email == "") || (celular == "") || (dni == "")) {
+				request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
+			} else {
+				Cliente cli = new Cliente((dc.ultimoid() + 1), dni, nombre, apellido, celular, email, usuario, contraseña);
+				dc.add(cli);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			
 		}
 
 	}

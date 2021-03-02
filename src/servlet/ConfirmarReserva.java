@@ -49,17 +49,17 @@ public class ConfirmarReserva extends HttpServlet {
 		System.out.println(cli.getDni());
 		System.out.println(es.getNombre());
 
-		Correo correo = new Correo();
+		//Correo correo = new Correo();
 
 		
 		Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha, cli.getDni());
 		
-		try {
+		/*try {
 			correo.enviar_mail_confirmacion(cli.getEmail(), r, es);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		 */
 		dr.add(r);
 		
 		request.getSession().setAttribute("reserva", r);

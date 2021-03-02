@@ -38,9 +38,13 @@ public class ModificarCompletarPartido extends HttpServlet {
 			request.getRequestDispatcher("iniciarSesion.jsp").forward(request, response);
 		}
 		String numeroreserva = request.getParameter("nrores");
-
+		
+		
+		
 		int reserva = Integer.parseInt(numeroreserva);
 		System.out.println("El numero de reserva que recibo del listado partidos unidos es: "+reserva);
+		
+		
 
 		if (numeroreserva != null) {
 			
@@ -52,6 +56,7 @@ public class ModificarCompletarPartido extends HttpServlet {
 			
 			System.out.println(r.toString());
 			System.out.println(cr.toString());
+			
 			
 			request.getSession().setAttribute("reservamodificar", r);
 			request.getSession().setAttribute("clientereserva", cr);

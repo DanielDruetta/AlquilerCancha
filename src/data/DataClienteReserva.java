@@ -153,5 +153,32 @@ public class DataClienteReserva {
 
 		return cr;
 	}
+	
+	public void modificar_jugadores_aportados(ClienteReserva cr) {
+		PreparedStatement stmt = null;
+		ResultSet keyResultSet = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"update cliente_reserva set cantidad_jugadores=? where numero_reserva=? and dni=?",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, cr.getCantidad_jugadores());
+			stmt.setInt(2, cr.getNumero_reserva());
+			stmt.setString(3, cr.getDni());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (keyResultSet != null)
+					keyResultSet.close();
+				if (stmt != null)
+					stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 }

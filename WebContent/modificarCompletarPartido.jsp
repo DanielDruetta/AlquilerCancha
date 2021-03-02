@@ -19,7 +19,7 @@
 <body>
 	<div class="container">
 		<h3>Modificar cantidad de jugadores</h3>
-		<form class="form-" action="" method="post">
+		<form class="form-ModificarCompletarPartidoConfirmar" action="modificar_completar_partido" method="post">
 
 			<div class="form-group">
 				<label for="inputDni" class="control-label col-md-2">Establecimiento:</label>
@@ -54,21 +54,23 @@
 			</div>
 
 			<div class="form-group">
-				<label for="inputNombre" class="control-label col-md-4">Cantidad de jugadores restantes:</label>
+				<label for="inputNombre" class="control-label col-md-6">Cantidad de jugadores restantes por completar al partido:</label>
 				<div class="col-md-12">
 					<input id="inputNombre" name="nombre" class="form-control" type="number" value="<%=rm.getLugares_disponibles()%>" disabled>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="inputNombre" class="control-label col-md-4">Cantidad actual de jugadores</label>
+				<label for="inputNombre" class="control-label col-md-6">Cantidad actual de jugadores aportados al partido</label>
 				<div class="col-md-12">
-					<input id="inputNombre" name="nombre" class="form-control" type="number" value="<%= cr.getCantidad_jugadores()%>" disabled>
+					<input id="CantJugadoresAportados" name="CantJugadoresAportados" class="form-control" type="number" value="<%= cr.getCantidad_jugadores()%>" disabled>
+					<input type="hidden" id="nrores" name="nrores" class="form-control" value="<%= rm.getNumero_reserva() %>">
 				</div>
 			</div>
+			
 
 			<div class="form-group">
-				<label for="inputNombre" class="control-label col-md-4">Nueva cantidad de jugadores</label>
+				<label for="inputNombre" class="control-label col-md-6">Nueva cantidad de jugadores aportado al partido</label>
 				<div class="col-md-12">
 					<select class="form-control" id="cantidad" name="cantidad">
 						<option>-</option>
