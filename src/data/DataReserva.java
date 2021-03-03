@@ -36,7 +36,7 @@ public class DataReserva {
 		ResultSet keyResultSet = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into reserva(numero_reserva, fecha, hora_inicio, establecimiento, numero_cancha, dni) values(?,?,?,?,?,?)",
+					"insert into reserva(numero_reserva, fecha, hora_inicio, establecimiento, numero_cancha, dni, lugares_disponibles) values(?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, r.getNumero_reserva());
 			stmt.setDate(2, r.getFecha());
@@ -44,6 +44,7 @@ public class DataReserva {
 			stmt.setString(4, r.getEstablecimiento());
 			stmt.setInt(5, r.getNumero_cancha());
 			stmt.setString(6, r.getDni());
+			stmt.setInt(7, r.getLugares_disponibles());
 
 			stmt.executeUpdate();
 

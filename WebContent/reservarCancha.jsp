@@ -28,7 +28,7 @@
 			<div class="form-group">
 				<label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
 				<div class="col-md-7">
-					<select class="col-md-12" id="inputEstablecimiento"
+					<select class="form-control" id="inputEstablecimiento"
 						name="inputEstablecimiento">
 						<%
 							for (Establecimiento c : es) {
@@ -54,8 +54,8 @@
 			<div class="form-group">
 				<label for="inputTipo" class="control-label col-md-2">Tipo:</label>
 				<div class="col-md-7">
-					<select class="col-md-12" id="inputTipo" name="inputTipo">
-
+					<select class="form-control" id="inputTipo" name="inputTipo" onchange="seleccionar_tipo(this)">
+						<option class=form-control value="">-</option>
 						<option class=form-control value=5>5</option>
 						<option class=form-control value=7>7</option>
 						<option class=form-control value=9>9</option>
@@ -64,6 +64,12 @@
 					</select>
 				</div>
 			</div>
+			
+			<div class="form-group" id="solicitar_jugadores">
+				
+			</div>
+			
+			
 
 			<div class="form-group">
 				<div class="col-md-2">
@@ -75,4 +81,27 @@
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
+
+<script>
+function seleccionar_tipo(elemento) {
+	selecthtml = ''
+	
+	selecthtml += '<label for="inputNroJugadores" class="control-label col-md-6">Le faltan jugadores? Ingrese la cantidad abajo:</label>'	
+	selecthtml += '<div class="col-md-7">'	
+	selecthtml += '<select class="form-control" id="inputNroJugadores" name="inputNroJugadores">'
+	for (i=0;i<elemento.value*2;i++) {
+		
+		selecthtml += '<option class=form-control value='+i+'>'+i+'</option>'
+		
+	}
+	selecthtml += '</select>'
+	selecthtml += '</div>'	
+	document.getElementById('solicitar_jugadores').innerHTML = selecthtml
+	
+	
+}
+
+
+
+</script>
 </html>

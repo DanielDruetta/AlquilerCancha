@@ -19,7 +19,7 @@ public Reserva() {
 }
 
 
-public Reserva(int numero_reserva, Date fecha, int hora_inicio, String establecimiento, int numero_cancha, String dni) {
+public Reserva(int numero_reserva, Date fecha, int hora_inicio, String establecimiento, int numero_cancha, String dni, int lugares_disponibles) {
 	super();
 	this.numero_reserva = numero_reserva;
 	this.fecha = fecha;
@@ -27,11 +27,15 @@ public Reserva(int numero_reserva, Date fecha, int hora_inicio, String estableci
 	this.establecimiento = establecimiento;
 	this.numero_cancha = numero_cancha;
 	this.dni = dni;
+	this.lugares_disponibles = lugares_disponibles;
 }
 
 
-
-
+public Reserva(int numero_reserva, int lugares_disponibles) {
+	super();
+	this.numero_reserva = numero_reserva;
+	this.lugares_disponibles = lugares_disponibles;
+}
 
 
 public int getNumero_reserva() {

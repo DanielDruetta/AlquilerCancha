@@ -35,6 +35,11 @@ public class ConfirmarReserva extends HttpServlet {
 		String seleccion = request.getParameter("seleccion");
 		System.out.println(seleccion);
 
+		
+		String lugares = (String) session.getAttribute("lugares_disponibles");
+		int lugares_disponibles = Integer.parseInt(lugares);
+		request.getSession().setAttribute("lugares_disponibles", "");
+		
 		String[] datos = seleccion.split("r");
 		int numero_cancha = Integer.parseInt(datos[0]);
 		int hora_inicio = Integer.parseInt(datos[1]);
@@ -44,15 +49,12 @@ public class ConfirmarReserva extends HttpServlet {
 		Date fecha = (Date) session.getAttribute("fecha");
 
 		DataReserva dr = new DataReserva();
-		System.out.println(dr.ultimoid());
 
-		System.out.println(cli.getDni());
-		System.out.println(es.getNombre());
 
 		//Correo correo = new Correo();
 
 		
-		Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha, cli.getDni());
+		Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha, cli.getDni(), lugares_disponibles);
 		
 		/*try {
 			correo.enviar_mail_confirmacion(cli.getEmail(), r, es);
@@ -61,6 +63,7 @@ public class ConfirmarReserva extends HttpServlet {
 		}
 		 */
 		dr.add(r);
+		
 		
 		request.getSession().setAttribute("reserva", r);
 

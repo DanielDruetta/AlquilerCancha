@@ -17,9 +17,10 @@
 <%
 	ArrayList<Ocupada> disponibles = (ArrayList<Ocupada>) request.getAttribute("listaDisponibles");
 
-Establecimiento es = (Establecimiento) session.getAttribute("establecimiento");
+	Establecimiento es = (Establecimiento) session.getAttribute("establecimiento");
 
-DataPrecio dp = new DataPrecio();
+	DataPrecio dp = new DataPrecio();
+
 %>
 
 </head>
@@ -50,7 +51,6 @@ DataPrecio dp = new DataPrecio();
 										Precio precio = new Precio();
 										precio = dp.obtenerPrecio(es.getNombre(), disp.getNumero());
 										int precioint = (int) Math.round(precio.getPrecio());
-										System.out.println(precioint);
 										%>
 								<tr>
 									<td><%=disp.getNumero()%></td>

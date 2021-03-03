@@ -180,5 +180,39 @@ public class DataClienteReserva {
 		}
 
 	}
+	
+	public ArrayList<Integer> reservasYaCompletadas(Cliente c) {
+
+		ArrayList<Integer> cr = new ArrayList<Integer>();;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select numero_reserva from cliente_reserva where dni=? and cantidad_jugadores>0");
+			stmt.setString(1, c.getDni());
+			rs = stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					cr.add(rs.getInt("numero_reserva"));
+				}	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return cr;
+	}
 
 }

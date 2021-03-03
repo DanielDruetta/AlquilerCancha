@@ -1,7 +1,9 @@
 <%@page import="data.DataEstablecimiento"%>
+<%@page import="data.DataClienteReserva"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="data.DataReserva"%>
+<%@page import="entidades.Cliente"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,8 +12,12 @@
 
 <%
 	DataReserva dr = new DataReserva();
+	DataClienteReserva dcr = new DataClienteReserva();
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	reservas = dr.reservasAcompletar();
+	Cliente c = (Cliente) session.getAttribute("usuario");
+	ArrayList<Integer> reservas_ya_completadas_por_el_cliente = new ArrayList<Integer>();
+	reservas_ya_completadas_por_el_cliente = dcr.reservasYaCompletadas(c);	
 %>
 </head>
 
@@ -20,6 +26,7 @@
 		<h3>Listado de partidos a completar</h3>
 		<form class="form-CompletarPartido" action="CompletarPartido"
 			method="post">
+			<br>
 			<table class="table">
 				<thead>
 					<tr>
@@ -42,9 +49,15 @@
 						<td style="padding-top: 20px"><%=res.getFecha()%></td>
 						<td style="padding-top: 20px"><%=res.getHora_inicio()%></td>
 						<td style="padding-top: 20px"><%=res.getLugares_disponibles()%></td>
-						<td style="padding-top: 20px"><button type="submit"
+						<% if (reservas_ya_completadas_por_el_cliente.contains(res.getNumero_reserva())) { %> 
+							<td style="padding-top: 20px">Ya se encuentra unido a este partido</td> 
+						<% } else { %> 
+							 
+							<td style="padding-top: 20px"><button type="submit"
 								class="btn btn-light" name="nroreserva"
 								value="<%=String.valueOf(res.getNumero_reserva())%>">Seleccionar</button></td>
+								
+						<% } %>
 					</tr>
 
 					<%

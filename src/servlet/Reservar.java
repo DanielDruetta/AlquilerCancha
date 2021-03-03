@@ -42,20 +42,27 @@ public class Reservar extends HttpServlet {
 
 		} else if (act.equals("Aceptar")) {
 
-			String establecimiento = request.getParameter("inputEstablecimiento");
+			
+			
 			String fecha = request.getParameter("inputFecha");
-			System.out.println(fecha);
-			String tipoS = request.getParameter("inputTipo");
-
 			Date date = Date.valueOf(fecha);
-
 			System.out.println(date);
-
 			request.getSession().setAttribute("fecha", date);
+			
+			String jugadores = request.getParameter("inputNroJugadores");
+			int jugadores_int = Integer.parseInt(jugadores);
+			System.out.println("Jugadores nescesarios:" + jugadores_int);
+			request.getSession().setAttribute("lugares_disponibles", jugadores);
+			
 
+
+			String tipoS = request.getParameter("inputTipo");
 			int tipo = Integer.parseInt(tipoS);
 			DataCancha dc = new DataCancha();
 			DataEstablecimiento de = new DataEstablecimiento();
+			
+			
+			String establecimiento = request.getParameter("inputEstablecimiento");
 			Establecimiento es = de.buscarEst(establecimiento);
 
 			ArrayList<Ocupada> ocupadas = new ArrayList<Ocupada>();
@@ -94,8 +101,6 @@ public class Reservar extends HttpServlet {
 						disp.setDescripcion(dc.descripcion(establecimiento, dispo.getNumero()));
 
 						int posicion = disponibles.indexOf(dispo);
-						System.out.println("Aca va");
-						System.out.println(posicion);
 						disponibles.set(posicion, disp);
 
 					}

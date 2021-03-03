@@ -36,7 +36,7 @@
 			<div class="form-group">
 				<label for="inputCancha" class="control-label col-md-2">Numero de cancha:</label>
 				<div class="col-md-7">
-					<select class="col-md-3" id="inputCancha" name="inputCancha">
+					<select class="form-control col-md-2" id="inputCancha" name="inputCancha">
 						<%
 							for (Integer nro : canchas) {
 						%>
@@ -48,6 +48,9 @@
 						%>
 					</select>
 				</div>
+				
+				
+				
 			</div>
 
 			<div class="form-group">

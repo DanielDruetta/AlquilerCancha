@@ -88,6 +88,16 @@
 					disabled>
 			</div>
 		</div>
+		
+		<div class="form-group">
+			<label for="inputFecha" class="control-label col-md-4">Jugadores que necesita el partido</label>
+			<div class="col-md-7">
+				<input id="inputLugaresDisponibles" name="inputLugaresDisponibles" class="form-control"
+					placeholder="" required="" autofocus="" type="text"
+					value="<%=r.getLugares_disponibles()%>" disabled>
+			</div>
+		</div>
+		
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
