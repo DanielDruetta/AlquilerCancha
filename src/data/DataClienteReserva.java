@@ -214,5 +214,44 @@ public class DataClienteReserva {
 
 		return cr;
 	}
+	
+
+	
+	public int cantidad_jugadores_unidos(int nro_reserva) {
+
+		int nro = 0;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select sum(cantidad_jugadores) as sumatoria from cliente_reserva where numero_reserva=?");
+
+			stmt.setInt(1, nro_reserva);
+
+			rs = stmt.executeQuery();
+			if (rs != null && rs.next()) {
+
+				nro = rs.getInt("sumatoria");
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return nro;
+	}
+	
 
 }

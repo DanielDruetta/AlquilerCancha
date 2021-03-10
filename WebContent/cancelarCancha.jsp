@@ -6,6 +6,8 @@
 <%@page import="entidades.Establecimiento"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="data.DataReserva"%>
+<%@page import="data.DataCancha"%>
+<%@page import="data.DataClienteReserva"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,9 @@
 	DataReserva dr = new DataReserva();
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	reservas = dr.reservasCliente(c.getDni());
+	DataClienteReserva dcr = new DataClienteReserva();
+	DataCancha dc = new DataCancha();
+	
 %>
 
 </head>
@@ -62,11 +67,9 @@
 										<div style="display:flex;margin-left:31px">
 											<div style="float:left">
 												<select class="form-control" id="inputLugares_<%= disp.getNumero_reserva()%>" name="inputLugares">
-													<option class=form-control value=1>1</option>
-													<option class=form-control value=2>2</option>
-													<option class=form-control value=3>3</option>
-													<option class=form-control value=4>4</option>
-													<option class=form-control value=5>5</option>
+												<% for(int i=0;i < (dc.tipoSegunNroCancha(disp.getNumero_cancha(), disp.getEstablecimiento())) * 2 - 1 - dcr.cantidad_jugadores_unidos(disp.getNumero_reserva()) ;i++) { %>
+													<option class=form-control value=<%=i%>><%=i%></option>
+												<%} %>
 												</select>
 											</div>
 											<div style="float:left;margin-left:7px;margin-top:4px" id="botones_<%= disp.getNumero_reserva()%>">
