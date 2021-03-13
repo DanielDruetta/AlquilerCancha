@@ -18,17 +18,16 @@ public class Alta extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String act = request.getParameter("act");
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (act.equals("Registrarse")) {
 			System.out.println("Se presiono registrarse");
 			DataCliente dc = new DataCliente();
@@ -39,16 +38,21 @@ public class Alta extends HttpServlet {
 			String email = request.getParameter("email");
 			String celular = request.getParameter("celular");
 			String dni = request.getParameter("dni");
+			
 			if ((usuario == "") || (contraseña == "") || (nombre == "") || (apellido == "") || (email == "") || (celular == "") || (dni == "")) {
 				request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
 			} else {
-				Cliente cli = new Cliente((dc.ultimoid() + 1), dni, nombre, apellido, celular, email, usuario, contraseña);
-				dc.add(cli);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				
+				try {
+					Cliente cli = new Cliente((dc.ultimoid() + 1), dni, nombre, apellido, celular, email, usuario, contraseña);
+					dc.add(cli);
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				} catch (Exception e) {
+					System.out.println("El objeto error es de tipo " + e);
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
 			}
-			
 		}
-
 	}
-
 }
