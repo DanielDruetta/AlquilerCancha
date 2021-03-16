@@ -13,8 +13,8 @@
 
 <%
 	DataEstablecimiento de = new DataEstablecimiento();
-	request.getSession().setAttribute("listaEstablecimientos", de.getAll()); //esto es correcto
-	ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribute("listaEstablecimientos");
+request.getSession().setAttribute("listaEstablecimientos", de.getAll()); //esto es correcto
+ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribute("listaEstablecimientos");
 %>
 
 </head>
@@ -29,7 +29,9 @@
 				<label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
 				<div class="col-md-7">
 					<select class="form-control" id="inputEstablecimiento"
-						name="inputEstablecimiento">
+						name="inputEstablecimiento" onchange="set_tipos(this)">
+						<option class=form-control value="">-</option>
+
 						<%
 							for (Establecimiento c : es) {
 						%>
@@ -51,25 +53,34 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+
+			<%
+				for (Establecimiento c : es) {
+			%>
+			<div style="display: none" class="form-group"
+				id="seleccion_<%=c.getNombre()%>">
 				<label for="inputTipo" class="control-label col-md-2">Tipo:</label>
 				<div class="col-md-7">
-					<select class="form-control" id="inputTipo" name="inputTipo" onchange="seleccionar_tipo(this)">
+					<select class="form-control" id="inputTipo" name="inputTipo"
+						onchange="seleccionar_tipo(this)">
 						<option class=form-control value="">-</option>
-						<option class=form-control value=5>5</option>
-						<option class=form-control value=7>7</option>
-						<option class=form-control value=9>9</option>
-						<option class=form-control value=11>11</option>
-
+						<%
+							ArrayList<Integer> tipos = de.tipos(c.getNombre());
+						for (int i = 0; i < tipos.size(); i++) {
+						%>
+						<option class=form-control value=<%=tipos.get(i)%>><%=tipos.get(i)%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>
-			
-			<div class="form-group" id="solicitar_jugadores">
-				
-			</div>
-			
-			
+
+			<%
+				}
+			%>
+
+			<div class="form-group" id="solicitar_jugadores"></div>
 
 			<div class="form-group">
 				<div class="col-md-2">
@@ -83,25 +94,39 @@
 </body>
 
 <script>
-function seleccionar_tipo(elemento) {
-	selecthtml = ''
-	
-	selecthtml += '<label for="inputNroJugadores" class="control-label col-md-6">Le faltan jugadores? Ingrese la cantidad abajo:</label>'	
-	selecthtml += '<div class="col-md-7">'	
-	selecthtml += '<select class="form-control" id="inputNroJugadores" name="inputNroJugadores">'
-	for (i=0;i<elemento.value*2;i++) {
-		
-		selecthtml += '<option class=form-control value='+i+'>'+i+'</option>'
-		
+	function seleccionar_tipo(elemento) {
+		selecthtml = ''
+
+		selecthtml += '<label for="inputNroJugadores" class="control-label col-md-6">Le faltan jugadores? Ingrese la cantidad abajo:</label>'
+		selecthtml += '<div class="col-md-7">'
+		selecthtml += '<select class="form-control" id="inputNroJugadores" name="inputNroJugadores">'
+		for (i = 0; i < elemento.value * 2; i++) {
+
+			selecthtml += '<option class=form-control value='+i+'>' + i
+					+ '</option>'
+
+		}
+		selecthtml += '</select>'
+		selecthtml += '</div>'
+		document.getElementById('solicitar_jugadores').innerHTML = selecthtml
+
 	}
-	selecthtml += '</select>'
-	selecthtml += '</div>'	
-	document.getElementById('solicitar_jugadores').innerHTML = selecthtml
-	
-	
-}
+</script>
 
+<script>
+	function set_tipos(elemento) {
+		var seleccionado = $(elemento).find('option:selected').val();
+		var seleccion = document.getElementById('seleccion_' + seleccionado).style.display = "inline"
+		var canchas = document.querySelectorAll('[id^="seleccion_"]');
+		canchas.forEach(function(cancha) {
+			canchita = cancha.id.split("_")
+			if (canchita[1] == seleccionado) {
+				cancha.style.display = "inline"
+			} else {
+				cancha.style.display = "none"
+			}
+		});
 
-
+	}
 </script>
 </html>
