@@ -54,15 +54,17 @@ public class Reservar extends HttpServlet {
 			System.out.println("Jugadores nescesarios:" + jugadores_int);
 			request.getSession().setAttribute("lugares_disponibles", jugadores);
 			
-
-
-			String tipoS = request.getParameter("inputTipo");
+			String establecimiento = request.getParameter("inputEstablecimiento");
+			System.out.println(establecimiento);
+			
+			String tipoS = request.getParameter(establecimiento);
+			System.out.println(tipoS);
 			int tipo = Integer.parseInt(tipoS);
 			DataCancha dc = new DataCancha();
 			DataEstablecimiento de = new DataEstablecimiento();
 			
 			
-			String establecimiento = request.getParameter("inputEstablecimiento");
+			
 			Establecimiento es = de.buscarEst(establecimiento);
 
 			ArrayList<Ocupada> ocupadas = new ArrayList<Ocupada>();

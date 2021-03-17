@@ -28,7 +28,7 @@
 		<h3>Reservas vigentes</h3>
 		<form class="form-cancelarReserva" action="CancelarReserva"
 			method="post">
-			<div class="row"  style="width:1200px">
+			<div class="row" style="width: 1200px">
 				<div class="col-12 col-sm-12 col-lg-12">
 					<div class="table-responsive">
 						<table class="table">
@@ -58,25 +58,40 @@
 											value=<%=String.valueOf(disp.getNumero_reserva())%>>Cancelar
 											reserva</button>
 									</td>
-									
-									<td id="boton_solicitar_<%= disp.getNumero_reserva()%>" style="display:block">
-										<a class="btn btn-secondary" style="color:white" onclick="solicitar_jugadores('<%= disp.getNumero_reserva() %>')">Solicitar jugadores</a>
-									</td>
-									
-									<td style="display:none" id="solicitar_jugadores_<%= disp.getNumero_reserva()%>">
-										<div style="display:flex;margin-left:31px">
-											<div style="float:left">
-												<select class="form-control" id="inputLugares_<%= disp.getNumero_reserva()%>" name="inputLugares">
-												<% for(int i=0;i < (dc.tipoSegunNroCancha(disp.getNumero_cancha(), disp.getEstablecimiento())) * 2 - 1 - dcr.cantidad_jugadores_unidos(disp.getNumero_reserva()) ;i++) { %>
+
+									<td id="boton_solicitar_<%=disp.getNumero_reserva()%>"
+										style="display: block"><a
+										id="botonsolicitar_<%=disp.getNumero_reserva()%>"
+										class="btn btn-secondary" style="color: white"
+										onclick="solicitar_jugadores('<%=disp.getNumero_reserva()%>')">Solicitar
+											jugadores</a> <a
+										id="respuesta_solicitar_<%=disp.getNumero_reserva()%>"
+										style="font-size: 13px"></a></td>
+
+									<td style="display: none"
+										id="solicitar_jugadores_<%=disp.getNumero_reserva()%>">
+										<div style="display: flex; margin-left: 31px">
+											<div style="float: left">
+												<select class="form-control"
+													id="inputLugares_<%=disp.getNumero_reserva()%>"
+													name="inputLugares">
+													<%
+														for (int i = 0; i < (dc.tipoSegunNroCancha(disp.getNumero_cancha(), disp.getEstablecimiento())) * 2 - 1
+															- dcr.cantidad_jugadores_unidos(disp.getNumero_reserva()); i++) {
+													%>
 													<option class=form-control value=<%=i%>><%=i%></option>
-												<%} %>
+													<%
+														}
+													%>
 												</select>
 											</div>
-											<div style="float:left;margin-left:7px;margin-top:4px" id="botones_<%= disp.getNumero_reserva()%>">
-												<a class="btn btn-success btn-sm"  onclick="ingresar_cantidad('<%= disp.getNumero_reserva()%>')">
-													OK</a>
-												<a class="btn btn-danger btn-sm" style="width:35px" onclick="cancelar('<%= disp.getNumero_reserva()%>')">
-													X</a>
+											<div style="float: left; margin-left: 7px; margin-top: 4px"
+												id="botones_<%=disp.getNumero_reserva()%>">
+												<a class="btn btn-success btn-sm"
+													onclick="ingresar_cantidad('<%=disp.getNumero_reserva()%>')">
+													OK</a> <a id="boton_cerrar_<%=disp.getNumero_reserva()%>"
+													class="btn btn-danger btn-sm" style="width: 35px"
+													onclick="cancelar('<%=disp.getNumero_reserva()%>')"> X</a>
 											</div>
 										</div>
 									</td>
@@ -97,32 +112,73 @@
 	<jsp:include page="footer.jsp" />
 </body>
 <script>
-function cancelar(reserva){
-	document.getElementById('solicitar_jugadores_'+reserva).style.display = 'none';
-	document.getElementById('boton_solicitar_'+reserva).style.display = 'block';
-	document.getElementById('boton_solicitar_'+reserva).style.display = 'block';
-	document.getElementById('boton_solicitar_'+reserva).style.display = 'block';
-	document.getElementById('botones_'+reserva).style.display = 'block';
+	function cancelar(reserva) {
+		document.getElementById('solicitar_jugadores_' + reserva).style.display = 'none';
+		document.getElementById('boton_solicitar_' + reserva).style.display = 'block';
+		document.getElementById('boton_solicitar_' + reserva).style.display = 'block';
+		document.getElementById('boton_solicitar_' + reserva).style.display = 'block';
+		document.getElementById('botones_' + reserva).style.display = 'block';
 
-}
+	}
 
-function solicitar_jugadores(reserva){
-	document.getElementById('solicitar_jugadores_'+reserva).style.display = 'block';
-	document.getElementById('boton_solicitar_'+reserva).style.display = 'none';
-	
-	//if (document.getElementById('solicitar_jugadores_'+reserva).style.display == 'block') {
-	//	document.getElementById('solicitar_jugadores_'+reserva).style.display = 'none';
+	function solicitar_jugadores(reserva) {
+		document.getElementById('solicitar_jugadores_' + reserva).style.display = 'block';
+		document.getElementById('boton_solicitar_' + reserva).style.display = 'none';
 
-	//} else {
-	//	document.getElementById('solicitar_jugadores_'+reserva).style.display = 'block';
-	//}
-	
-}
-function ingresar_cantidad(reserva){
-	var cantidad = document.getElementById('inputLugares_'+reserva).value;
-	console.log(reserva)
-	console.log(cantidad)
-	$.post('/AlquilerCancha/ingresar_jugadores',{reserva:reserva,cantidad:cantidad});
-}
+		//if (document.getElementById('solicitar_jugadores_'+reserva).style.display == 'block') {
+		//	document.getElementById('solicitar_jugadores_'+reserva).style.display = 'none';
+
+		//} else {
+		//	document.getElementById('solicitar_jugadores_'+reserva).style.display = 'block';
+		//}
+
+	}
+	function ingresar_cantidad(reserva) {
+		var cantidad = document.getElementById('inputLugares_' + reserva).value;
+		console.log(reserva)
+		console.log(cantidad)
+		$
+				.post('/AlquilerCancha/ingresar_jugadores', {
+					reserva : reserva,
+					cantidad : cantidad
+				})
+				.done(
+						function() {
+							console.log("Se ejecuto correctamente");
+							document.getElementById('boton_cerrar_' + reserva)
+									.click();
+							document
+									.getElementById('botonsolicitar_' + reserva).style.display = 'none';
+							document.getElementById('respuesta_solicitar_'
+									+ reserva).style.color = "green";
+							document.getElementById('respuesta_solicitar_'
+									+ reserva).innerHTML = "Se solicitaron correctamente los jugadores";
+							setTimeout(function() {
+								document.getElementById('respuesta_solicitar_'
+										+ reserva).innerHTML = "";
+								document.getElementById('botonsolicitar_'
+										+ reserva).style.display = 'inline';
+							}, 2500);
+						})
+				.fail(
+						function() {
+							console.log("No se ejecuto correctamente");
+							document.getElementById('boton_cerrar_' + reserva)
+									.click();
+							document
+									.getElementById('botonsolicitar_' + reserva).style.display = 'none';
+							document.getElementById('respuesta_solicitar_'
+									+ reserva).style.color = "red";
+							document.getElementById('respuesta_solicitar_'
+									+ reserva).innerHTML = "No se solicitaron correctamente los jugadores";
+							setTimeout(function() {
+								document.getElementById('respuesta_solicitar_'
+										+ reserva).innerHTML = "";
+								document.getElementById('botonsolicitar_'
+										+ reserva).style.display = 'inline';
+							}, 2500);
+						});
+
+	}
 </script>
 </html>

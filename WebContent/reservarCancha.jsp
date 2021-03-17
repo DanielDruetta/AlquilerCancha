@@ -45,13 +45,7 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label for="inputFecha" class="control-label col-md-2">Fecha</label>
-				<div class="col-md-7">
-					<input id="inputFecha" name="inputFecha" class="form-control"
-						placeholder="" required="" autofocus="" type="date">
-				</div>
-			</div>
+			
 
 
 			<%
@@ -61,8 +55,8 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 				id="seleccion_<%=c.getNombre()%>">
 				<label for="inputTipo" class="control-label col-md-2">Tipo:</label>
 				<div class="col-md-7">
-					<select class="form-control" id="inputTipo" name="inputTipo"
-						onchange="seleccionar_tipo(this)">
+					<select class="form-control" id="inputTipo_<%=c.getNombre()%>"
+						name="<%=c.getNombre()%>" onchange="seleccionar_tipo(this)">
 						<option class=form-control value="">-</option>
 						<%
 							ArrayList<Integer> tipos = de.tipos(c.getNombre());
@@ -79,7 +73,15 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 			<%
 				}
 			%>
-
+			<br>
+			<div class="form-group">
+				<label for="inputFecha" class="control-label col-md-2">Fecha</label>
+				<div class="col-md-7">
+					<input id="inputFecha" name="inputFecha" class="form-control"
+						placeholder="" required="" autofocus="" type="date">
+				</div>
+			</div>
+			
 			<div class="form-group" id="solicitar_jugadores"></div>
 
 			<div class="form-group">
@@ -118,6 +120,7 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 		var seleccionado = $(elemento).find('option:selected').val();
 		var seleccion = document.getElementById('seleccion_' + seleccionado).style.display = "inline"
 		var canchas = document.querySelectorAll('[id^="seleccion_"]');
+		console.clear();
 		canchas.forEach(function(cancha) {
 			canchita = cancha.id.split("_")
 			if (canchita[1] == seleccionado) {
@@ -126,7 +129,7 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 				cancha.style.display = "none"
 			}
 		});
-
+		
 	}
 </script>
 </html>
