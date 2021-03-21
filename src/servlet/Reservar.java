@@ -57,7 +57,7 @@ public class Reservar extends HttpServlet {
 			String establecimiento = request.getParameter("inputEstablecimiento");
 			System.out.println(establecimiento);
 			
-			String tipoS = request.getParameter(establecimiento);
+			String tipoS = request.getParameter("inputTipo");
 			System.out.println(tipoS);
 			int tipo = Integer.parseInt(tipoS);
 			DataCancha dc = new DataCancha();
