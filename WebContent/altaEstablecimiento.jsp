@@ -7,12 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <jsp:include page="header.jsp" />
 <%
 	Administrador a = (Administrador) session.getAttribute("administrador");
-	if (a == null) {
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-	}
+if (a == null) {
+	request.getRequestDispatcher("index.jsp").forward(request, response);
+}
 %>
 </head>
 <body>
@@ -24,7 +25,8 @@
 			</div>
 
 			<div class="form-group">
-				<label for="inputNombre" class="control-label col-md-4">Nombre del establecimiento:</label>
+				<label for="inputNombre" class="control-label col-md-4">Nombre
+					del establecimiento:</label>
 				<div class="col-md-10">
 					<input id="inputNombre" name="nombre" class="form-control"
 						type="text">
@@ -32,7 +34,8 @@
 			</div>
 
 			<div class="form-group">
-				<label for="inputDireccion" class="control-label col-md-4">Direccion del establecimiento:</label>
+				<label for="inputDireccion" class="control-label col-md-4">Direccion
+					del establecimiento:</label>
 				<div class="col-md-10">
 					<input id="inputDireccion" name="direccion" class="form-control"
 						type="text">
@@ -56,10 +59,22 @@
 			</div>
 
 			<div class="form-group">
+				<label href="#" data-toggle="tooltip" data-html="true" title="<img src='imagenes/gif_tutorial.gif' alt='En caso de dudas comunicarse con Daniel.'>" for="inputHoraInicio" class="control-label col-md-4">
+					URL de Google
+						Maps:
+				</label>
+				<div class="col-md-10">
+					<input id="inputUrlMapa" name="urlMapa" class="form-control"
+						type="text">
+				</div>
+			</div>
+
+			<div class="form-group">
 				<label for="inputHoraInicio" class="control-label col-md-4">Hora
 					inicio:</label>
 				<div class="col-md-10">
-					<select id="inputHoraInicio" name="inputHoraInicio">
+					<select class="form-control" id="inputHoraInicio"
+						name="inputHoraInicio">
 						<%
 							for (int hi = 0; hi <= 23; hi++) {
 						%>
@@ -74,9 +89,10 @@
 			</div>
 
 			<div class="form-group">
-				<label for="inputHoraFin" class="control-label col-md-2">Hora fin:</label>
+				<label for="inputHoraFin" class="control-label col-md-2">Hora
+					fin:</label>
 				<div class="col-md-10">
-					<select id="inputHoraFin" name="inputHoraFin">
+					<select class="form-control" id="inputHoraFin" name="inputHoraFin">
 						<%
 							for (int hf = 0; hf <= 23; hf++) {
 						%>
@@ -89,7 +105,7 @@
 					</select>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<div class="col-md-2">
 					<input type="submit" class="btn btn-primary" name="act"
@@ -100,4 +116,10 @@
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
+
+<script>
+	$(document).ready(function() {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+</script>
 </html>

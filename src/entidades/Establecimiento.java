@@ -7,6 +7,7 @@ int hora_inicio;
 int hora_fin;
 String usuario;
 String contraseña;
+String url_mapa;
 
 
 
@@ -14,6 +15,18 @@ public Establecimiento() {
 	super();
 }
 
+
+public Establecimiento(String nombre, String direccion, int hora_inicio, int hora_fin, String usuario,
+		String contraseña, String url_mapa) {
+	super();
+	this.nombre = nombre;
+	this.direccion = direccion;
+	this.hora_inicio = hora_inicio;
+	this.hora_fin = hora_fin;
+	this.usuario = usuario;
+	this.contraseña = contraseña;
+	this.url_mapa = url_mapa;
+}
 
 public Establecimiento(String nombre, String direccion, int hora_inicio, int hora_fin, String usuario,
 		String contraseña) {
@@ -24,8 +37,19 @@ public Establecimiento(String nombre, String direccion, int hora_inicio, int hor
 	this.hora_fin = hora_fin;
 	this.usuario = usuario;
 	this.contraseña = contraseña;
+	
 }
 
+
+
+public String getUrl_mapa() {
+	return url_mapa;
+}
+
+
+public void setUrl_mapa(String url_mapa) {
+	this.url_mapa = url_mapa;
+}
 
 
 public Establecimiento(String nombre) {

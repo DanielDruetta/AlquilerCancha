@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DataEstablecimiento;
+import entidades.Establecimiento;
 
 
 @WebServlet({ "/CargarTipos", "/cargar_tipos" })
@@ -37,6 +38,7 @@ public class CargarTipos extends HttpServlet {
 
 		String establecimiento = request.getParameter("id");
 		System.out.println("El estableciminto ingresado es:" + establecimiento);
+		Establecimiento es = de.buscarEst(establecimiento);
 		
 		ArrayList<Integer> tipos = de.tipos(establecimiento);
 		String respuesta = "<option value='vacio'>Ingrese un tipo de cancha</option>";
@@ -45,6 +47,10 @@ public class CargarTipos extends HttpServlet {
 			 String num_s = Integer.toString(num);
 			 respuesta = respuesta + "<option value="+num_s+">"+num_s+"</option>";
 	        }
+		
+		respuesta = respuesta + "!!??" + "<iframe src="+ es.getUrl_mapa() + "frameborder='0' allowfullscreen='' style='border:0' allowfullscreen></iframe>";
+		
+		
 		
 		response.setContentType("text/plain");  
 	    response.setCharacterEncoding("UTF-8"); 

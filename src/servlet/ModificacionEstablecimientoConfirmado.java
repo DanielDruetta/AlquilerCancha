@@ -43,14 +43,14 @@ public class ModificacionEstablecimientoConfirmado extends HttpServlet {
 
 			String hora_inicio = request.getParameter("inputHoraInicio");
 			String hora_fin = request.getParameter("inputHoraFin");
-
+			String url_mapa = request.getParameter("urlMapa");
 			int horainicio = Integer.parseInt(hora_inicio);
 			int horafin = Integer.parseInt(hora_fin);
 
 			System.out.println(horainicio);
 			System.out.println(horafin);
 
-			Establecimiento estnuevo = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña);
+			Establecimiento estnuevo = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña, url_mapa);
 			System.out.println("Establecimiento nuevo " + estnuevo.toString());
 
 			Establecimiento estviejo = (Establecimiento) session.getAttribute("establec");

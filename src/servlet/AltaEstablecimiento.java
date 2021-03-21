@@ -42,6 +42,8 @@ public class AltaEstablecimiento extends HttpServlet {
 			String hora_inicio = request.getParameter("inputHoraInicio");
 
 			String hora_fin = request.getParameter("inputHoraFin");
+			String url_mapa = request.getParameter("urlMapa");
+			System.out.println("El url del mapa es:" + url_mapa);
 
 			int horainicio = Integer.parseInt(hora_inicio);
 			int horafin = Integer.parseInt(hora_fin);
@@ -49,7 +51,7 @@ public class AltaEstablecimiento extends HttpServlet {
 			System.out.println(horainicio);
 			System.out.println(horafin);
 
-			Establecimiento es = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña);
+			Establecimiento es = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña, url_mapa);
 			System.out.println(es.toString());
 			de.add(es);
 			request.getRequestDispatcher("index.jsp").forward(request, response);

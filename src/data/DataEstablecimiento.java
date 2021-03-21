@@ -55,7 +55,7 @@ public class DataEstablecimiento {
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into establecimiento(nombre, direccion, hora_inicio, hora_fin, usuario, contraseña) values(?,?,?,?,?,?)",
+					"insert into establecimiento(nombre, direccion, hora_inicio, hora_fin, usuario, contraseña, url_mapa) values(?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1, c.getNombre());
@@ -64,6 +64,7 @@ public class DataEstablecimiento {
 			stmt.setInt(4, c.getHora_fin());
 			stmt.setString(5, c.getUsuario());
 			stmt.setString(6, c.getContraseña());
+			stmt.setString(7, c.getUrl_mapa());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -129,7 +130,7 @@ public class DataEstablecimiento {
 		ResultSet rs = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select nombre,direccion,hora_inicio,hora_fin,usuario from establecimiento where nombre=?");
+					"select nombre,direccion,hora_inicio,hora_fin,usuario,url_mapa from establecimiento where nombre=?");
 			stmt.setString(1, establecimiento);
 
 			rs = stmt.executeQuery();
@@ -142,6 +143,7 @@ public class DataEstablecimiento {
 				c.setHora_inicio(rs.getInt("hora_inicio"));
 				c.setHora_fin(rs.getInt("hora_fin"));
 				c.setUsuario(rs.getString("usuario"));
+				c.setUrl_mapa(rs.getString("url_mapa"));
 
 			}
 		} catch (SQLException e) {
@@ -236,7 +238,7 @@ public class DataEstablecimiento {
 		try {
 			System.out.println("Data establecimineto 1");
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"update establecimiento set nombre=?,direccion=?,hora_inicio=?,hora_fin=?,usuario=?,contraseña=? where nombre=?",
+					"update establecimiento set nombre=?,direccion=?,hora_inicio=?,hora_fin=?,usuario=?,contraseña=?,url_mapa=? where nombre=?",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, nuev.getNombre());
 			stmt.setString(2, nuev.getDireccion());
@@ -244,7 +246,8 @@ public class DataEstablecimiento {
 			stmt.setInt(4, nuev.getHora_fin());
 			stmt.setString(5, nuev.getUsuario());
 			stmt.setString(6, nuev.getContraseña());
-			stmt.setString(7, viej.getNombre());
+			stmt.setString(7, nuev.getUrl_mapa());
+			stmt.setString(8, viej.getNombre());
 
 			stmt.executeUpdate();
 			System.out.println("Data cancha 2");

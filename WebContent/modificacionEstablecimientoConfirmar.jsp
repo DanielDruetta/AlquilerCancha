@@ -38,6 +38,14 @@
 						type="text" value="<%=est.getDireccion()%>">
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<label for="inputDireccion" class="control-label col-md-6">URL del mapa en google maps:</label>
+				<div class="col-md-12">
+					<input id="inputUrlMapa" name="urlMapa" class="form-control"
+						type="text" value="<%=est.getUrl_mapa()%>">
+				</div>
+			</div>
 
 			<div class="form-group">
 				<label for="inputUsuario" class="control-label col-md-6">Usuario:</label>

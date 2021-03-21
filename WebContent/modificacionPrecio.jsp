@@ -38,7 +38,7 @@
 				<label for="inputEstablecimiento" class="control-label col-md-2">Numero
 					de cancha:</label>
 				<div class="col-md-7">
-					<select class="col-md-3" id="inputEstablecimiento"
+					<select class="form-control col-md-3" id="inputEstablecimiento"
 						name="inputEstablecimiento">
 						<%
 							for (Integer nro : canchas) {
