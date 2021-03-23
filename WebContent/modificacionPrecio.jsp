@@ -39,7 +39,7 @@
 					de cancha:</label>
 				<div class="col-md-7">
 					<select class="form-control col-md-3" id="inputEstablecimiento"
-						name="inputEstablecimiento">
+						name="inputEstablecimiento" onchange="get_precio(this)">
 						<%
 							for (Integer nro : canchas) {
 						%>
@@ -52,6 +52,8 @@
 					</select>
 				</div>
 			</div>
+			
+			<div id="titulo_ubicacion"> </div>
 
 
 			<div class="form-group">
@@ -72,4 +74,25 @@
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
+
+<script>
+
+	function get_precio(elemento) {
+		var nro_cancha = elemento.value;
+
+		$.ajax({
+			type : 'POST',
+			url : '/AlquilerCancha/CargarPrecio',
+			data : {
+				'nro_cancha' : nro_cancha
+			}
+		}).done(
+				function(respuesta) {
+					$('#titulo_ubicacion').html(respuesta)
+				}).fail(function() {
+			alert('Hubo un error al cargar los tipos de cancha')
+		})
+
+	}
+</script>
 </html>

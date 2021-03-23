@@ -76,9 +76,9 @@ public class Signin extends HttpServlet {
 					}
 
 					if (a == null) {
-
-						System.out.println("Usuario o contraseña incorrectos");
-						request.getRequestDispatcher("loginFalla.jsp").forward(request, response);
+						
+						request.setAttribute("mensajeError", "Usuario y/o contraseña incorrecto");
+						request.getRequestDispatcher("iniciarSesion.jsp").forward(request, response);
 
 					}
 				}
@@ -86,7 +86,7 @@ public class Signin extends HttpServlet {
 
 		} else if (act.equals("Registrarse")) {
 			System.out.println("Se presiono registrarse");
-			request.getRequestDispatcher("altaCliente.html").forward(request, response);
+			request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
 		} else {
 			// someone has altered the HTML and sent a different value!
 		}

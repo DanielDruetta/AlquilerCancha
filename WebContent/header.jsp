@@ -99,14 +99,18 @@ table {
 				</li>
 				
 				<% }%>
-				
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Buscar Partidos </a>
+
+				<%
+					if (c != null) {
+				%>
+
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Buscar Partidos </a>
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
-						<a class="dropdown-item" href="listadoPartidos.jsp">Lista de partidos disponibles</a> 
-						<a class="dropdown-item" href="listadoPartidosUnidos.jsp">Lista de partidos unidos</a> 
+						<a class="dropdown-item" href="listadoPartidos.jsp">Lista de partidos disponibles</a> <a class="dropdown-item" href="listadoPartidosUnidos.jsp">Lista de partidos unidos</a>
 					</div>
 				</li>
+				
+				<% } %>
 
 			</ul>
 

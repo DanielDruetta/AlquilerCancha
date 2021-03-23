@@ -6,6 +6,16 @@
 
 <body>
 	<div class="container">
+		<%
+			if (request.getAttribute("mensajeError") != null) {
+		%>
+		<div class="alert alert-danger" role="alert">
+			<%=request.getAttribute("mensajeError")%>
+		</div>
+		<%
+			}
+		%>
+
 		<form class="form-signin" action="signin" method="post">
 			<div class="form-group col-md-12">
 				<h3>Iniciar sesion</h3>

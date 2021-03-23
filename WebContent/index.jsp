@@ -20,6 +20,22 @@
 <body>
 	<div align="center">
 
+		<%
+			if (request.getAttribute("mensajeError") != null) {
+		%>
+		<div class="alert alert-danger" role="alert"> <%=request.getAttribute("mensajeError")%> </div>
+		<%
+			}
+		%>
+
+		<%
+			if (request.getAttribute("mensajeOk") != null) {
+		%>
+		<div class="alert alert-success" role="alert"> <%=request.getAttribute("mensajeOk")%> </div>
+		<%
+			}
+		%>
+
 		<div id="carouselExampleSlidesOnly" class="carousel slide"
 			data-ride="carousel" data-interval="4000">
 			<div class="carousel-inner">

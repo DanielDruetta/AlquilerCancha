@@ -106,7 +106,7 @@ public class DataCliente {
 		return c;
 	}
 
-	public void add(Cliente c) {
+	public void add(Cliente c) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -129,7 +129,7 @@ public class DataCliente {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)

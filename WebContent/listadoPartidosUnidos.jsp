@@ -10,10 +10,13 @@
 <jsp:include page="header.jsp" />
 
 <%
+	if (session.getAttribute("usuario") == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	DataClienteReserva dcr = new DataClienteReserva();
-ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-Cliente c = (Cliente) session.getAttribute("usuario");
-reservas = dcr.reservas(c.getDni());
+	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	Cliente c = (Cliente) session.getAttribute("usuario");
+	reservas = dcr.reservas(c.getDni());
 
 %>
 </head>
