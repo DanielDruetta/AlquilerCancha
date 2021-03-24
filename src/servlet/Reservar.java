@@ -3,7 +3,7 @@ package servlet;
 import java.io.IOException;
 
 import java.sql.Date;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +33,8 @@ public class Reservar extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		
 		HttpSession session = request.getSession();
 
 		String act = request.getParameter("act");
@@ -64,8 +66,16 @@ public class Reservar extends HttpServlet {
 			DataEstablecimiento de = new DataEstablecimiento();
 			
 			
+			System.out.println("Antes");
+			Establecimiento es = null;
+			try {
+				es = de.buscarEst(establecimiento);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-			Establecimiento es = de.buscarEst(establecimiento);
+			System.out.println("El establecimiento es: "+ es);
 
 			ArrayList<Ocupada> ocupadas = new ArrayList<Ocupada>();
 

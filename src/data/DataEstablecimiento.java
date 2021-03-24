@@ -17,7 +17,7 @@ public class DataEstablecimiento {
 
 		try {
 			stmt = (Statement) FactoryConexion.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select nombre,direccion,hora_inicio,hora_fin from establecimiento");
+			rs = stmt.executeQuery("select nombre,direccion,hora_inicio,hora_fin,url_mapa from establecimiento");
 			if (rs != null) {
 				while (rs.next()) {
 					Establecimiento c = new Establecimiento();
@@ -25,6 +25,7 @@ public class DataEstablecimiento {
 					c.setDireccion(rs.getString("direccion"));
 					c.setHora_inicio(rs.getInt("hora_inicio"));
 					c.setHora_fin(rs.getInt("hora_fin"));
+					c.setUrl_mapa(rs.getString("url_mapa"));
 					establecimientos.add(c);
 				}
 			}

@@ -31,7 +31,7 @@
 
 			<div class="form-group">
 				<label for="inputEstablecimiento" class="control-label col-md-4">Establecimiento:</label>
-				<div class="col-md-10">
+				<div class="col-md-4">
 					<input id="inputEstablecimiento" name="establecimiento"
 						class="form-control" type="text" value=<%=e.getNombre()%> disabled>
 				</div>
@@ -42,12 +42,12 @@
 				<label for="inputNumero" class="control-label col-md-2">Numero
 					de cancha:</label>
 				<div class="col-md-4">
-					<select class="col-md-12" id="inputNumero" name="numero">
+					<select class="form-control" id="inputNumero" name="numero">
 						<%
 							for (Integer nro : canchas) {
 						%>
 
-						<option class=form-control value="<%=nro%>"><%=nro%></option>
+						<option class="form-control" value="<%=nro%>"><%=nro%></option>
 
 						<%
 							}

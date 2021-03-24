@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import data.DataPrecio;
 import entidades.Establecimiento;
@@ -43,9 +44,10 @@ public class CargarPrecio extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		
-		ServletRequest session = null;
+		HttpSession session = request.getSession();
+		System.out.println("HOLARDA");
 		Establecimiento e = (Establecimiento) session.getAttribute("establec");
-		
+		System.out.println(e);
 		DataPrecio dp = new DataPrecio();
 
 		String nro = request.getParameter("nro_cancha");
@@ -53,8 +55,7 @@ public class CargarPrecio extends HttpServlet {
 
 		Precio pre = dp.obtenerPrecio(e.getNombre(),nro_cancha);
 
-		String respuesta = "<a> " + String.valueOf(pre.getPrecio()) + " </a>" ; //pasar as tring
-		
+		String respuesta =String.valueOf(pre.getPrecio()) ;
 		
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
