@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,12 +19,10 @@ public class BajaEstablecimientoConfirmado extends HttpServlet {
 
 	public BajaEstablecimientoConfirmado() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -34,12 +34,18 @@ public class BajaEstablecimientoConfirmado extends HttpServlet {
 			System.out.println("No se presiono nada");
 		} else if (actio.equals("Eliminar")) {
 			System.out.println("Se presiono eliminar");
-			Establecimiento est = (Establecimiento) session.getAttribute("establecim");
+			Establecimiento est = (Establecimiento) session.getAttribute("establecim_elimiar");
 			DataEstablecimiento de = new DataEstablecimiento();
-			System.out.println(est.toString());
-			de.delete(est);
-			request.getRequestDispatcher("ventanaAdmin.html").forward(request, response);
-			doGet(request, response);
+
+			try {
+				de.delete(est);
+				request.setAttribute("mensajeOk", "Establecimiento eliminado exitosamente");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			} catch (SQLException e) {
+				request.setAttribute("mensajeError", e.getMessage());
+				request.getRequestDispatcher("bajaEstablecimiento.jsp").forward(request, response);
+			}
+			
 		}
 
 	}

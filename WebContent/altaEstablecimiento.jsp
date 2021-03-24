@@ -10,14 +10,22 @@
 
 <jsp:include page="header.jsp" />
 <%
-	Administrador a = (Administrador) session.getAttribute("administrador");
-if (a == null) {
-	request.getRequestDispatcher("index.jsp").forward(request, response);
-}
+	if (session.getAttribute("administrador") == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 %>
 </head>
 <body>
 	<div class="container">
+		<%
+			if (request.getAttribute("mensajeError") != null) {
+		%>
+		<div class="alert alert-danger" role="alert">
+			<%=request.getAttribute("mensajeError")%>
+		</div>
+		<%
+			}
+		%>
 		<form class="form-altaestablecimiento" action="AltaEstablecimiento"
 			method="post">
 			<div class="form-group col-md-12">
@@ -59,10 +67,10 @@ if (a == null) {
 			</div>
 
 			<div class="form-group">
-				<label href="#" data-toggle="tooltip" data-html="true" title="<img src='imagenes/gif_tutorial.gif' alt='En caso de dudas comunicarse con Daniel.'>" for="inputHoraInicio" class="control-label col-md-4">
-					URL de Google
-						Maps:
-				</label>
+				<label href="#" data-toggle="tooltip" data-html="true"
+					title="<img src='imagenes/gif_tutorial.gif' alt='En caso de dudas comunicarse con Daniel.'>"
+					for="inputHoraInicio" class="control-label col-md-4"> URL
+					de Google Maps: </label>
 				<div class="col-md-10">
 					<input id="inputUrlMapa" name="urlMapa" class="form-control"
 						type="text">
@@ -109,7 +117,7 @@ if (a == null) {
 			<div class="form-group">
 				<div class="col-md-2">
 					<input type="submit" class="btn btn-primary" name="act"
-						value="Aceptar">
+						value="Aceptar" onclick="verificacion()">
 				</div>
 			</div>
 		</form>
@@ -121,5 +129,23 @@ if (a == null) {
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip();
 	});
+
+	function verificacion() {
+		var nombre = document.getElementById('inputNombre');
+		var direccion = document.getElementById('inputDireccion');
+		var urlMapa = document.getElementById('inputUrlMapa');
+		var usuario = document.getElementById('inputUsuario');
+		var contraseña = document.getElementById('inputContraseña');
+		var horaInicio = document.getElementById('inputHoraInicio');
+		var horaFin = document.getElementById('inputHoraFin');
+
+		if ((nombre.value == "") || (direccion.value == "")
+				|| (urlMapa.value == "") || (usuario.value == "")
+				|| (contraseña.value == "") || (horaInicio.value == "")
+				|| (horaFin.value == "")) {
+			alert("Existen campos vacios");
+			return false;
+		}
+	}
 </script>
 </html>

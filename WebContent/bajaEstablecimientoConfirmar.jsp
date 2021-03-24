@@ -7,11 +7,10 @@
 <head>
 <jsp:include page="header.jsp" />
 <%
-	Administrador a = (Administrador) session.getAttribute("administrador");
-	if (a == null) {
+	if (session.getAttribute("administrador") == null) {
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
-	Establecimiento est = (Establecimiento) session.getAttribute("establecim");
+	Establecimiento est = (Establecimiento) session.getAttribute("establecim_elimiar");
 %>
 
 </head>

@@ -11,8 +11,7 @@
 <jsp:include page="header.jsp" />
 
 <%
-	Administrador a = (Administrador) session.getAttribute("administrador");
-	if (a == null) {
+	if (session.getAttribute("administrador") == null) {
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 	DataEstablecimiento de = new DataEstablecimiento();

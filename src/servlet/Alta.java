@@ -20,11 +20,13 @@ public class Alta extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String act = request.getParameter("act");
 		if (act == null) {
@@ -40,22 +42,26 @@ public class Alta extends HttpServlet {
 			String email = request.getParameter("email");
 			String celular = request.getParameter("celular");
 			String dni = request.getParameter("dni");
-			
-			if ((usuario == "") || (contraseña == "") || (nombre == "") || (apellido == "") || (email == "") || (celular == "") || (dni == "")) {
+
+			if ((usuario == "") || (contraseña == "") || (nombre == "") || (apellido == "") || (email == "")
+					|| (celular == "") || (dni == "")) {
 				request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
 			} else {
-				
+
 				try {
-					Cliente cli = new Cliente((dc.ultimoid() + 1), dni, nombre, apellido, celular, email, usuario, contraseña);
+					Cliente cli = new Cliente((dc.ultimoid() + 1), dni, nombre, apellido, celular, email, usuario,
+							contraseña);
 					dc.add(cli);
 					request.setAttribute("mensajeOk", "Cliente registrado exitosamente");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				} catch (SQLException e) {
 					request.setAttribute("mensajeError", e.getMessage());
-					//System.out.println(e.getMessage());
-					//System.out.println(e.getErrorCode()); //Esto te da un codigo de error. Lo ideal es hacer una funcion que de acuerdo al codigo, personalice el mensaje para mostrar en front.
+					// System.out.println(e.getMessage());
+					// System.out.println(e.getErrorCode()); //Esto te da un codigo de error. Lo
+					// ideal es hacer una funcion que de acuerdo al codigo, personalice el mensaje
+					// para mostrar en front.
 					request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
-				} 
+				}
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,12 +19,10 @@ public class ModificacionEstablecimientoConfirmado extends HttpServlet {
 
 	public ModificacionEstablecimientoConfirmado() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -40,7 +40,6 @@ public class ModificacionEstablecimientoConfirmado extends HttpServlet {
 			String direccion = request.getParameter("direccion");
 			String usuario = request.getParameter("usuario");
 			String contraseña = request.getParameter("contraseña");
-
 			String hora_inicio = request.getParameter("inputHoraInicio");
 			String hora_fin = request.getParameter("inputHoraFin");
 			String url_mapa = request.getParameter("urlMapa");
@@ -49,19 +48,36 @@ public class ModificacionEstablecimientoConfirmado extends HttpServlet {
 
 			System.out.println(horainicio);
 			System.out.println(horafin);
+			if ((usuario == "") || (contraseña == "") || (nombre == "") || (direccion == "") || (hora_inicio == "")
+					|| (hora_fin == "") || (url_mapa == "")) {
+				request.getRequestDispatcher("modificacionEstablecimientoConfirmar.jsp").forward(request, response);
+			} else {
 
-			Establecimiento estnuevo = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña, url_mapa);
-			System.out.println("Establecimiento nuevo " + estnuevo.toString());
+				try {
+					Establecimiento estnuevo = new Establecimiento(nombre, direccion, horainicio, horafin, usuario,
+							contraseña, url_mapa);
+					System.out.println("Establecimiento nuevo " + estnuevo.toString());
 
-			Establecimiento estviejo = (Establecimiento) session.getAttribute("establec");
-			System.out.println("Establecimiento viejo " + estviejo.toString());
+					Establecimiento estviejo;
+					if (session.getAttribute("establec") != null) {
+						estviejo = (Establecimiento) session.getAttribute("establec");
+					} else {
+						estviejo = (Establecimiento) session.getAttribute("establec_modificar");
+					}
+					System.out.println("Establecimiento viejo " + estviejo.toString());
 
-			de.modificarEstablecimiento(estnuevo, estviejo);
-			request.getSession().setAttribute("establec", estnuevo);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+					de.modificarEstablecimiento(estnuevo, estviejo);
 
-			doGet(request, response);
+					if (session.getAttribute("establec") != null) {
+						request.getSession().setAttribute("establec", estnuevo);
+					}
+					request.setAttribute("mensajeOk", "Establecimiento modificado exitosamente");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				} catch (SQLException e) {
+					request.setAttribute("mensajeError", e.getMessage());
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
+			}
 		}
-
 	}
 }

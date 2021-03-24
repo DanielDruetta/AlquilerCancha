@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +18,10 @@ public class BajaEstablecimiento extends HttpServlet {
 
 	public BajaEstablecimiento() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -31,20 +31,23 @@ public class BajaEstablecimiento extends HttpServlet {
 		if (act == null) {
 			System.out.println("No se presiono nada");
 		} else if (act.equals("Aceptar")) {
-			System.out.println("Servlet baja establecimiento");
 			String establecimiento = request.getParameter("inputEstablecimiento");
 			System.out.println(establecimiento);
 
 			DataEstablecimiento de = new DataEstablecimiento();
-			Establecimiento e = de.buscarEst(establecimiento);
-			System.out.println(e.toString());
-
-			request.getSession().setAttribute("establecim", e);
-			request.getRequestDispatcher("bajaEstablecimientoConfirmar.jsp").forward(request, response);
+			try {
+				Establecimiento e = de.buscarEst(establecimiento);
+				System.out.println("ENCONTRO");
+				request.getSession().setAttribute("establecim_elimiar", e);
+				request.getRequestDispatcher("bajaEstablecimientoConfirmar.jsp").forward(request, response);
+				
+			} catch (SQLException e) {
+				request.setAttribute("mensajeError", e.getMessage());
+				request.getRequestDispatcher("modificacionEstablecimiento.jsp").forward(request, response);
+			}
+			
 
 		}
-
-		doGet(request, response);
 
 	}
 }

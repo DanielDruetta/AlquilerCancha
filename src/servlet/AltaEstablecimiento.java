@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,6 @@ public class AltaEstablecimiento extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -38,9 +39,7 @@ public class AltaEstablecimiento extends HttpServlet {
 			String direccion = request.getParameter("direccion");
 			String usuario = request.getParameter("usuario");
 			String contraseña = request.getParameter("contraseña");
-
 			String hora_inicio = request.getParameter("inputHoraInicio");
-
 			String hora_fin = request.getParameter("inputHoraFin");
 			String url_mapa = request.getParameter("urlMapa");
 			System.out.println("El url del mapa es:" + url_mapa);
@@ -48,17 +47,24 @@ public class AltaEstablecimiento extends HttpServlet {
 			int horainicio = Integer.parseInt(hora_inicio);
 			int horafin = Integer.parseInt(hora_fin);
 
-			System.out.println(horainicio);
-			System.out.println(horafin);
+			if ((usuario == "") || (contraseña == "") || (nombre == "") || (direccion == "") || (hora_inicio == "")
+					|| (hora_fin == "") || (url_mapa == "")) {
+				request.getRequestDispatcher("altaEstablecimiento.jsp").forward(request, response);
+			} else {
 
-			Establecimiento es = new Establecimiento(nombre, direccion, horainicio, horafin, usuario, contraseña, url_mapa);
-			System.out.println(es.toString());
-			de.add(es);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+				try {
+					Establecimiento es = new Establecimiento(nombre, direccion, horainicio, horafin, usuario,
+							contraseña, url_mapa);
+					System.out.println(es.toString());
+					de.add(es);
+					request.setAttribute("mensajeOk", "Establecimiento registrado exitosamente");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 
+				} catch (SQLException e) {
+					request.setAttribute("mensajeError", e.getMessage());
+					request.getRequestDispatcher("altaEstablecimiento.jsp").forward(request, response);
+				}
+			}
 		}
-
-		doGet(request, response);
 	}
-
 }
