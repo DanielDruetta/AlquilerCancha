@@ -14,18 +14,18 @@
 <jsp:include page="header.jsp" />
 <%
 	Cliente c = (Cliente) session.getAttribute("usuario");
-	DataReserva dr = new DataReserva();
-	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-	reservas = dr.reservasCliente(c.getDni());
-	DataClienteReserva dcr = new DataClienteReserva();
-	DataCancha dc = new DataCancha();
-	
+DataReserva dr = new DataReserva();
+ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+reservas = dr.reservasCliente(c.getDni());
+DataClienteReserva dcr = new DataClienteReserva();
+DataCancha dc = new DataCancha();
 %>
 
 </head>
 <body>
 	<div class="container">
-		<h3>Reservas vigentes</h3>
+		<h3>Reservas vigentes </h3> 
+		<h5>Recuerde que no podra cancelar una reserva donde se hayan unido otros jugadores </h5>
 		<form class="form-cancelarReserva" action="CancelarReserva"
 			method="post">
 			<div class="row" style="width: 1200px">
@@ -53,12 +53,17 @@
 									<td><%=disp.getEstablecimiento()%></td>
 									<td><%=disp.getNumero_cancha()%></td>
 
+									<%
+										if (dcr.tiene_jugadores_unidos(disp.getNumero_reserva())) {
+									%>
 									<td>
 										<button type="submit" class="btn btn-danger" name="seleccion"
 											value=<%=String.valueOf(disp.getNumero_reserva())%>>Cancelar
 											reserva</button>
 									</td>
-
+									<%
+										}
+									%>
 									<td id="boton_solicitar_<%=disp.getNumero_reserva()%>"
 										style="display: block"><a
 										id="botonsolicitar_<%=disp.getNumero_reserva()%>"
@@ -76,7 +81,7 @@
 													id="inputLugares_<%=disp.getNumero_reserva()%>"
 													name="inputLugares">
 													<%
-														for (int i = 0; i < (dc.tipoSegunNroCancha(disp.getNumero_cancha(), disp.getEstablecimiento())) * 2 - 1
+														for (int i = 1; i <= (dc.tipoSegunNroCancha(disp.getNumero_cancha(), disp.getEstablecimiento())) * 2 - 1
 															- dcr.cantidad_jugadores_unidos(disp.getNumero_reserva()); i++) {
 													%>
 													<option class=form-control value=<%=i%>><%=i%></option>

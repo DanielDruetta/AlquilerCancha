@@ -42,7 +42,7 @@ table {
 				%>
 				<li class="nav-item"><a class="nav-link" href="reservarCancha.jsp">Reservar Cancha</a></li>
 
-				<li class="nav-item"><a class="nav-link" href="../AlquilerCancha/cancelarCancha.jsp">Cancelar Reserva</a></li>
+				<li class="nav-item"><a class="nav-link" href="../AlquilerCancha/cancelarCancha.jsp">Mis Reservas</a></li>
 				<% }%>
 				
 				<%

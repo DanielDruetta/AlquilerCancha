@@ -47,7 +47,7 @@ public class DataMantenimiento {
 		ResultSet rs = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT establecimiento,numero_cancha,fecha_desde,fecha_hasta,descripcion,observaciones FROM mantenimiento m WHERE m.fecha_desde>=NOW() and establecimiento=? order by m.fecha_desde ");
+					"SELECT establecimiento,numero_cancha,fecha_desde,fecha_hasta,descripcion,observaciones FROM mantenimiento m WHERE m.fecha_hasta>=NOW() and establecimiento=? order by m.fecha_desde ");
 
 			stmt.setString(1, establecimiento);
 			rs = stmt.executeQuery();

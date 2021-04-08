@@ -253,5 +253,39 @@ public class DataClienteReserva {
 		return nro;
 	}
 	
+	public boolean tiene_jugadores_unidos(int numero_reserva) {
+
+		boolean respuesta = true;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT * from cliente_reserva where numero_reserva = ? LIMIT 1");
+			stmt.setInt(1, numero_reserva);
+			rs = stmt.executeQuery();
+			if (rs != null && rs.next()) {
+				respuesta = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(respuesta);
+		return respuesta;
+	}
+	
+	
+	
 
 }

@@ -76,7 +76,7 @@
 				<label for="inputHoraInicio" class="control-label col-md-6">Hora
 					inicio:</label>
 				<div class="col-md-12">
-					<select id="inputHoraInicio" name="inputHoraInicio">
+					<select class="form-control" id="inputHoraInicio" name="inputHoraInicio">
 						<option class=form-control
 							value="<%=Integer.toString(est.getHora_inicio())%>"
 							selected="selected"><%=est.getHora_inicio()%></option>
@@ -98,7 +98,7 @@
 				<label for="inputHoraFin" class="control-label col-md-6">Hora
 					fin:</label>
 				<div class="col-md-12">
-					<select id="inputHoraFin" name="inputHoraFin">
+					<select class="form-control" id="inputHoraFin" name="inputHoraFin">
 						<option class=form-control
 							value="<%=Integer.toString(est.getHora_fin())%>"
 							selected="selected"><%=est.getHora_fin()%></option>
