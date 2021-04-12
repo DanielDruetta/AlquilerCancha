@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,13 +41,21 @@ public class ModificacionPrecio extends HttpServlet {
 		System.out.println(numerocanch);
 		System.out.println(nuevoprecio);
 
-		Establecimiento e = (Establecimiento) session.getAttribute("establec");
+		Establecimiento es = (Establecimiento) session.getAttribute("establec");
 
-		Precio precio = new Precio(e.getNombre(), numerocancha, nuevoprecio);
-		DataPrecio dp = new DataPrecio();
-		dp.add(precio);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-		doGet(request, response);
+		try {
+			Precio precio = new Precio(es.getNombre(), numerocancha, nuevoprecio);
+			DataPrecio dp = new DataPrecio();
+			dp.add(precio);
+			request.setAttribute("mensajeOk", "Precio modificado exitosamente");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+
+		} catch (SQLException e) {
+			request.setAttribute("mensajeError", e.getMessage());
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+
+		}
+
 	}
 
 }

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -42,8 +43,8 @@ public class AltaCancha extends HttpServlet {
 			System.out.println("Se presiono aceptar");
 			DataCancha dc = new DataCancha();
 			DataEstablecimiento de = new DataEstablecimiento();
-			Establecimiento e = (Establecimiento) session.getAttribute("establec");
-			String establecimiento = e.getNombre();
+			Establecimiento es = (Establecimiento) session.getAttribute("establec");
+			String establecimiento = es.getNombre();
 			String luz = request.getParameter("luz");
 			String descripcion = request.getParameter("descripcion");
 			String preci = request.getParameter("precio");
@@ -52,7 +53,7 @@ public class AltaCancha extends HttpServlet {
 			System.out.println(establecimiento);
 
 			ArrayList<Integer> canchas = new ArrayList<Integer>();
-			canchas = de.canchas(e.getNombre());
+			canchas = de.canchas(es.getNombre());
 
 			int tipo = Integer.parseInt(tip);
 			double preciocancha = Double.parseDouble(preci);
@@ -60,14 +61,22 @@ public class AltaCancha extends HttpServlet {
 			if (luz == null)
 				luz = "N";
 
-			Cancha can = new Cancha(canchas.size() + 1, descripcion, tipo, luz, establecimiento);
-			dc.add(can);
+			try {
+				Cancha can = new Cancha(canchas.size() + 1, descripcion, tipo, luz, establecimiento);
+				dc.add(can);
 
-			Precio precio = new Precio(e.getNombre(), canchas.size() + 1, preciocancha);
-			DataPrecio dr = new DataPrecio();
-			dr.add(precio);
+				Precio precio = new Precio(es.getNombre(), canchas.size() + 1, preciocancha);
+				DataPrecio dr = new DataPrecio();
+				dr.add(precio);
 
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.setAttribute("mensajeOk", "Cancha registrada exitosamente");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+
+			} catch (SQLException e) {
+				request.setAttribute("mensajeError", e.getMessage());
+				request.getRequestDispatcher("altaCancha.jsp").forward(request, response);
+
+			}
 
 		}
 

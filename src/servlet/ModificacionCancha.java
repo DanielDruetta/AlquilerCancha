@@ -33,7 +33,6 @@ public class ModificacionCancha extends HttpServlet {
 		if (act == null) {
 			System.out.println("No se presiono nada");
 		} else if (act.equals("Modificar cancha")) {
-			//System.out.println("Servlet modificacion cancha");
 			DataCancha dc = new DataCancha();
 
 			Establecimiento e = (Establecimiento) session.getAttribute("establec");

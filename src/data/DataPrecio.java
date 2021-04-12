@@ -8,7 +8,7 @@ import entidades.Precio;
 
 public class DataPrecio {
 
-	public void add(Precio p) {
+	public void add(Precio p) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -21,7 +21,7 @@ public class DataPrecio {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)

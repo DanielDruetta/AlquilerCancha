@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,22 +50,27 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 			if (luz == null)
 				luz = "N";
 
-			DataCancha dc = new DataCancha();
-			DataPrecio dp = new DataPrecio();
+			try {
+				DataCancha dc = new DataCancha();
+				DataPrecio dp = new DataPrecio();
 
-			Cancha cannuevo = new Cancha(numero, descripcion, tipo, luz, establecimiento);
-			System.out.println("Cancha nueva" + cannuevo.toString());
+				Cancha cannuevo = new Cancha(numero, descripcion, tipo, luz, establecimiento);
+				System.out.println("Cancha nueva" + cannuevo.toString());
 
-			Cancha canviejo = (Cancha) session.getAttribute("cancha");
-			System.out.println("Cancha vieja" + canviejo.toString());
+				Cancha canviejo = (Cancha) session.getAttribute("cancha");
+				System.out.println("Cancha vieja" + canviejo.toString());
+				
+				dc.modificarCancha(cannuevo, canviejo);
+				Precio precio = new Precio(establecimiento, numero, nuevoprecio);
+				dp.add(precio);
+				request.setAttribute("mensajeOk", "Cancha modificada exitosamente");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+				
+			} catch (SQLException e) {
+				request.setAttribute("mensajeError", e.getMessage());
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
 
-			dc.modificarCancha(cannuevo, canviejo);
-			
-			Precio precio = new Precio(establecimiento, numero, nuevoprecio);
-			dp.add(precio);
-			
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-			doGet(request, response);
 		}
 
 	}

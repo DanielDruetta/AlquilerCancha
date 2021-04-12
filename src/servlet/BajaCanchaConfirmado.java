@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,9 +37,15 @@ public class BajaCanchaConfirmado extends HttpServlet {
 			Cancha can = (Cancha) session.getAttribute("cancha");
 			DataCancha dc = new DataCancha();
 			System.out.println(can.toString());
-			dc.delete(can);
-			request.getRequestDispatcher("ventanaDueño.html").forward(request, response);
-			doGet(request, response);
+			try {
+				dc.delete(can);
+				request.setAttribute("mensajeOk", "Cancha eliminada exitosamente");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+
+			} catch (SQLException e) {
+				request.setAttribute("mensajeError", e.getMessage());
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
 		}
 
 	}

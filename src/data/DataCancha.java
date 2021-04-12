@@ -54,7 +54,7 @@ public class DataCancha {
 		return canchas;
 	}
 
-	public void add(Cancha c) {
+	public void add(Cancha c) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -70,7 +70,7 @@ public class DataCancha {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)
@@ -249,12 +249,13 @@ public class DataCancha {
 		return c;
 	}
 
-	public void delete(Cancha c) {
+	public void delete(Cancha c) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"delete from mantenimiento where establecimiento=? and numero_cancha=? and fecha_desde=?", PreparedStatement.RETURN_GENERATED_KEYS);
+					"delete from cancha where establecimiento=? and numero=?",
+					PreparedStatement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1, c.getEstablecimiento());
 			stmt.setInt(2, c.getNumero());
@@ -266,7 +267,7 @@ public class DataCancha {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)
@@ -280,7 +281,7 @@ public class DataCancha {
 		}
 	}
 
-	public Cancha modificarCancha(Cancha nuev, Cancha viej) {
+	public Cancha modificarCancha(Cancha nuev, Cancha viej) throws SQLException {
 
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
@@ -301,7 +302,7 @@ public class DataCancha {
 			System.out.println("Data cancha 2");
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)

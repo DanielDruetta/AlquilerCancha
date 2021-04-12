@@ -56,11 +56,11 @@ public class Alta extends HttpServlet {
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				} catch (SQLException e) {
 					request.setAttribute("mensajeError", e.getMessage());
+					request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
 					// System.out.println(e.getMessage());
 					// System.out.println(e.getErrorCode()); //Esto te da un codigo de error. Lo
 					// ideal es hacer una funcion que de acuerdo al codigo, personalice el mensaje
 					// para mostrar en front.
-					request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
 				}
 			}
 		}
