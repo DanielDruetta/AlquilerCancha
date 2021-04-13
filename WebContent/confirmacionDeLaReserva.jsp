@@ -22,11 +22,31 @@
 
 <body>
 	<div class="container">
+		<%
+			if (request.getAttribute("mensajeError") != null) {
+		%>
+		<div class="alert alert-danger" role="alert">
+			<%=request.getAttribute("mensajeError")%>
+		</div>
+		<%
+			}
+		%>
+
+		<%
+			if (request.getAttribute("mensajeOk") != null) {
+		%>
+		<div class="alert alert-success" role="alert">
+			<%=request.getAttribute("mensajeOk")%>
+		</div>
+		<%
+			}
+		%>
 		<div class="form-group col-md-12">
 			<h3>Datos de la reserva</h3>
 		</div>
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Numero de reserva</label>
+			<label for="inputFecha" class="control-label col-md-4">Numero
+				de reserva</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -44,7 +64,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Fecha del partido</label>
+			<label for="inputFecha" class="control-label col-md-4">Fecha
+				del partido</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -53,7 +74,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Hora inicio del partido</label>
+			<label for="inputFecha" class="control-label col-md-4">Hora
+				inicio del partido</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -62,7 +84,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Hora fin del partido</label>
+			<label for="inputFecha" class="control-label col-md-4">Hora
+				fin del partido</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -71,7 +94,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Numero de cancha</label>
+			<label for="inputFecha" class="control-label col-md-4">Numero
+				de cancha</label>
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -80,7 +104,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="inputPrecio" class="control-label col-md-4">Precio de la reserva</label>
+			<label for="inputPrecio" class="control-label col-md-4">Precio
+				de la reserva</label>
 			<div class="col-md-7">
 				<input id="inputPrecio" name="inputPrecio" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
@@ -88,16 +113,17 @@
 					disabled>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
-			<label for="inputFecha" class="control-label col-md-4">Jugadores que necesita el partido</label>
+			<label for="inputFecha" class="control-label col-md-4">Jugadores
+				que necesita el partido</label>
 			<div class="col-md-7">
-				<input id="inputLugaresDisponibles" name="inputLugaresDisponibles" class="form-control"
-					placeholder="" required="" autofocus="" type="text"
-					value="<%=r.getLugares_disponibles()%>" disabled>
+				<input id="inputLugaresDisponibles" name="inputLugaresDisponibles"
+					class="form-control" placeholder="" required="" autofocus=""
+					type="text" value="<%=r.getLugares_disponibles()%>" disabled>
 			</div>
 		</div>
-		
+
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>

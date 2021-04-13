@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,11 +36,10 @@ public class ConfirmarReserva extends HttpServlet {
 		String seleccion = request.getParameter("seleccion");
 		System.out.println(seleccion);
 
-		
 		String lugares = (String) session.getAttribute("lugares_disponibles");
 		int lugares_disponibles = Integer.parseInt(lugares);
 		request.getSession().setAttribute("lugares_disponibles", "");
-		
+
 		String[] datos = seleccion.split("r");
 		int numero_cancha = Integer.parseInt(datos[0]);
 		int hora_inicio = Integer.parseInt(datos[1]);
@@ -48,26 +48,27 @@ public class ConfirmarReserva extends HttpServlet {
 		Cliente cli = (Cliente) session.getAttribute("usuario");
 		Date fecha = (Date) session.getAttribute("fecha");
 
-		DataReserva dr = new DataReserva();
+/*		Correo correo = new Correo();
 
-
-		//Correo correo = new Correo();
-
-		
-		Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha, cli.getDni(), lugares_disponibles);
-		
-		/*try {
+		try {
 			correo.enviar_mail_confirmacion(cli.getEmail(), r, es);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		 */
-		dr.add(r);
-		
-		
-		request.getSession().setAttribute("reserva", r);
+*/
+		try {
+			DataReserva dr = new DataReserva();
+			Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha,
+					cli.getDni(), lugares_disponibles);
+			dr.add(r);
 
-		request.getRequestDispatcher("confirmacionDeLaReserva.jsp").forward(request, response);
+			request.setAttribute("mensajeOk", "Reserva realizada exitosamente");
+			request.getSession().setAttribute("reserva", r);
+			request.getRequestDispatcher("confirmacionDeLaReserva.jsp").forward(request, response);
+		} catch (SQLException e) {
+			request.setAttribute("mensajeError", e.getMessage());
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 
 		// doGet(request, response);
 	}

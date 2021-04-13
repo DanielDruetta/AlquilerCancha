@@ -84,7 +84,7 @@ public class DataCancha {
 		}
 	}
 
-	public ArrayList<Ocupada> buscarFechaEstablecimiento(String establecimiento, String fecha, int tipo) {
+	public ArrayList<Ocupada> buscarFechaEstablecimiento(String establecimiento, String fecha, int tipo) throws SQLException {
 
 		ArrayList<Ocupada> ocupadas = new ArrayList<>();
 		PreparedStatement stmt = null;
@@ -108,12 +108,10 @@ public class DataCancha {
 					o.setDescripcion(rs.getString("descripcion"));
 					o.setTipo(rs.getInt("tipo"));
 					ocupadas.add(o);
-
 				}
-
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (rs != null) {

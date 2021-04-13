@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,13 +30,18 @@ public class CancelarReserva extends HttpServlet {
 		String seleccion = request.getParameter("seleccion");
 		System.out.println(seleccion);
 
-		DataReserva dr = new DataReserva();
-
-		dr.eliminarReserva(seleccion);
-
-		doGet(request, response);
 		
-		request.getRequestDispatcher("cancelarCancha.jsp").forward(request, response);
+
+		try {
+			DataReserva dr = new DataReserva();
+			dr.eliminarReserva(seleccion);
+
+			request.setAttribute("mensajeOk", "Reserva cancelada exitosamente");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} catch (SQLException e) {
+			request.setAttribute("mensajeError", e.getMessage());
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 }

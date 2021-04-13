@@ -14,18 +14,19 @@
 <jsp:include page="header.jsp" />
 <%
 	Cliente c = (Cliente) session.getAttribute("usuario");
-DataReserva dr = new DataReserva();
-ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-reservas = dr.reservasCliente(c.getDni());
-DataClienteReserva dcr = new DataClienteReserva();
-DataCancha dc = new DataCancha();
+	DataReserva dr = new DataReserva();
+	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	reservas = dr.reservasCliente(c.getDni());
+	DataClienteReserva dcr = new DataClienteReserva();
+	DataCancha dc = new DataCancha();
 %>
 
 </head>
 <body>
 	<div class="container">
-		<h3>Reservas vigentes </h3> 
-		<h5>Recuerde que no podra cancelar una reserva donde se hayan unido otros jugadores </h5>
+		<h3>Reservas vigentes</h3>
+		<p>Recuerde que no podra cancelar una reserva donde se hayan unido
+			otros jugadores</p>
 		<form class="form-cancelarReserva" action="CancelarReserva"
 			method="post">
 			<div class="row" style="width: 1200px">
@@ -62,6 +63,10 @@ DataCancha dc = new DataCancha();
 											reserva</button>
 									</td>
 									<%
+										} else {
+									%>
+									<td></td>
+									<%
 										}
 									%>
 									<td id="boton_solicitar_<%=disp.getNumero_reserva()%>"
@@ -82,7 +87,7 @@ DataCancha dc = new DataCancha();
 													name="inputLugares">
 													<%
 														for (int i = 1; i <= (dc.tipoSegunNroCancha(disp.getNumero_cancha(), disp.getEstablecimiento())) * 2 - 1
-															- dcr.cantidad_jugadores_unidos(disp.getNumero_reserva()); i++) {
+																	- dcr.cantidad_jugadores_unidos(disp.getNumero_reserva()); i++) {
 													%>
 													<option class=form-control value=<%=i%>><%=i%></option>
 													<%

@@ -88,11 +88,7 @@
 						</table>
 					</div>
 				</div>
-				<!-- end col-12 -->
 			</div>
-			<!-- end row -->
-
-
 		</form>
 	</div>
 	<jsp:include page="footer.jsp" />

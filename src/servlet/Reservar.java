@@ -33,56 +33,45 @@ public class Reservar extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
 		HttpSession session = request.getSession();
-
 		String act = request.getParameter("act");
 
 		if (act == null) {
 			System.out.println("No se presiono nada");
 
 		} else if (act.equals("Aceptar")) {
-
-			
-			
 			String fecha = request.getParameter("inputFecha");
 			Date date = Date.valueOf(fecha);
 			System.out.println(date);
 			request.getSession().setAttribute("fecha", date);
-			
+
 			String jugadores = request.getParameter("inputNroJugadores");
 			int jugadores_int = Integer.parseInt(jugadores);
 			System.out.println("Jugadores nescesarios:" + jugadores_int);
 			request.getSession().setAttribute("lugares_disponibles", jugadores);
-			
+
 			String establecimiento = request.getParameter("inputEstablecimiento");
 			System.out.println(establecimiento);
-			
+
 			String tipoS = request.getParameter("inputTipo");
 			System.out.println(tipoS);
 			int tipo = Integer.parseInt(tipoS);
+
 			DataCancha dc = new DataCancha();
 			DataEstablecimiento de = new DataEstablecimiento();
-			
-			
-			System.out.println("Antes");
-			Establecimiento es = null;
-			try {
-				es = de.buscarEst(establecimiento);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			System.out.println("El establecimiento es: "+ es);
 
+			Establecimiento es = null;
 			ArrayList<Ocupada> ocupadas = new ArrayList<Ocupada>();
 
-			ocupadas = dc.buscarFechaEstablecimiento(establecimiento, fecha, tipo);// Esta funcion lo que hace es,
-																					// devuelve una lista de ocupadas
-																					// (numero y hora) de ese tipo, para
-																					// esa fecha y ese establecimiento
+			try {
+				es = de.buscarEst(establecimiento);
+				System.out.println("El establecimiento es: " + es);
+				ocupadas = dc.buscarFechaEstablecimiento(establecimiento, fecha, tipo);
+				// Esta funcion lo que hace es, devuelve una lista de ocupadas (numero y hora) de ese tipo, para esa fecha y ese establecimiento
+			} catch (SQLException e) {
+				request.setAttribute("mensajeError", e.getMessage());
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
 
 			Cliente cli = (Cliente) session.getAttribute("usuario");
 			System.out.println(cli.getDni());
@@ -116,14 +105,11 @@ public class Reservar extends HttpServlet {
 						disponibles.set(posicion, disp);
 
 					}
-
 				}
 			}
 
 			request.setAttribute("listaDisponibles", disponibles);
-
 			request.getSession().setAttribute("establecimiento", es);
-
 			request.getRequestDispatcher("seleccionarCancha.jsp").forward(request, response);
 
 		} else if (act.equals("cancelar")) {

@@ -28,10 +28,8 @@ public class DataReserva {
 
 		return max;
 	}
-	
-	
-	
-	public void add(Reserva r) {
+
+	public void add(Reserva r) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -54,7 +52,7 @@ public class DataReserva {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)
@@ -203,7 +201,7 @@ public class DataReserva {
 		return reservas;
 	}
 
-	public void eliminarReserva(String numero_reserva) {
+	public void eliminarReserva(String numero_reserva) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -218,7 +216,7 @@ public class DataReserva {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)
@@ -231,7 +229,7 @@ public class DataReserva {
 			}
 		}
 	}
-	
+
 	public ArrayList<Reserva> reservasAcompletar() {
 
 		ArrayList<Reserva> reservas = new ArrayList<>();
@@ -276,8 +274,7 @@ public class DataReserva {
 
 		return reservas;
 	}
-	
-	
+
 	public Reserva search(int numero_reserva) {
 
 		Reserva r = null;
@@ -317,7 +314,7 @@ public class DataReserva {
 
 		return r;
 	}
-	
+
 	public void modificar_cantidad_jugadores(Reserva r) {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
@@ -343,5 +340,5 @@ public class DataReserva {
 		}
 
 	}
-	
+
 }
