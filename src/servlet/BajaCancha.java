@@ -19,13 +19,14 @@ public class BajaCancha extends HttpServlet {
 
 	public BajaCancha() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,6 +35,7 @@ public class BajaCancha extends HttpServlet {
 		String act = request.getParameter("act");
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (act.equals("Eliminar cancha")) {
 			System.out.println("Se presiono eliminar");
 			DataCancha dc = new DataCancha();

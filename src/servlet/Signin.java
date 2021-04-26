@@ -23,7 +23,10 @@ public class Signin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,6 +37,7 @@ public class Signin extends HttpServlet {
 
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (act.equals("Ingresar")) {
 			Cliente cli = new Cliente();
 
@@ -76,7 +80,7 @@ public class Signin extends HttpServlet {
 					}
 
 					if (a == null) {
-						
+
 						request.setAttribute("mensajeError", "Usuario y/o contraseña incorrecto");
 						request.getRequestDispatcher("iniciarSesion.jsp").forward(request, response);
 

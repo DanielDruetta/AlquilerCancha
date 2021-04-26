@@ -21,7 +21,10 @@ public class AltaEstablecimiento extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,6 +33,7 @@ public class AltaEstablecimiento extends HttpServlet {
 		String act = request.getParameter("act");
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (act.equals("Aceptar")) {
 			System.out.println("Se presiono aceptar");
 
@@ -61,7 +65,7 @@ public class AltaEstablecimiento extends HttpServlet {
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 
 				} catch (SQLException e) {
-					request.setAttribute("mensajeError", e.getMessage());
+					request.setAttribute("mensajeError", "Error interno del servidor");
 					request.getRequestDispatcher("altaEstablecimiento.jsp").forward(request, response);
 				}
 			}

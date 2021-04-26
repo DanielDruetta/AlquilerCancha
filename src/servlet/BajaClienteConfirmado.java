@@ -11,41 +11,29 @@ import javax.servlet.http.HttpSession;
 import data.DataCliente;
 import entidades.Cliente;
 
-/**
- * Servlet implementation class BajaClienteConfirmado
- */
 @WebServlet("/BajaClienteConfirmado")
 public class BajaClienteConfirmado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public BajaClienteConfirmado() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String actio = request.getParameter("action");
 		if (actio == null) {
-			System.out.println("No se presiono nadasdfsdf");
+			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (actio.equals("Eliminar")) {
 			System.out.println("Se presiono eliminarrrrrr");
 			Cliente cli = (Cliente) session.getAttribute("usuario");

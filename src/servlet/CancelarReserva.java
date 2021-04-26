@@ -21,16 +21,16 @@ public class CancelarReserva extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String seleccion = request.getParameter("seleccion");
-		System.out.println(seleccion);
-
-		
 
 		try {
 			DataReserva dr = new DataReserva();
@@ -39,7 +39,7 @@ public class CancelarReserva extends HttpServlet {
 			request.setAttribute("mensajeOk", "Reserva cancelada exitosamente");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} catch (SQLException e) {
-			request.setAttribute("mensajeError", e.getMessage());
+			request.setAttribute("mensajeError", "Error interno del servidor");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}

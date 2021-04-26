@@ -23,7 +23,10 @@ public class BajaCanchaConfirmado extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,6 +35,7 @@ public class BajaCanchaConfirmado extends HttpServlet {
 		String actio = request.getParameter("action");
 		if (actio == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (actio.equals("Eliminar")) {
 			System.out.println("Se presiono eliminar");
 			Cancha can = (Cancha) session.getAttribute("cancha");
@@ -43,7 +47,7 @@ public class BajaCanchaConfirmado extends HttpServlet {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 
 			} catch (SQLException e) {
-				request.setAttribute("mensajeError", e.getMessage());
+				request.setAttribute("mensajeError", "Error interno del servidor");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		}

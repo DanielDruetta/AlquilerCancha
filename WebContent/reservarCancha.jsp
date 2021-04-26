@@ -27,15 +27,28 @@
 <jsp:include page="header.jsp" />
 
 <%
+	if (session.getAttribute("usuario") == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	DataEstablecimiento de = new DataEstablecimiento();
-request.getSession().setAttribute("listaEstablecimientos", de.getAll()); //esto es correcto
-ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribute("listaEstablecimientos");
+	request.getSession().setAttribute("listaEstablecimientos", de.getAll()); //esto es correcto
+	ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribute("listaEstablecimientos");
 %>
 
 </head>
 <body>
 
 	<div class="container">
+		<%
+			if (request.getAttribute("mensajeError") != null) {
+		%>
+		<div class="alert alert-danger" role="alert">
+			<%=request.getAttribute("mensajeError")%>
+		</div>
+		<%
+			}
+		%>
+
 		<form class="form-reservar" action="reservar" method="post">
 
 			<div class="col-md-12">
@@ -44,9 +57,9 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-					
+
 					<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14">
-						
+
 						<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14">
 							<label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
 							<div class="col-md-7">
@@ -112,9 +125,9 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-				<div id="titulo_ubicacion"></div>
+					<div id="titulo_ubicacion"></div>
 					<div id="ubicacion" class="z-depth-1-half map-container"
-						style="height: 500px;margin-top:20px"></div>
+						style="height: 500px; margin-top: 20px"></div>
 				</div>
 			</div>
 		</form>
@@ -160,14 +173,17 @@ ArrayList<Establecimiento> es = (ArrayList<Establecimiento>) session.getAttribut
 					data : {
 						'id' : establecimiento
 					}
-				}).done(function(tipos) {
-					data_tipos = tipos.split('!!??')
-					console.log("Data tipo 1=" + data_tipos[1])
-					console.log("Data tipo 0=" + data_tipos[0])
-					$('#titulo_ubicacion').html('<b>Ubicacion del establecimiento:</b> '+ establecimiento )
-					$('#ubicacion').html(data_tipos[1])
-					$('#inputTipo').html(data_tipos[0])
-				}).fail(function() {
+				}).done(
+						function(tipos) {
+							data_tipos = tipos.split('!!??')
+							console.log("Data tipo 1=" + data_tipos[1])
+							console.log("Data tipo 0=" + data_tipos[0])
+							$('#titulo_ubicacion').html(
+									'<b>Ubicacion del establecimiento:</b> '
+											+ establecimiento)
+							$('#ubicacion').html(data_tipos[1])
+							$('#inputTipo').html(data_tipos[0])
+						}).fail(function() {
 					alert('Hubo un error al cargar los tipos de cancha')
 				})
 			})

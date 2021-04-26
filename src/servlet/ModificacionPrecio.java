@@ -20,13 +20,14 @@ public class ModificacionPrecio extends HttpServlet {
 
 	public ModificacionPrecio() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,7 +52,7 @@ public class ModificacionPrecio extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 
 		} catch (SQLException e) {
-			request.setAttribute("mensajeError", e.getMessage());
+			request.setAttribute("mensajeError", "Error interno del servidor");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 
 		}

@@ -15,12 +15,12 @@
 <jsp:include page="header.jsp" />
 
 <%
+	if (session.getAttribute("usuario") == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	ArrayList<Ocupada> disponibles = (ArrayList<Ocupada>) request.getAttribute("listaDisponibles");
-
 	Establecimiento es = (Establecimiento) session.getAttribute("establecimiento");
-
 	DataPrecio dp = new DataPrecio();
-
 %>
 
 </head>
@@ -35,7 +35,6 @@
 						<table class="table" style="text-align: center">
 							<thead>
 								<tr>
-
 									<th>Numero</th>
 									<th>Hora</th>
 									<th>Estado</th>
@@ -47,11 +46,11 @@
 							<tbody>
 								<%
 									for (Ocupada disp : disponibles) {
-									if (disp.getEstado().equals("Disponible")) {
-										Precio precio = new Precio();
-										precio = dp.obtenerPrecio(es.getNombre(), disp.getNumero());
-										int precioint = (int) Math.round(precio.getPrecio());
-										%>
+										if (disp.getEstado().equals("Disponible")) {
+											Precio precio = new Precio();
+											precio = dp.obtenerPrecio(es.getNombre(), disp.getNumero());
+											int precioint = (int) Math.round(precio.getPrecio());
+								%>
 								<tr>
 									<td><%=disp.getNumero()%></td>
 									<td><%=disp.getHora_inicio()%></td>
@@ -64,8 +63,8 @@
 									</td>
 									<%
 										}
-					
-										if (disp.getEstado().equals("Ocupada")) {
+
+											if (disp.getEstado().equals("Ocupada")) {
 									%>
 								
 								<tr>

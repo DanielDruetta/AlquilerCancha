@@ -26,7 +26,10 @@ public class ConfirmarReserva extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +37,6 @@ public class ConfirmarReserva extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String seleccion = request.getParameter("seleccion");
-		System.out.println(seleccion);
 
 		String lugares = (String) session.getAttribute("lugares_disponibles");
 		int lugares_disponibles = Integer.parseInt(lugares);
@@ -48,14 +50,12 @@ public class ConfirmarReserva extends HttpServlet {
 		Cliente cli = (Cliente) session.getAttribute("usuario");
 		Date fecha = (Date) session.getAttribute("fecha");
 
-/*		Correo correo = new Correo();
-
-		try {
-			correo.enviar_mail_confirmacion(cli.getEmail(), r, es);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-*/
+		/*
+		 * Correo correo = new Correo();
+		 * 
+		 * try { correo.enviar_mail_confirmacion(cli.getEmail(), r, es); } catch
+		 * (IOException e) { e.printStackTrace(); }
+		 */
 		try {
 			DataReserva dr = new DataReserva();
 			Reserva r = new Reserva((dr.ultimoid() + 1), fecha, hora_inicio, es.getNombre(), numero_cancha,
@@ -66,11 +66,8 @@ public class ConfirmarReserva extends HttpServlet {
 			request.getSession().setAttribute("reserva", r);
 			request.getRequestDispatcher("confirmacionDeLaReserva.jsp").forward(request, response);
 		} catch (SQLException e) {
-			request.setAttribute("mensajeError", e.getMessage());
+			request.setAttribute("mensajeError", "Error interno del servidor");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
-
-		// doGet(request, response);
 	}
-
 }

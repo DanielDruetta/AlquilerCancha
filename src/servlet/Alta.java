@@ -22,7 +22,10 @@ public class Alta extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -55,7 +58,7 @@ public class Alta extends HttpServlet {
 					request.setAttribute("mensajeOk", "Cliente registrado exitosamente");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				} catch (SQLException e) {
-					request.setAttribute("mensajeError", e.getMessage());
+					request.setAttribute("mensajeError", "Error interno del servidor");
 					request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
 					// System.out.println(e.getMessage());
 					// System.out.println(e.getErrorCode()); //Esto te da un codigo de error. Lo

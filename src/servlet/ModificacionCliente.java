@@ -21,7 +21,10 @@ public class ModificacionCliente extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,6 +33,7 @@ public class ModificacionCliente extends HttpServlet {
 		String act = request.getParameter("act");
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (act.equals("Modificar")) {
 			System.out.println("Se presiono modificar");
 			String usuario = request.getParameter("usuario");
@@ -50,7 +54,7 @@ public class ModificacionCliente extends HttpServlet {
 
 			dc.modificarCliente(clinuevo, cliviejo);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-			
+
 			request.getSession().setAttribute("usuario", clinuevo);
 
 			doGet(request, response);

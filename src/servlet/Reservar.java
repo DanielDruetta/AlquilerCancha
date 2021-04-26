@@ -28,7 +28,10 @@ public class Reservar extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,23 +41,26 @@ public class Reservar extends HttpServlet {
 
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 
 		} else if (act.equals("Aceptar")) {
 			String fecha = request.getParameter("inputFecha");
+			String jugadores = request.getParameter("inputNroJugadores");
+			String establecimiento = request.getParameter("inputEstablecimiento");
+			String tipoS = request.getParameter("inputTipo");
+
+			if ( (fecha == null) || (jugadores == null) || (establecimiento == null) || ( (tipoS == null)  || (tipoS.contentEquals("vacio"))) ) {
+				request.setAttribute("mensajeError", "Complete todos los campos por favor");
+				request.getRequestDispatcher("reservarCancha.jsp").forward(request, response);
+			}
+			
 			Date date = Date.valueOf(fecha);
-			System.out.println(date);
 			request.getSession().setAttribute("fecha", date);
 
-			String jugadores = request.getParameter("inputNroJugadores");
 			int jugadores_int = Integer.parseInt(jugadores);
 			System.out.println("Jugadores nescesarios:" + jugadores_int);
 			request.getSession().setAttribute("lugares_disponibles", jugadores);
 
-			String establecimiento = request.getParameter("inputEstablecimiento");
-			System.out.println(establecimiento);
-
-			String tipoS = request.getParameter("inputTipo");
-			System.out.println(tipoS);
 			int tipo = Integer.parseInt(tipoS);
 
 			DataCancha dc = new DataCancha();
@@ -62,14 +68,17 @@ public class Reservar extends HttpServlet {
 
 			Establecimiento es = null;
 			ArrayList<Ocupada> ocupadas = new ArrayList<Ocupada>();
+			
+			
 
 			try {
 				es = de.buscarEst(establecimiento);
 				System.out.println("El establecimiento es: " + es);
 				ocupadas = dc.buscarFechaEstablecimiento(establecimiento, fecha, tipo);
-				// Esta funcion lo que hace es, devuelve una lista de ocupadas (numero y hora) de ese tipo, para esa fecha y ese establecimiento
+				// Esta funcion lo que hace es, devuelve una lista de ocupadas (numero y hora)
+				// de ese tipo, para esa fecha y ese establecimiento
 			} catch (SQLException e) {
-				request.setAttribute("mensajeError", e.getMessage());
+				request.setAttribute("mensajeError", "Error interno del servidor");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 

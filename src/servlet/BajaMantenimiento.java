@@ -24,7 +24,10 @@ public class BajaMantenimiento extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,11 +43,6 @@ public class BajaMantenimiento extends HttpServlet {
 
 		Establecimiento e = (Establecimiento) session.getAttribute("establec");
 		String nombre = e.getNombre();
-
-		// System.out.println(seleccion);
-		// System.out.println(nombre);
-		// System.out.println(numero_cancha);
-		// System.out.println(fecha_desde);
 
 		DataMantenimiento dm = new DataMantenimiento();
 		Mantenimiento man = new Mantenimiento(nombre, numero_cancha, fecha_desde);

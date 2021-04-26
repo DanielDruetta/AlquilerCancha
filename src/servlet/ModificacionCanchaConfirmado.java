@@ -25,13 +25,18 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String actio = request.getParameter("action");
 		if (actio == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (actio.equals("Modificar")) {
 			System.out.println("Servlet modificacion cancha confirmado");
@@ -59,15 +64,15 @@ public class ModificacionCanchaConfirmado extends HttpServlet {
 
 				Cancha canviejo = (Cancha) session.getAttribute("cancha");
 				System.out.println("Cancha vieja" + canviejo.toString());
-				
+
 				dc.modificarCancha(cannuevo, canviejo);
 				Precio precio = new Precio(establecimiento, numero, nuevoprecio);
 				dp.add(precio);
 				request.setAttribute("mensajeOk", "Cancha modificada exitosamente");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
-				
+
 			} catch (SQLException e) {
-				request.setAttribute("mensajeError", e.getMessage());
+				request.setAttribute("mensajeError", "Error interno del servidor");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 

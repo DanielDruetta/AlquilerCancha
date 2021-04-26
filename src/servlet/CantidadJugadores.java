@@ -23,44 +23,40 @@ public class CantidadJugadores extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
-
 		String act = request.getParameter("act");
 
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 
 		else if (act.equals("Aceptar")) {
-
 			String cant = request.getParameter("cantidad");
-			
 			int cantidad = Integer.parseInt(cant);
-			
+
 			if (cantidad != 0) {
-				
 				Reserva r = (Reserva) session.getAttribute("reserva");
-				
 				Cliente c = (Cliente) session.getAttribute("usuario");
-				
+
 				System.out.println(c.toString());
 				System.out.println(r.toString());
 				System.out.println(cantidad);
-				
-				ClienteReserva cr = new ClienteReserva(c.getDni(),r.getNumero_reserva(),cantidad);
-				
+
+				ClienteReserva cr = new ClienteReserva(c.getDni(), r.getNumero_reserva(), cantidad);
+
 				DataClienteReserva dcr = new DataClienteReserva();
-				
+
 				dcr.add(cr);
-				
-				System.out.println("adsassadsaasddas");
-				
+
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		}

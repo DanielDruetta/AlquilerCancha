@@ -22,7 +22,10 @@ public class ModificacionEstablecimiento extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,6 +33,7 @@ public class ModificacionEstablecimiento extends HttpServlet {
 		String act = request.getParameter("act");
 		if (act == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (act.equals("Aceptar")) {
 			System.out.println("Servlet modificacion establecimiento");
 			DataEstablecimiento de = new DataEstablecimiento();
@@ -39,17 +43,14 @@ public class ModificacionEstablecimiento extends HttpServlet {
 
 			try {
 				Establecimiento e = de.buscarEst(establecimiento);
-				request.getSession().setAttribute("establec_modificar", e); //Esto lo hace cuando modifica el admin
+				request.getSession().setAttribute("establec_modificar", e); // Esto lo hace cuando modifica el admin
 				request.getRequestDispatcher("modificacionEstablecimientoConfirmar.jsp").forward(request, response);
 
 			} catch (SQLException e) {
-				request.setAttribute("mensajeError", e.getMessage());
+				request.setAttribute("mensajeError", "Error interno del servidor");
 				request.getRequestDispatcher("modificacionEstablecimiento.jsp").forward(request, response);
 			}
-
 		}
-
 		doGet(request, response);
-
 	}
 }

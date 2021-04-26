@@ -21,42 +21,34 @@ import entidades.Precio;
 @WebServlet("/CargarPrecio")
 public class CargarPrecio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CargarPrecio() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public CargarPrecio() {
+		super();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
-		
+
 		HttpSession session = request.getSession();
-		System.out.println("HOLARDA");
 		Establecimiento e = (Establecimiento) session.getAttribute("establec");
-		System.out.println(e);
 		DataPrecio dp = new DataPrecio();
 
 		String nro = request.getParameter("nro_cancha");
 		int nro_cancha = Integer.parseInt(nro);
 
-		Precio pre = dp.obtenerPrecio(e.getNombre(),nro_cancha);
+		Precio pre = dp.obtenerPrecio(e.getNombre(), nro_cancha);
 
-		String respuesta =String.valueOf(pre.getPrecio()) ;
-		
+		String respuesta = String.valueOf(pre.getPrecio());
+
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(respuesta);

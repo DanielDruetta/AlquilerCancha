@@ -23,7 +23,10 @@ public class BajaEstablecimientoConfirmado extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String act = request.getParameter("act");
+		if (act == null) {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,6 +35,7 @@ public class BajaEstablecimientoConfirmado extends HttpServlet {
 		String actio = request.getParameter("act");
 		if (actio == null) {
 			System.out.println("No se presiono nada");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (actio.equals("Eliminar")) {
 			System.out.println("Se presiono eliminar");
 			Establecimiento est = (Establecimiento) session.getAttribute("establecim_elimiar");
@@ -42,10 +46,10 @@ public class BajaEstablecimientoConfirmado extends HttpServlet {
 				request.setAttribute("mensajeOk", "Establecimiento eliminado exitosamente");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} catch (SQLException e) {
-				request.setAttribute("mensajeError", e.getMessage());
+				request.setAttribute("mensajeError", "Error interno del servidor");
 				request.getRequestDispatcher("bajaEstablecimiento.jsp").forward(request, response);
 			}
-			
+
 		}
 
 	}
