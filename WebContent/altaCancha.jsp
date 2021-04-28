@@ -60,8 +60,12 @@
 			<div class="form-group">
 				<label for="inputTipo" class="control-label col-md-2">Tipo:</label>
 				<div class="col-md-10">
-					<input id="inputTipo" name="tipo" class="form-control" type="text"
-						placeholder="">
+					<select class="form-control" id="inputTipo" name="tipo"> 
+						<option value="5">5</option> 
+						<option value="7">7</option>
+						<option value="9">9</option>
+						<option value="11">11</option>
+					</select>
 				</div>
 			</div>
 

@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import data.DataReserva;
 import entidades.Reserva;
+import entidades.Administrador;
 import entidades.Cliente;
+import entidades.Establecimiento;
 
 @WebServlet("/CompletarPartido")
 public class CompletarPartido extends HttpServlet {
@@ -22,8 +25,12 @@ public class CompletarPartido extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String act = request.getParameter("act");
-		if (act == null) {
+		HttpSession session = request.getSession();
+		Establecimiento e = (Establecimiento) session.getAttribute("establec");
+		Cliente c = (Cliente) session.getAttribute("usuario");
+		Administrador a = (Administrador) session.getAttribute("administrador");
+
+		if ((c == null) || (e == null) || (a == null)) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}

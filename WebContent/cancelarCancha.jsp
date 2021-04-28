@@ -24,6 +24,15 @@
 </head>
 <body>
 	<div class="container">
+		<%
+			if (request.getAttribute("mensajeError") != null) {
+		%>
+		<div class="alert alert-danger" role="alert">
+			<%=request.getAttribute("mensajeError")%>
+		</div>
+		<%
+			}
+		%>
 		<h3>Reservas vigentes</h3>
 		<p>Recuerde que no podra cancelar una reserva donde se hayan unido
 			otros jugadores</p>

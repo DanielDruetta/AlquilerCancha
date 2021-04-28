@@ -50,21 +50,17 @@
 		%>
 
 		<form class="form-reservar" action="reservar" method="post">
-
 			<div class="col-md-12">
 				<h3>Buscar un turno</h3>
 			</div>
-
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
 					<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14">
-
 						<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14">
 							<label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
 							<div class="col-md-7">
 								<select class="form-control" id="inputEstablecimiento"
-									name="inputEstablecimiento">
+									name="inputEstablecimiento" required="">
 									<option class=form-control value="">-</option>
 
 									<%
@@ -80,29 +76,15 @@
 							</div>
 						</div>
 
-
-
-
-
-
 						<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14">
 							<label for="inputTipo" class="control-label col-md-2">Tipo:</label>
 							<div class="col-md-7">
-								<select class="form-control" id="inputTipo" name="inputTipo">
-
-								</select>
+								<select class="form-control" id="inputTipo" name="inputTipo" required=""></select>
 							</div>
 						</div>
 
-
-
-
-
 						<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14"
 							id="solicitar_jugadores"></div>
-
-
-
 
 						<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14">
 							<label for="inputFecha" class="control-label col-md-2">Fecha</label>
@@ -112,16 +94,12 @@
 							</div>
 						</div>
 
-
-
-
 						<div class="col-xs-14 col-sm-14 col-md-14 col-lg-14">
 							<div class="col-md-2">
 								<input type="submit" class="btn btn-primary" id="act" name="act"
 									value="Aceptar">
 							</div>
 						</div>
-
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

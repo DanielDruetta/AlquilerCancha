@@ -18,6 +18,15 @@
 
 <body>
 	<div class="container">
+		<%
+			if (request.getAttribute("mensajeError") != null) {
+		%>
+		<div class="alert alert-danger" role="alert">
+			<%=request.getAttribute("mensajeError")%>
+		</div>
+		<%
+			}
+		%>
 		<h3>Ingresar cantidad de jugadores</h3>
 		<form class="form-CantidadJugadores" action="CantidadJugadores"
 			method="post">
@@ -61,7 +70,7 @@
 					de jugadores:</label>
 				<div class="col-md-12">
 					<select class="form-control" id="cantidad" name="cantidad">
-						<option>-</option>
+						<option value="-">-</option>
 						<%
 							for (int i = 1; i <= r.getLugares_disponibles(); i++) {
 						%>

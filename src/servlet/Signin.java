@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import data.DataCliente;
 import data.DataEstablecimiento;
@@ -31,6 +32,7 @@ public class Signin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 		String usuario = request.getParameter("usuario");
 		String contraseña = request.getParameter("contrasena");
 		String act = request.getParameter("act");
@@ -48,7 +50,7 @@ public class Signin extends HttpServlet {
 			Cliente c = dc.getByUser(cli);
 
 			if (c != null) {
-				request.getSession().setAttribute("usuario", c);
+				session.setAttribute("usuario", c);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 
@@ -62,7 +64,7 @@ public class Signin extends HttpServlet {
 				Establecimiento e = de.getByUser(est);
 
 				if (e != null) {
-					request.getSession().setAttribute("establec", e);
+					session.setAttribute("establec", e);
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 
@@ -75,7 +77,7 @@ public class Signin extends HttpServlet {
 					Administrador a = da.getByUser(adm);
 
 					if (a != null) {
-						request.getSession().setAttribute("administrador", a);
+						session.setAttribute("administrador", a);
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 					}
 
@@ -92,7 +94,7 @@ public class Signin extends HttpServlet {
 			System.out.println("Se presiono registrarse");
 			request.getRequestDispatcher("altaCliente.jsp").forward(request, response);
 		} else {
-			// someone has altered the HTML and sent a different value!
+			request.getRequestDispatcher("iniciarSesion.jsp").forward(request, response);
 		}
 
 	}

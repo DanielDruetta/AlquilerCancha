@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import data.DataCancha;
 import data.DataEstablecimiento;
+import entidades.Administrador;
 import entidades.Cliente;
 import entidades.Establecimiento;
 import entidades.Ocupada;
@@ -28,8 +29,12 @@ public class Reservar extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String act = request.getParameter("act");
-		if (act == null) {
+		HttpSession session = request.getSession();
+		Establecimiento e = (Establecimiento) session.getAttribute("establec");
+		Cliente c = (Cliente) session.getAttribute("usuario");
+		Administrador a = (Administrador) session.getAttribute("administrador");
+
+		if ((c == null) || (e == null) || (a == null)) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
@@ -58,7 +63,6 @@ public class Reservar extends HttpServlet {
 			request.getSession().setAttribute("fecha", date);
 
 			int jugadores_int = Integer.parseInt(jugadores);
-			System.out.println("Jugadores nescesarios:" + jugadores_int);
 			request.getSession().setAttribute("lugares_disponibles", jugadores);
 
 			int tipo = Integer.parseInt(tipoS);
@@ -69,8 +73,6 @@ public class Reservar extends HttpServlet {
 			Establecimiento es = null;
 			ArrayList<Ocupada> ocupadas = new ArrayList<Ocupada>();
 			
-			
-
 			try {
 				es = de.buscarEst(establecimiento);
 				System.out.println("El establecimiento es: " + es);
@@ -83,7 +85,6 @@ public class Reservar extends HttpServlet {
 			}
 
 			Cliente cli = (Cliente) session.getAttribute("usuario");
-			System.out.println(cli.getDni());
 
 			ArrayList<Ocupada> disponibles = new ArrayList<Ocupada>();
 
@@ -122,7 +123,7 @@ public class Reservar extends HttpServlet {
 			request.getRequestDispatcher("seleccionarCancha.jsp").forward(request, response);
 
 		} else if (act.equals("cancelar")) {
-			System.out.println("Se presiono cancelar");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {
 		}
 		doGet(request, response);

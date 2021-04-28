@@ -315,7 +315,7 @@ public class DataReserva {
 		return r;
 	}
 
-	public void modificar_cantidad_jugadores(Reserva r) {
+	public void modificar_cantidad_jugadores(Reserva r) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -326,7 +326,7 @@ public class DataReserva {
 			stmt.setInt(2, r.getNumero_reserva());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)

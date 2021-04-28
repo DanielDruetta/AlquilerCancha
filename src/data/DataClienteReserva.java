@@ -154,7 +154,7 @@ public class DataClienteReserva {
 		return cr;
 	}
 	
-	public void modificar_jugadores_aportados(ClienteReserva cr) {
+	public void modificar_jugadores_aportados(ClienteReserva cr) throws SQLException  {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -166,7 +166,7 @@ public class DataClienteReserva {
 			stmt.setString(3, cr.getDni());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)
