@@ -50,14 +50,22 @@ public class CargarPrecio extends HttpServlet {
 
 		String nro = request.getParameter("nro_cancha");
 		int nro_cancha = Integer.parseInt(nro);
+		
+		try {
+			Precio pre = dp.obtenerPrecio(e.getNombre(), nro_cancha);
 
-		Precio pre = dp.obtenerPrecio(e.getNombre(), nro_cancha);
+			String respuesta = String.valueOf(pre.getPrecio());
 
-		String respuesta = String.valueOf(pre.getPrecio());
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(respuesta);
+			
+		} catch (Exception e1) {
+			request.setAttribute("mensajeError", "Error interno del servidor");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(respuesta);
+		
 	}
 
 }

@@ -38,7 +38,6 @@ public class ModificarCompletarPartido extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
 
 		HttpSession session = request.getSession();
 
@@ -50,7 +49,6 @@ public class ModificarCompletarPartido extends HttpServlet {
 		String numeroreserva = request.getParameter("nrores");
 
 		int reserva = Integer.parseInt(numeroreserva);
-		System.out.println("El numero de reserva que recibo del listado partidos unidos es: " + reserva);
 
 		if (numeroreserva != null) {
 

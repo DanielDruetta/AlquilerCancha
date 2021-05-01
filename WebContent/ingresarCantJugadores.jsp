@@ -9,6 +9,9 @@
 <jsp:include page="header.jsp" />
 
 <%
+	if (session.getAttribute("usuario") == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
 	Reserva r = (Reserva) session.getAttribute("reserva");
 	DataReserva dr = new DataReserva();
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();

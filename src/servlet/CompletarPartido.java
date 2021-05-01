@@ -37,12 +37,6 @@ public class CompletarPartido extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Cliente c = (Cliente) session.getAttribute("usuario");
-		if (c == null) {
-			request.getRequestDispatcher("iniciarSesion.jsp").forward(request, response);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
 		String numeroreserva = request.getParameter("nroreserva");
 
 		int reserva = Integer.parseInt(numeroreserva);

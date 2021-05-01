@@ -58,16 +58,12 @@
 							 
 							<td style="padding-top: 20px"><button type="submit"
 								class="btn btn-light" name="nroreserva"
-								value="<%=String.valueOf(res.getNumero_reserva())%>">Seleccionar</button></td>
-								
+								value="<%=String.valueOf(res.getNumero_reserva())%>">Seleccionar</button></td>			
 						<% } %>
 					</tr>
-
 					<%
 						}
 					%>
-
-
 				</tbody>
 			</table>
 		</form>

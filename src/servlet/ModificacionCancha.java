@@ -54,12 +54,18 @@ public class ModificacionCancha extends HttpServlet {
 			Cancha can = new Cancha(establecimiento, numero);
 			Cancha c = dc.search(can);
 
-			DataPrecio dp = new DataPrecio();
-			Precio p = dp.obtenerPrecio(establecimiento, numero);
+			try {
+				DataPrecio dp = new DataPrecio();
+				Precio p = dp.obtenerPrecio(establecimiento, numero);
 
-			request.getSession().setAttribute("cancha", c);
-			request.getSession().setAttribute("precio", p);
-			request.getRequestDispatcher("modificacionCanchaConfirmar.jsp").forward(request, response);
+				request.getSession().setAttribute("cancha", c);
+				request.getSession().setAttribute("precio", p);
+				request.getRequestDispatcher("modificacionCanchaConfirmar.jsp").forward(request, response);
+
+			} catch (Exception e1) {
+				request.setAttribute("mensajeError", "Error interno del servidor");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
 
 		}
 

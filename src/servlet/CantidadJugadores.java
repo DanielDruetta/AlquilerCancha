@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,9 +63,15 @@ public class CantidadJugadores extends HttpServlet {
 
 				DataClienteReserva dcr = new DataClienteReserva();
 
-				dcr.add(cr);
-
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				try {
+					dcr.add(cr);
+					request.setAttribute("mensajeOk", "Jugadores registrados exitosamente");
+					request.getRequestDispatcher("index.jsp").forward(request, response);		
+				} catch (SQLException e) {
+					request.setAttribute("mensajeError", "Error interno del servidor");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
+				
 			}
 		}
 	}

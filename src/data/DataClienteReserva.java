@@ -11,7 +11,7 @@ import entidades.Reserva;
 
 public class DataClienteReserva {
 
-	public void add(ClienteReserva cr) {
+	public void add(ClienteReserva cr) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -22,7 +22,7 @@ public class DataClienteReserva {
 			stmt.executeQuery();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)
@@ -86,7 +86,7 @@ public class DataClienteReserva {
 			if (rs != null) {
 				while (rs.next()) {
 					Reserva o = new Reserva();
-					int cantidad_jugadores = rs.getInt("cantidad_jugadores");  //ver este maneje!
+					int cantidad_jugadores = rs.getInt("cantidad_jugadores"); // ver este maneje!
 					String establecimiento = rs.getString("establecimiento");
 					o.setEstablecimiento(String.valueOf(establecimiento) + "xyz" + String.valueOf(cantidad_jugadores));
 					o.setNumero_cancha(rs.getInt("numero_cancha"));
@@ -132,7 +132,8 @@ public class DataClienteReserva {
 				cr = new ClienteReserva();
 				cr.setDni(rs.getString("dni"));
 				cr.setNumero_reserva(rs.getInt("numero_reserva"));
-				cr.setCantidad_jugadores(rs.getInt("cantidad_jugadores"));;
+				cr.setCantidad_jugadores(rs.getInt("cantidad_jugadores"));
+				;
 
 			}
 		} catch (SQLException e) {
@@ -153,8 +154,8 @@ public class DataClienteReserva {
 
 		return cr;
 	}
-	
-	public void modificar_jugadores_aportados(ClienteReserva cr) throws SQLException  {
+
+	public void modificar_jugadores_aportados(ClienteReserva cr) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -180,10 +181,11 @@ public class DataClienteReserva {
 		}
 
 	}
-	
+
 	public ArrayList<Integer> reservasYaCompletadas(Cliente c) {
 
-		ArrayList<Integer> cr = new ArrayList<Integer>();;
+		ArrayList<Integer> cr = new ArrayList<Integer>();
+		;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
@@ -194,7 +196,7 @@ public class DataClienteReserva {
 			if (rs != null) {
 				while (rs.next()) {
 					cr.add(rs.getInt("numero_reserva"));
-				}	
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -214,9 +216,7 @@ public class DataClienteReserva {
 
 		return cr;
 	}
-	
 
-	
 	public int cantidad_jugadores_unidos(int nro_reserva) {
 
 		int nro = 0;
@@ -252,15 +252,15 @@ public class DataClienteReserva {
 
 		return nro;
 	}
-	
+
 	public boolean tiene_jugadores_unidos(int numero_reserva) {
 
 		boolean respuesta = true;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT * from cliente_reserva where numero_reserva = ? LIMIT 1");
+			stmt = FactoryConexion.getInstancia().getConn()
+					.prepareStatement("SELECT * from cliente_reserva where numero_reserva = ? LIMIT 1");
 			stmt.setInt(1, numero_reserva);
 			rs = stmt.executeQuery();
 			if (rs != null && rs.next()) {
@@ -284,8 +284,5 @@ public class DataClienteReserva {
 		System.out.println(respuesta);
 		return respuesta;
 	}
-	
-	
-	
 
 }
