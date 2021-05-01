@@ -42,7 +42,6 @@ public class CargarPrecio extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
 
 		HttpSession session = request.getSession();
 		Establecimiento e = (Establecimiento) session.getAttribute("establec");
