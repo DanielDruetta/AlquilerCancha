@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Futbol 5</title>
+<title>Alquilazo</title>
 <link rel="icon" href="imagenes/icono_title.png">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
@@ -80,14 +80,6 @@ table {
 				<%
 					if (a != null) {
 				%>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="clienteDropdown" role="button" data-toggle="dropdown" aria-expanded="false"> Clientes </a>
-					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
-						<a class="dropdown-item" href="altaCliente.jsp">Alta Cliente</a> 
-						<a class="dropdown-item" href="bajaCliente.jsp">Eliminar Cliente</a> 
-						<a class="dropdown-item" href="modificacionCliente.jsp">Modificar Cliente</a>
-					</div>
-				</li>
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Establecimientos </a>

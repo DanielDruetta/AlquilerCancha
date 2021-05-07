@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<label for="inputEstablecimiento" class="control-label col-md-2">Establecimiento:</label>
 				<div class="col-md-10">
-					<select class="col-md-12" id="inputEstablecimiento"
+					<select class="form-control" id="inputEstablecimiento"
 						name="inputEstablecimiento">
 						<%
 							for (Establecimiento c : es) {
