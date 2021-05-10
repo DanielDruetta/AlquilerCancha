@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,15 +40,20 @@ public class BajaClienteConfirmado extends HttpServlet {
 		HttpSession session = request.getSession();
 		String actio = request.getParameter("action");
 		if (actio == null) {
-			System.out.println("No se presiono nada");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (actio.equals("Eliminar")) {
-			System.out.println("Se presiono eliminarrrrrr");
-			Cliente cli = (Cliente) session.getAttribute("usuario");
+			Cliente cli = (Cliente) session.getAttribute("usuario_eliminar");
 			DataCliente dc = new DataCliente();
-			System.out.println(cli.toString());
-			dc.delete(cli);
-			doGet(request, response);
+			try {
+				dc.delete(cli);
+				request.setAttribute("mensajeOk", "Cliente eliminado exitosamente");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			} catch (SQLException e) {
+				request.setAttribute("mensajeError", "Error interno del servidor");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+		} else {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 
 	}

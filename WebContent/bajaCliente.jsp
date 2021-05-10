@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Administrador"%>
+<%@page import="data.DataCliente"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Cliente"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +14,8 @@
 	if (a == null) {
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
+	DataCliente dc = new DataCliente();
+	ArrayList<Cliente> cl = dc.getAll();
 %>
 </head>
 
@@ -20,21 +25,25 @@
 			<div class="form-group col-md-12">
 				<h3>Baja cliente</h3>
 			</div>
+
 			<div class="form-group">
-				<label for="inputUsuario" class="control-label col-md-2">Nombre:</label>
+				<label for="inputCliente" class="control-label col-md-8">Nombre y apellido del cliente:</label>
 				<div class="col-md-10">
-					<input id="inputUsuario" name="nombre" class="form-control"
-						type="text" placeholder="">
+					<select class="form-control" id="inputCliente"
+						name="inputCliente">
+						<%
+							for (Cliente c : cl) {
+						%>
+
+						<option class=form-control value="<%=c.getDni()%>"><%=c.getNombre() + " " + c.getApellido() %></option>
+
+						<%
+							}
+						%>
+					</select>
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label for="inputPassword" class="control-label col-md-2">Apellido:</label>
-				<div class="col-md-10">
-					<input id="inputPassword" name="apellido" class="form-control"
-						type="text">
-				</div>
-			</div>
 
 			<div class="form-group">
 				<div class="col-md-2">

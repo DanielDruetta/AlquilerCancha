@@ -46,13 +46,11 @@ public class BajaCliente extends HttpServlet {
 			System.out.println("Se presiono eliminar");
 			DataCliente dc = new DataCliente();
 
-			String nombre = request.getParameter("nombre");
-			String apellido = request.getParameter("apellido");
+			String dni_cliente = request.getParameter("inputCliente");
 
-			Cliente cli = new Cliente(nombre, apellido);
-			Cliente c = dc.search(cli);
+			Cliente c = dc.buscarDNI(dni_cliente);
 			System.out.println(c.toString());
-			request.getSession().setAttribute("usuario", c);
+			request.getSession().setAttribute("usuario_eliminar", c);
 			request.getRequestDispatcher("bajaClienteConfirmar.jsp").forward(request, response);
 
 		}

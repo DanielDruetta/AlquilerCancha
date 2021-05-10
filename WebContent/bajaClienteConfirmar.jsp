@@ -7,7 +7,7 @@
 <jsp:include page="header.jsp" />
 
 <%
-	Cliente cli = (Cliente) session.getAttribute("usuario");
+	Cliente cli = (Cliente) session.getAttribute("usuario_eliminar");
 %>
 
 </head>

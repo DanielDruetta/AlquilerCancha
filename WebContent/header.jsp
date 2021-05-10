@@ -81,6 +81,15 @@ table {
 					if (a != null) {
 				%>
 
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="clienteDropdown"
+					role="button" data-toggle="dropdown" aria-expanded="false">
+						Clientes </a>
+					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">
+						<a class="dropdown-item" href="bajaCliente.jsp">Eliminar Cliente</a>
+					</div>
+				</li>
+
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Establecimientos </a>
 					<div class="dropdown-menu" aria-labelledby="vacanteDropdown">

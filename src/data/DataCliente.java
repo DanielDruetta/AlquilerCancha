@@ -4,6 +4,9 @@ package data;
 import entidades.*;
 
 import java.sql.*;
+import java.util.ArrayList;
+
+import com.mysql.jdbc.Statement;
 
 public class DataCliente {
 
@@ -143,15 +146,14 @@ public class DataCliente {
 		}
 	}
 
-	public void delete(Cliente c) {
+	public void delete(Cliente c) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"delete from cliente where nombre=? and apellido=?", PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("delete from cliente where dni=?",
+					PreparedStatement.RETURN_GENERATED_KEYS);
 
-			stmt.setString(1, c.getNombre());
-			stmt.setString(2, c.getApellido());
+			stmt.setString(1, c.getDni());
 			stmt.executeUpdate();
 
 			keyResultSet = stmt.getGeneratedKeys();
@@ -160,7 +162,7 @@ public class DataCliente {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (keyResultSet != null)
@@ -247,6 +249,50 @@ public class DataCliente {
 		}
 
 		return c;
+	}
+	
+	
+	public ArrayList<Cliente> getAll() {
+		Statement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Cliente> clientes = new ArrayList<>();
+
+		try {
+			stmt = (Statement) FactoryConexion.getInstancia().getConn().createStatement();
+			rs = stmt.executeQuery("select nombre,direccion,hora_inicio,hora_fin,url_mapa from establecimiento");
+			
+			rs = stmt.executeQuery("select dni, nombre, apellido, celular, email, usuario from cliente");
+			if (rs != null) {
+				while (rs.next()) {
+					Cliente c = new Cliente();
+					c.setDni(rs.getString("dni"));
+					c.setNombre(rs.getString("nombre"));
+					c.setApellido(rs.getString("apellido"));
+					c.setCelular(rs.getString("celular"));
+					c.setEmail(rs.getString("email"));
+					c.setUsuario(rs.getString("usuario"));
+					clientes.add(c);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return clientes;
 	}
 
 }
