@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.DataMantenimiento;
+import data.DataReserva;
 import entidades.Administrador;
 import entidades.Cliente;
 import entidades.Establecimiento;
 import entidades.Mantenimiento;
+import entidades.Reserva;
 
 @WebServlet({ "/AltaMantenimiento", "/altamantenimiento" })
 public class AltaMantenimiento extends HttpServlet {
@@ -52,23 +55,24 @@ public class AltaMantenimiento extends HttpServlet {
 		Date fechaIniMan = Date.valueOf(fechaInicio);
 		
 		int numeroCancha = Integer.parseInt(cancha);
-
-		System.out.println(cancha);
-		System.out.println(fechaIniMan);
-		System.out.println(fechaFinMan);
 		
-		System.out.println(descripcion);
-		System.out.println(observaciones);
+		DataReserva dr = new DataReserva();
 		
 		Establecimiento e = (Establecimiento) session.getAttribute("establec");
 		DataMantenimiento dm = new DataMantenimiento();
 		
+		ArrayList<Reserva> reservas_rango_fechas = dr.getReservasRango(e.getNombre(),numeroCancha,fechaIniMan,fechaFinMan);
 		Mantenimiento man = new Mantenimiento(e.getNombre(),numeroCancha,fechaIniMan,fechaFinMan,descripcion,observaciones);
-		
+		request.getSession().setAttribute("fecha_inicio_mantenimiento", fechaIniMan);
+		request.getSession().setAttribute("fecha_fin_mantenimiento", fechaFinMan);
 		dm.add(man);
 		
+		if (reservas_rango_fechas.size() > 0) {
+			request.getSession().setAttribute("reservas_dentro_rango", reservas_rango_fechas);
+			request.getRequestDispatcher("informarMantenimiento.jsp").forward(request, response);
+			doGet(request, response);
+		} 
 		request.getRequestDispatcher("index.jsp").forward(request, response);
-
 		doGet(request, response);
 	}
 

@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -237,7 +238,7 @@ public class DataReserva {
 		ResultSet rs = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT numero_reserva,fecha,hora_inicio, numero_cancha, establecimiento, lugares_disponibles FROM reserva WHERE fecha>=CAST(NOW() as date) and lugares_disponibles!=0 order by fecha,hora_inicio");
+					"SELECT numero_reserva,dni,fecha,hora_inicio, numero_cancha, establecimiento, lugares_disponibles FROM reserva WHERE fecha>=CAST(NOW() as date) and lugares_disponibles!=0 order by fecha,hora_inicio");
 
 			rs = stmt.executeQuery();
 
@@ -251,6 +252,7 @@ public class DataReserva {
 					o.setEstablecimiento(rs.getString("establecimiento"));
 					o.setFecha(rs.getDate("fecha"));
 					o.setLugares_disponibles(rs.getInt("lugares_disponibles"));
+					o.setDni(rs.getString("dni"));
 					reservas.add(o);
 
 				}
@@ -339,6 +341,55 @@ public class DataReserva {
 			}
 		}
 
+	}
+	
+	public ArrayList<Reserva> getReservasRango(String establecimiento, Integer numero_cancha,Date fechaInicio, Date fechaFin) {
+
+		ArrayList<Reserva> reservas = new ArrayList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT numero_reserva,dni,fecha,hora_inicio, numero_cancha, establecimiento, lugares_disponibles FROM reserva WHERE establecimiento = ? and numero_cancha = ? and fecha >= ? and fecha <= ?");
+			stmt.setString(1, establecimiento);
+			stmt.setInt(2, numero_cancha);
+			stmt.setDate(3, fechaInicio);
+			stmt.setDate(4, fechaFin);
+			rs = stmt.executeQuery();
+
+			if (rs != null) {
+				while (rs.next()) {
+
+					Reserva o = new Reserva();
+					o.setNumero_reserva(rs.getInt("numero_reserva"));
+					o.setHora_inicio(rs.getInt("hora_inicio"));
+					o.setNumero_cancha(rs.getInt("numero_cancha"));
+					o.setEstablecimiento(rs.getString("establecimiento"));
+					o.setFecha(rs.getDate("fecha"));
+					o.setLugares_disponibles(rs.getInt("lugares_disponibles"));
+					o.setDni(rs.getString("dni"));
+					reservas.add(o);
+
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return reservas;
 	}
 
 }
