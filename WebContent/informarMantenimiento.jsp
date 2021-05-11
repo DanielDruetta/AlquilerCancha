@@ -21,7 +21,7 @@ ArrayList<Reserva> reservas = (ArrayList<Reserva>) session.getAttribute("reserva
 <body>
 	<div class="container">
 		<h3>Listado de reservas dentro del rango de fechas del mantenimiento</h3>
-		<p>Informe a los clientes la situación, porque su reserva podría estar comprometida</p>
+		<p>Se descargará automáticamente un pdf con la información de las reservas. Informe a los clientes la situación, porque sus reservas podrían estar comprometidas.</p>
 		<table class="table">
 			<thead>
 				<tr>
@@ -53,9 +53,15 @@ ArrayList<Reserva> reservas = (ArrayList<Reserva>) session.getAttribute("reserva
 			</tbody>
 		</table>
 		<form action="descargar_lista" method="post">
-			<button class="btn btn-light">Descargar lista</button>
+			<button style="display:none" id="boton_descargar" class="btn btn-light">Descargar lista</button>
 		</form>
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
+
+<script>
+	window.onload = function() {
+	  document.getElementById("boton_descargar").click();
+	};
+</script>
 </html>
