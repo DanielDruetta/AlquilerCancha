@@ -3,6 +3,7 @@
 <%@page import="entidades.Mantenimiento"%>
 <%@page import="entidades.Establecimiento"%>
 <%@page import="data.DataMantenimiento"%>
+<%@page import="java.text.SimpleDateFormat"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,20 +11,23 @@
 <jsp:include page="header.jsp" />
 
 <%
-Establecimiento es = (Establecimiento) session.getAttribute("establec");
-if (es == null) {
-	request.getRequestDispatcher("index.jsp").forward(request, response);
-}
-DataMantenimiento dm = new DataMantenimiento();
-ArrayList<Mantenimiento> mantenimientos = new ArrayList<Mantenimiento>();
-mantenimientos = dm.mantenimientos(es.getNombre());
+	Establecimiento es = (Establecimiento) session.getAttribute("establec");
+	if (es == null) {
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+	DataMantenimiento dm = new DataMantenimiento();
+	ArrayList<Mantenimiento> mantenimientos = new ArrayList<Mantenimiento>();
+	mantenimientos = dm.mantenimientos(es.getNombre());
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 </head>
 
 <body>
 	<div class="container">
 		<h3>Listado de mantenimientos</h3>
-		<form class="form-BajaMantenimiento" action="bajamantenimiento" method="post">
+		<form class="form-BajaMantenimiento" action="bajamantenimiento"
+			method="post">
 			<table class="table">
 				<thead>
 					<tr>
@@ -39,15 +43,16 @@ mantenimientos = dm.mantenimientos(es.getNombre());
 				<tbody>
 					<%
 						for (Mantenimiento man : mantenimientos) {
-							
 					%>
 					<tr>
-						<td style="padding-top:20px"><%=man.getNumeroCancha()%></td>
-						<td style="padding-top:20px"><%=man.getFechaInicio()%> </td>
-						<td style="padding-top:20px"><%=man.getFechaFin()%></td>
-						<td style="padding-top:20px"><%=man.getDescripcion()%></td>
-						<td style="padding-top:20px"><%=man.getObservaciones()%></td>
-						<td><button type="submit" class="btn btn-outline-danger" style="color: red;" name="seleccion" value="<%=String.valueOf(man.getNumeroCancha()) + "r" + String.valueOf(man.getFechaInicio())%>">Eliminar</button></td>
+						<td style="padding-top: 20px"><%=man.getNumeroCancha()%></td>
+						<td style="padding-top: 20px"><%=objSDF.format(man.getFechaInicio())%></td>
+						<td style="padding-top: 20px"><%=objSDF.format(man.getFechaFin())%></td>
+						<td style="padding-top: 20px"><%=man.getDescripcion()%></td>
+						<td style="padding-top: 20px"><%=man.getObservaciones()%></td>
+						<td><button type="submit" class="btn btn-outline-danger"
+								style="color: red;" name="seleccion"
+								value="<%=String.valueOf(man.getNumeroCancha()) + "r" + String.valueOf(man.getFechaInicio())%>">Eliminar</button></td>
 					</tr>
 
 					<%

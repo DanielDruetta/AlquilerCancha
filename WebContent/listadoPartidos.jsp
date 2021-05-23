@@ -5,6 +5,7 @@
 <%@page import="data.DataReserva"%>
 <%@page import="data.DataCliente"%>
 <%@page import="entidades.Cliente"%>
+<%@page import= "java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,8 @@
 	DataCliente dc = new DataCliente();
 	ArrayList<Integer> reservas_ya_completadas_por_el_cliente = new ArrayList<Integer>();
 	reservas_ya_completadas_por_el_cliente = dcr.reservasYaCompletadas(c);	
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 </head>
 
@@ -52,7 +55,7 @@
 					<tr>
 						<td style="padding-top: 20px"><%=res.getEstablecimiento()%></td>
 						<td style="padding-top: 20px"><%=res.getNumero_cancha()%></td>
-						<td style="padding-top: 20px"><%=res.getFecha()%></td>
+						<td style="padding-top: 20px"><%=objSDF.format(res.getFecha())%></td>
 						<td style="padding-top: 20px"><%=res.getHora_inicio()%></td>
 						<td style="padding-top: 20px"><%=res.getLugares_disponibles()%></td>
 						

@@ -8,6 +8,7 @@
 <%@page import="data.DataPrecio"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="java.sql.Time"%>
+<%@page import= "java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,8 @@
 	Reserva r = (Reserva) session.getAttribute("reserva");
 
 	DataPrecio dp = new DataPrecio();
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 
 <body>
@@ -69,7 +72,7 @@
 			<div class="col-md-7">
 				<input id="inputFecha" name="inputFecha" class="form-control"
 					placeholder="" required="" autofocus="" type="text"
-					value="<%=r.getFecha()%>" disabled>
+					value="<%=objSDF.format(r.getFecha())%>" disabled>
 			</div>
 		</div>
 

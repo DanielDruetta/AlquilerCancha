@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="data.DataReserva"%>
+<%@page import= "java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,8 @@
 	DataReserva dr = new DataReserva();
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	reservas = dr.reservasAcompletar();
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 </head>
 
@@ -46,7 +49,7 @@
 				<label for="inputUsuario" class="control-label col-md-2">Fecha:</label>
 				<div class="col-md-12">
 					<input id="inputUsuario" name="usuario" class="form-control"
-						type="text" value="<%=r.getFecha()%>" disabled>
+						type="text" value="<%=objSDF.format(r.getFecha())%>" disabled>
 				</div>
 			</div>
 

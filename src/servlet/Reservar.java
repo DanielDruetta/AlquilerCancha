@@ -63,6 +63,16 @@ public class Reservar extends HttpServlet {
 			Date date = Date.valueOf(fecha);
 			request.getSession().setAttribute("fecha", date);
 
+			Date fecha_actual = new Date(System.currentTimeMillis());
+
+			if (date.before(fecha_actual)) {
+				if ( !( (fecha_actual.getDate() == date.getDate()) && (fecha_actual.getMonth() == date.getMonth()) && (fecha_actual.getYear() == date.getYear() ) ) ) {
+					request.setAttribute("mensajeError", "La fecha de la reserva debe ser mayor a hoy");
+					request.getRequestDispatcher("reservarCancha.jsp").forward(request, response);
+					System.out.println("NO se puede reservar");
+				}
+			}
+
 			int jugadores_int = Integer.parseInt(jugadores);
 			request.getSession().setAttribute("lugares_disponibles", jugadores);
 

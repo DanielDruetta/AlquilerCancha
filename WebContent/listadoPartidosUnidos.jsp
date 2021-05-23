@@ -3,6 +3,7 @@
 <%@page import="entidades.Reserva"%>
 <%@page import="entidades.Cliente"%>
 <%@page import="data.DataClienteReserva"%>
+<%@page import= "java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,8 @@
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	Cliente c = (Cliente) session.getAttribute("usuario");
 	reservas = dcr.reservas(c.getDni());
-
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 </head>
 
@@ -52,7 +54,7 @@
 					<tr>
 						<td style="padding-top: 20px"><%=establecimiento%></td>
 						<td style="padding-top: 20px"><%=res.getNumero_cancha()%></td>
-						<td style="padding-top: 20px"><%=res.getFecha()%></td>
+						<td style="padding-top: 20px"><%=objSDF.format(res.getFecha())%></td>
 						<td style="padding-top: 20px"><%=res.getHora_inicio()%></td>
 						<td style="padding-top: 20px"><%=res.getLugares_disponibles()%></td>
 						<td style="padding-top: 20px"><%=cantidad_jugadores%></td>

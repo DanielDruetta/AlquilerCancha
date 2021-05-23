@@ -8,6 +8,8 @@
 <%@page import="data.DataReserva"%>
 <%@page import="data.DataCancha"%>
 <%@page import="data.DataClienteReserva"%>
+<%@page import= "java.text.SimpleDateFormat" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +24,8 @@
 	reservas = dr.reservasCliente(c.getDni());
 	DataClienteReserva dcr = new DataClienteReserva();
 	DataCancha dc = new DataCancha();
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 
 </head>
@@ -61,7 +65,7 @@
 									for (Reserva disp : reservas) {
 								%>
 								<tr>
-									<td><%=disp.getFecha()%></td>
+									<td><%=objSDF.format(disp.getFecha())%></td>
 									<td><%=disp.getHora_inicio()%></td>
 									<td><%=disp.getEstablecimiento()%></td>
 									<td><%=disp.getNumero_cancha()%></td>

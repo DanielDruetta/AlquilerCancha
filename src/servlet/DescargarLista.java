@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -31,10 +32,12 @@ public class DescargarLista extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		String strDateFormat = "dd-MM-yyyy";
+		SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 		ArrayList<Reserva> reservas = (ArrayList<Reserva>) session.getAttribute("reservas_dentro_rango");
 		Date fecha_inicio = (Date) session.getAttribute("fecha_inicio_mantenimiento");
 		Date fecha_fin = (Date) session.getAttribute("fecha_fin_mantenimiento");
-		String fechas = fecha_inicio + "_" + fecha_fin;
+		String fechas = objSDF.format(fecha_inicio) + "_" + objSDF.format(fecha_fin);
 		String nombre_archivo = "reservasExistentes_" + fechas + ".pdf";
 		
 		System.out.println("Entro");

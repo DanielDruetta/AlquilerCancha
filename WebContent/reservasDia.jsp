@@ -7,6 +7,8 @@
 <%@page import="data.DataReserva"%>
 <%@page import="data.DataCliente"%>
 <%@page import="java.sql.Time"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,13 +24,16 @@
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	reservas = dr.reservasDia(e.getNombre());
 	DataCliente dc = new DataCliente();
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 
 </head>
 <body>
 
 	<div class="container">
-		<h3>Reservas del dia</h3>
+	<% Date fecha_actual = new Date(System.currentTimeMillis()); %>
+		<h3>Reservas del dia - <%= objSDF.format(fecha_actual)  %> </h3>
 		<form class="form-confirmarReserva" action="ConfirmarReserva"
 			method="post">
 			<div class="row">

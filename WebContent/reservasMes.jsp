@@ -7,6 +7,7 @@
 <%@page import="data.DataReserva"%>
 <%@page import="data.DataCliente"%>
 <%@page import="java.sql.Time"%>
+<%@page import= "java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,8 @@
 	ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	reservas = dr.reservasMes(e.getNombre());
 	DataCliente dc = new DataCliente();
+	String strDateFormat = "dd-MM-yyyy";
+	SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 %>
 
 </head>
@@ -57,7 +60,7 @@
 								<tr>
 									<td><%=disp.getNumero_reserva()%></td>
 									<td><%=disp.getNumero_cancha()%></td>
-									<td><%=disp.getFecha()%></td>
+									<td><%=objSDF.format(disp.getFecha())%></td>
 									<td><%=disp.getHora_inicio()%></td>
 									<td><%=disp.getHora_inicio() + 1%></td>
 									<td><%=disp.getDni()%></td>

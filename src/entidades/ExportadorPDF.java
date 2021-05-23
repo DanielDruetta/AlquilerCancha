@@ -1,6 +1,7 @@
 package entidades;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -57,10 +58,12 @@ public class ExportadorPDF
 	public void writeTableData(PdfPTable pdfTable)
 	{
 		DataCliente dc = new DataCliente();
+		String strDateFormat = "dd-MM-yyyy";
+		SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 		for (Reserva res : reservas)
 		{
 			pdfTable.addCell(String.valueOf(res.getNumero_reserva()));
-			pdfTable.addCell(String.valueOf(res.getFecha()));
+			pdfTable.addCell(String.valueOf(objSDF.format(res.getFecha())));
 			pdfTable.addCell(String.valueOf(res.getHora_inicio()));
 			pdfTable.addCell(String.valueOf(dc.buscarDNI(res.getDni()).getNombre() + " " + dc.buscarDNI(res.getDni()).getApellido()));
 			pdfTable.addCell(String.valueOf(dc.buscarDNI(res.getDni()).getCelular()));
