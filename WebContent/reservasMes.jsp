@@ -32,7 +32,7 @@
 
 
 	<div class="container">
-		<h3>Reservas del mes</h3>
+		<h3>Reservas de los próximos 30 días</h3>
 		<form class="form-confirmarReserva" action="ConfirmarReserva"
 			method="post">
 			<div class="row">

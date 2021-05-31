@@ -118,8 +118,7 @@ public class DataReserva {
 		ResultSet rs = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni,r.fecha FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where month(r.fecha)=month(NOW()) and year(r.fecha)=year(NOW()) and es.nombre=? order by r.fecha,r.hora_inicio");
-
+					"SELECT numero_reserva, r.hora_inicio, numero_cancha, r.dni,r.fecha FROM reserva r inner join establecimiento es on r.establecimiento = es.nombre where r.fecha >= CAST(NOW() as date) and r.fecha <= DATE_ADD(NOW(), INTERVAL 30 DAY) and es.nombre=? order by r.fecha,r.hora_inicio");
 			stmt.setString(1, establecimiento);
 			rs = stmt.executeQuery();
 
